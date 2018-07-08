@@ -13,7 +13,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-func (f *Framework) GetPostgresClient(meta metav1.ObjectMeta) (*xorm.Engine, error) {
+func (f *Framework) GetPostgresClient(meta metav1.ObjectMeta, dbName string, userName string) (*xorm.Engine, error) {
 	postgres, err := f.GetPostgres(meta)
 	if err != nil {
 		return nil, err
@@ -30,19 +30,17 @@ func (f *Framework) GetPostgresClient(meta metav1.ObjectMeta) (*xorm.Engine, err
 		return nil, err
 	}
 
-	cnnstr := fmt.Sprintf("user=postgres host=127.0.0.1 port=%v dbname=postgres sslmode=disable", tunnel.Local)
+	cnnstr := fmt.Sprintf("user=%s host=127.0.0.1 port=%v dbname=%s sslmode=disable", userName, tunnel.Local, dbName)
 	return xorm.NewEngine("postgres", cnnstr)
 }
 
-func (f *Framework) EventuallyCreateSchema(meta metav1.ObjectMeta) GomegaAsyncAssertion {
-
-	sql := `
+func (f *Framework) EventuallyCreateSchema(meta metav1.ObjectMeta, dbName string, userName string) GomegaAsyncAssertion {
+	sql := fmt.Sprintf(`
 DROP SCHEMA IF EXISTS "data" CASCADE;
-CREATE SCHEMA "data" AUTHORIZATION "postgres";
-`
+CREATE SCHEMA "data" AUTHORIZATION "%s";`, userName)
 	return Eventually(
 		func() bool {
-			db, err := f.GetPostgresClient(meta)
+			db, err := f.GetPostgresClient(meta, dbName, userName)
 			if err != nil {
 				return false
 			}
@@ -75,10 +73,10 @@ func characters(len int) string {
 	return string(r)
 }
 
-func (f *Framework) EventuallyPingDatabase(meta metav1.ObjectMeta) GomegaAsyncAssertion {
+func (f *Framework) EventuallyPingDatabase(meta metav1.ObjectMeta, dbName string, userName string) GomegaAsyncAssertion {
 	return Eventually(
 		func() bool {
-			db, err := f.GetPostgresClient(meta)
+			db, err := f.GetPostgresClient(meta, dbName, userName)
 			if err != nil {
 				return false
 			}
@@ -94,11 +92,11 @@ func (f *Framework) EventuallyPingDatabase(meta metav1.ObjectMeta) GomegaAsyncAs
 	)
 }
 
-func (f *Framework) EventuallyCreateTable(meta metav1.ObjectMeta, total int) GomegaAsyncAssertion {
+func (f *Framework) EventuallyCreateTable(meta metav1.ObjectMeta, dbName string, userName string, total int) GomegaAsyncAssertion {
 	count := 0
 	return Eventually(
 		func() bool {
-			db, err := f.GetPostgresClient(meta)
+			db, err := f.GetPostgresClient(meta, dbName, userName)
 			if err != nil {
 				return false
 			}
@@ -124,10 +122,10 @@ func (f *Framework) EventuallyCreateTable(meta metav1.ObjectMeta, total int) Gom
 	return nil
 }
 
-func (f *Framework) EventuallyCountTable(meta metav1.ObjectMeta) GomegaAsyncAssertion {
+func (f *Framework) EventuallyCountTable(meta metav1.ObjectMeta, dbName string, userName string) GomegaAsyncAssertion {
 	return Eventually(
 		func() int {
-			db, err := f.GetPostgresClient(meta)
+			db, err := f.GetPostgresClient(meta, dbName, userName)
 			if err != nil {
 				return -1
 			}
@@ -160,12 +158,12 @@ type PgStatArchiver struct {
 	ArchivedCount int
 }
 
-func (f *Framework) EventuallyCountArchive(meta metav1.ObjectMeta) GomegaAsyncAssertion {
+func (f *Framework) EventuallyCountArchive(meta metav1.ObjectMeta, dbName string, userName string) GomegaAsyncAssertion {
 	previousCount := -1
 	countSet := false
 	return Eventually(
 		func() bool {
-			db, err := f.GetPostgresClient(meta)
+			db, err := f.GetPostgresClient(meta, dbName, userName)
 			if err != nil {
 				return false
 			}
