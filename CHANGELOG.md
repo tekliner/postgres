@@ -1,5 +1,70 @@
 # Change Log
 
+## [0.9.0-beta.0](https://github.com/kubedb/postgres/tree/0.9.0-beta.0) (2018-09-20)
+[Full Changelog](https://github.com/kubedb/postgres/compare/0.8.0...0.9.0-beta.0)
+
+**Fixed bugs:**
+
+- Don't add admission group as a prioritized version [\#156](https://github.com/kubedb/postgres/pull/156) ([tamalsaha](https://github.com/tamalsaha))
+
+**Merged pull requests:**
+
+- Pass extra args to tools.sh [\#196](https://github.com/kubedb/postgres/pull/196) ([the-redback](https://github.com/the-redback))
+- Support Termination Policy & Stop working for deprecated \*Versions [\#195](https://github.com/kubedb/postgres/pull/195) ([hossainemruz](https://github.com/hossainemruz))
+- Revendor k8s.io/apiserver [\#193](https://github.com/kubedb/postgres/pull/193) ([tamalsaha](https://github.com/tamalsaha))
+- Revendor kubernetes-1.11.3 [\#192](https://github.com/kubedb/postgres/pull/192) ([tamalsaha](https://github.com/tamalsaha))
+- Support UpdateStrategy [\#190](https://github.com/kubedb/postgres/pull/190) ([tamalsaha](https://github.com/tamalsaha))
+- Add TerminationPolicy for databases [\#189](https://github.com/kubedb/postgres/pull/189) ([tamalsaha](https://github.com/tamalsaha))
+- Revendor api [\#188](https://github.com/kubedb/postgres/pull/188) ([tamalsaha](https://github.com/tamalsaha))
+- Use IntHash as status.observedGeneration [\#187](https://github.com/kubedb/postgres/pull/187) ([tamalsaha](https://github.com/tamalsaha))
+- fix build image [\#186](https://github.com/kubedb/postgres/pull/186) ([tahsinrahman](https://github.com/tahsinrahman))
+- fix github status [\#185](https://github.com/kubedb/postgres/pull/185) ([tahsinrahman](https://github.com/tahsinrahman))
+- update pipeline [\#184](https://github.com/kubedb/postgres/pull/184) ([tahsinrahman](https://github.com/tahsinrahman))
+- Fix E2E test for minikube [\#183](https://github.com/kubedb/postgres/pull/183) ([the-redback](https://github.com/the-redback))
+- update pipeline [\#182](https://github.com/kubedb/postgres/pull/182) ([tahsinrahman](https://github.com/tahsinrahman))
+- Update exporter image in concourse test [\#181](https://github.com/kubedb/postgres/pull/181) ([hossainemruz](https://github.com/hossainemruz))
+- Migrate Postgres [\#180](https://github.com/kubedb/postgres/pull/180) ([tamalsaha](https://github.com/tamalsaha))
+- Use exporter directly [\#179](https://github.com/kubedb/postgres/pull/179) ([hossainemruz](https://github.com/hossainemruz))
+- Update status.ObservedGeneration for failure phase [\#178](https://github.com/kubedb/postgres/pull/178) ([the-redback](https://github.com/the-redback))
+- Keep track of ObservedGenerationHash [\#177](https://github.com/kubedb/postgres/pull/177) ([tamalsaha](https://github.com/tamalsaha))
+- Use NewObservableHandler [\#176](https://github.com/kubedb/postgres/pull/176) ([tamalsaha](https://github.com/tamalsaha))
+- Fix uninstall for concourse [\#175](https://github.com/kubedb/postgres/pull/175) ([tahsinrahman](https://github.com/tahsinrahman))
+- Revise verification of spec fields [\#174](https://github.com/kubedb/postgres/pull/174) ([tamalsaha](https://github.com/tamalsaha))
+- Support passing args via PodTemplate [\#173](https://github.com/kubedb/postgres/pull/173) ([tamalsaha](https://github.com/tamalsaha))
+- Revendor api [\#172](https://github.com/kubedb/postgres/pull/172) ([tamalsaha](https://github.com/tamalsaha))
+- Introduce storageType : ephemeral [\#171](https://github.com/kubedb/postgres/pull/171) ([tamalsaha](https://github.com/tamalsaha))
+- Revendor api [\#170](https://github.com/kubedb/postgres/pull/170) ([tamalsaha](https://github.com/tamalsaha))
+- Add support for running tests on cncf machines [\#169](https://github.com/kubedb/postgres/pull/169) ([tahsinrahman](https://github.com/tahsinrahman))
+- Keep track of observedGeneration in status [\#168](https://github.com/kubedb/postgres/pull/168) ([tamalsaha](https://github.com/tamalsaha))
+- Use db crd image pull secrets as backup for snapshot jobs [\#167](https://github.com/kubedb/postgres/pull/167) ([tamalsaha](https://github.com/tamalsaha))
+- Separate StatsService for monitoring [\#166](https://github.com/kubedb/postgres/pull/166) ([the-redback](https://github.com/the-redback))
+- Use updated crd spec [\#165](https://github.com/kubedb/postgres/pull/165) ([tamalsaha](https://github.com/tamalsaha))
+- Rename OffshootLabels to OffshootSelectors [\#164](https://github.com/kubedb/postgres/pull/164) ([tamalsaha](https://github.com/tamalsaha))
+- Revendor apimachinery [\#163](https://github.com/kubedb/postgres/pull/163) ([tamalsaha](https://github.com/tamalsaha))
+- Use PostgresVersion for postgres images [\#162](https://github.com/kubedb/postgres/pull/162) ([annymsMthd](https://github.com/annymsMthd))
+- Revendor api [\#161](https://github.com/kubedb/postgres/pull/161) ([tamalsaha](https://github.com/tamalsaha))
+- Use kmodules monitoring and objectstore api [\#160](https://github.com/kubedb/postgres/pull/160) ([tamalsaha](https://github.com/tamalsaha))
+- Refactor concourse scripts [\#159](https://github.com/kubedb/postgres/pull/159) ([tahsinrahman](https://github.com/tahsinrahman))
+- Fix command `./hack/make.py test e2e` [\#158](https://github.com/kubedb/postgres/pull/158) ([the-redback](https://github.com/the-redback))
+- Set generated binary name to pg-operator [\#157](https://github.com/kubedb/postgres/pull/157) ([tamalsaha](https://github.com/tamalsaha))
+- Enable status subresource for crds [\#155](https://github.com/kubedb/postgres/pull/155) ([tamalsaha](https://github.com/tamalsaha))
+- Update client-go to v8.0.0 [\#154](https://github.com/kubedb/postgres/pull/154) ([tamalsaha](https://github.com/tamalsaha))
+- Format shell scripts [\#153](https://github.com/kubedb/postgres/pull/153) ([tamalsaha](https://github.com/tamalsaha))
+- Support custom configuration [\#152](https://github.com/kubedb/postgres/pull/152) ([hossainemruz](https://github.com/hossainemruz))
+- Fix travis build [\#151](https://github.com/kubedb/postgres/pull/151) ([hossainemruz](https://github.com/hossainemruz))
+- Updated osm version to 0.7.1 [\#150](https://github.com/kubedb/postgres/pull/150) ([the-redback](https://github.com/the-redback))
+- Support ENV variables in CRDs [\#149](https://github.com/kubedb/postgres/pull/149) ([hossainemruz](https://github.com/hossainemruz))
+
+## [0.8.0](https://github.com/kubedb/postgres/tree/0.8.0) (2018-06-12)
+[Full Changelog](https://github.com/kubedb/postgres/compare/0.8.0-rc.0...0.8.0)
+
+**Merged pull requests:**
+
+- Fix missing Error return [\#147](https://github.com/kubedb/postgres/pull/147) ([the-redback](https://github.com/the-redback))
+- Revendor forked k8s.io/apiserver [\#146](https://github.com/kubedb/postgres/pull/146) ([tamalsaha](https://github.com/tamalsaha))
+- Revendor dependencies for aws ans azure sdk [\#145](https://github.com/kubedb/postgres/pull/145) ([tamalsaha](https://github.com/tamalsaha))
+- Add changelog [\#144](https://github.com/kubedb/postgres/pull/144) ([tamalsaha](https://github.com/tamalsaha))
+
 ## [0.8.0-rc.0](https://github.com/kubedb/postgres/tree/0.8.0-rc.0) (2018-05-28)
 [Full Changelog](https://github.com/kubedb/postgres/compare/0.8.0-beta.2...0.8.0-rc.0)
 
@@ -53,13 +118,8 @@
 **Merged pull requests:**
 
 - Update rbac role [\#116](https://github.com/kubedb/postgres/pull/116) ([aerokite](https://github.com/aerokite))
-- update docker image validation [\#115](https://github.com/kubedb/postgres/pull/115) ([aerokite](https://github.com/aerokite))
 - Use work queue [\#114](https://github.com/kubedb/postgres/pull/114) ([aerokite](https://github.com/aerokite))
-- Reorg location of docker images [\#113](https://github.com/kubedb/postgres/pull/113) ([aerokite](https://github.com/aerokite))
 - Set client id for analytics [\#112](https://github.com/kubedb/postgres/pull/112) ([tamalsaha](https://github.com/tamalsaha))
-- delete configmap used for leader-election [\#110](https://github.com/kubedb/postgres/pull/110) ([aerokite](https://github.com/aerokite))
-- Various fixes in docker & controller [\#109](https://github.com/kubedb/postgres/pull/109) ([aerokite](https://github.com/aerokite))
-- Update to use Archiver pointer [\#108](https://github.com/kubedb/postgres/pull/108) ([aerokite](https://github.com/aerokite))
 - Fix CRD registration [\#107](https://github.com/kubedb/postgres/pull/107) ([the-redback](https://github.com/the-redback))
 - Added log-based archive support with wal-g in postgres [\#106](https://github.com/kubedb/postgres/pull/106) ([aerokite](https://github.com/aerokite))
 - Remove dependency on deleted appscode/log packages. [\#105](https://github.com/kubedb/postgres/pull/105) ([tamalsaha](https://github.com/tamalsaha))
@@ -104,13 +164,11 @@
 
 **Merged pull requests:**
 
-- e2e test for backup in local directory [\#93](https://github.com/kubedb/postgres/pull/93) ([aerokite](https://github.com/aerokite))
 - Support RBAC [\#92](https://github.com/kubedb/postgres/pull/92) ([aerokite](https://github.com/aerokite))
 - Allow setting resources for StatefulSet or Snapshot/Restore jobs [\#91](https://github.com/kubedb/postgres/pull/91) ([tamalsaha](https://github.com/tamalsaha))
 - Use updated snapshot storage format [\#90](https://github.com/kubedb/postgres/pull/90) ([tamalsaha](https://github.com/tamalsaha))
 - Add app=kubedb labels to TPR reg [\#89](https://github.com/kubedb/postgres/pull/89) ([tamalsaha](https://github.com/tamalsaha))
 - Support using non-default service account [\#88](https://github.com/kubedb/postgres/pull/88) ([tamalsaha](https://github.com/tamalsaha))
-- Separate validation [\#87](https://github.com/kubedb/postgres/pull/87) ([aerokite](https://github.com/aerokite))
 
 ## [0.2.0](https://github.com/kubedb/postgres/tree/0.2.0) (2017-06-22)
 [Full Changelog](https://github.com/kubedb/postgres/compare/0.1.0...0.2.0)
@@ -143,21 +201,18 @@
 - Use kubedb docker hub account [\#70](https://github.com/kubedb/postgres/pull/70) ([tamalsaha](https://github.com/tamalsaha))
 - Rename operator name [\#69](https://github.com/kubedb/postgres/pull/69) ([aerokite](https://github.com/aerokite))
 - Use kubedb.com apigroup instead of k8sdb.com [\#68](https://github.com/kubedb/postgres/pull/68) ([tamalsaha](https://github.com/tamalsaha))
-- Do not handle DormantDatabase [\#67](https://github.com/kubedb/postgres/pull/67) ([aerokite](https://github.com/aerokite))
 - Pass clients instead of config [\#66](https://github.com/kubedb/postgres/pull/66) ([aerokite](https://github.com/aerokite))
 - Ungroup imports on fmt [\#65](https://github.com/kubedb/postgres/pull/65) ([tamalsaha](https://github.com/tamalsaha))
 - Fix go report card issues [\#64](https://github.com/kubedb/postgres/pull/64) ([tamalsaha](https://github.com/tamalsaha))
 - Use common receiver [\#63](https://github.com/kubedb/postgres/pull/63) ([tamalsaha](https://github.com/tamalsaha))
 - Rename delete database to pause [\#62](https://github.com/kubedb/postgres/pull/62) ([tamalsaha](https://github.com/tamalsaha))
 - Rename DeletedDatabase to DormantDatabase [\#61](https://github.com/kubedb/postgres/pull/61) ([tamalsaha](https://github.com/tamalsaha))
-- Add e2e test for updating scheduler [\#60](https://github.com/kubedb/postgres/pull/60) ([aerokite](https://github.com/aerokite))
 - Fix update method [\#59](https://github.com/kubedb/postgres/pull/59) ([aerokite](https://github.com/aerokite))
 - Remove prefix from snapshot job [\#58](https://github.com/kubedb/postgres/pull/58) ([aerokite](https://github.com/aerokite))
 - Delete Database Secret for wipe out [\#57](https://github.com/kubedb/postgres/pull/57) ([aerokite](https://github.com/aerokite))
 - Rename DatabaseSnapshot to Snapshot [\#56](https://github.com/kubedb/postgres/pull/56) ([tamalsaha](https://github.com/tamalsaha))
 - Modify StatefulSet naming format [\#54](https://github.com/kubedb/postgres/pull/54) ([aerokite](https://github.com/aerokite))
 - Get object each time before updating [\#53](https://github.com/kubedb/postgres/pull/53) ([aerokite](https://github.com/aerokite))
-- Check docker image version [\#52](https://github.com/kubedb/postgres/pull/52) ([aerokite](https://github.com/aerokite))
 - Create headless service for StatefulSet [\#51](https://github.com/kubedb/postgres/pull/51) ([aerokite](https://github.com/aerokite))
 - Use data as Volume name [\#50](https://github.com/kubedb/postgres/pull/50) ([aerokite](https://github.com/aerokite))
 - Put kind in label instead of type [\#48](https://github.com/kubedb/postgres/pull/48) ([aerokite](https://github.com/aerokite))
