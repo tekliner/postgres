@@ -1,5 +1,40 @@
 # Change Log
 
+## [0.9.0-rc.0](https://github.com/kubedb/postgres/tree/0.9.0-rc.0) (2018-10-15)
+[Full Changelog](https://github.com/kubedb/postgres/compare/0.9.0-beta.1...0.9.0-rc.0)
+
+**Merged pull requests:**
+
+- Fix build [\#222](https://github.com/kubedb/postgres/pull/222) ([tamalsaha](https://github.com/tamalsaha))
+- Fix build [\#221](https://github.com/kubedb/postgres/pull/221) ([tamalsaha](https://github.com/tamalsaha))
+- Support providing resources for monitoring container [\#220](https://github.com/kubedb/postgres/pull/220) ([hossainemruz](https://github.com/hossainemruz))
+- Recognize denied request by any webhook in xray [\#219](https://github.com/kubedb/postgres/pull/219) ([tamalsaha](https://github.com/tamalsaha))
+- Various fixes [\#217](https://github.com/kubedb/postgres/pull/217) ([hossainemruz](https://github.com/hossainemruz))
+- Update kubernetes client libraries to 1.12.0 [\#216](https://github.com/kubedb/postgres/pull/216) ([tamalsaha](https://github.com/tamalsaha))
+- Add validation webhook xray [\#215](https://github.com/kubedb/postgres/pull/215) ([tamalsaha](https://github.com/tamalsaha))
+- Merge ports from service template [\#213](https://github.com/kubedb/postgres/pull/213) ([tamalsaha](https://github.com/tamalsaha))
+- Remove remaining DoNotPause [\#212](https://github.com/kubedb/postgres/pull/212) ([tamalsaha](https://github.com/tamalsaha))
+- Set TerminationPolicy to WipeOut in e2e tests [\#211](https://github.com/kubedb/postgres/pull/211) ([tamalsaha](https://github.com/tamalsaha))
+- Replace doNotPause with TerminationPolicy = DoNotTerminate [\#210](https://github.com/kubedb/postgres/pull/210) ([tamalsaha](https://github.com/tamalsaha))
+- Pass resources to NamespaceValidator [\#209](https://github.com/kubedb/postgres/pull/209) ([tamalsaha](https://github.com/tamalsaha))
+- Add validation webhook for Namespace deletion [\#208](https://github.com/kubedb/postgres/pull/208) ([tamalsaha](https://github.com/tamalsaha))
+- Use FQDN for kube-apiserver in AKS [\#207](https://github.com/kubedb/postgres/pull/207) ([tamalsaha](https://github.com/tamalsaha))
+- Support Livecycle hook and container probes [\#206](https://github.com/kubedb/postgres/pull/206) ([tamalsaha](https://github.com/tamalsaha))
+- Check if Kubernetes version is supported before running operator [\#205](https://github.com/kubedb/postgres/pull/205) ([tamalsaha](https://github.com/tamalsaha))
+
+## [0.9.0-beta.1](https://github.com/kubedb/postgres/tree/0.9.0-beta.1) (2018-09-30)
+[Full Changelog](https://github.com/kubedb/postgres/compare/0.9.0-beta.0...0.9.0-beta.1)
+
+**Merged pull requests:**
+
+- Revendor api [\#204](https://github.com/kubedb/postgres/pull/204) ([tamalsaha](https://github.com/tamalsaha))
+- Change streaming mode constants to CamelCase [\#203](https://github.com/kubedb/postgres/pull/203) ([tamalsaha](https://github.com/tamalsaha))
+- Fix tests [\#202](https://github.com/kubedb/postgres/pull/202) ([tamalsaha](https://github.com/tamalsaha))
+- Revendor api for catalog apigroup [\#201](https://github.com/kubedb/postgres/pull/201) ([tamalsaha](https://github.com/tamalsaha))
+- Cherry Pick into 'release-0.9': Fix missing '--' argument receiver on postgres-tools \(\#199\) [\#200](https://github.com/kubedb/postgres/pull/200) ([the-redback](https://github.com/the-redback))
+- Fix missing '--' argument receiver on postgres-tools [\#199](https://github.com/kubedb/postgres/pull/199) ([the-redback](https://github.com/the-redback))
+- Use --pull flag with docker build \(\#20\) [\#198](https://github.com/kubedb/postgres/pull/198) ([tamalsaha](https://github.com/tamalsaha))
+
 ## [0.9.0-beta.0](https://github.com/kubedb/postgres/tree/0.9.0-beta.0) (2018-09-20)
 [Full Changelog](https://github.com/kubedb/postgres/compare/0.8.0...0.9.0-beta.0)
 
@@ -11,6 +46,7 @@
 
 - Pass extra args to tools.sh [\#196](https://github.com/kubedb/postgres/pull/196) ([the-redback](https://github.com/the-redback))
 - Support Termination Policy & Stop working for deprecated \*Versions [\#195](https://github.com/kubedb/postgres/pull/195) ([hossainemruz](https://github.com/hossainemruz))
+- Introduce synchronous streaming replication model [\#194](https://github.com/kubedb/postgres/pull/194) ([zhenhuadong](https://github.com/zhenhuadong))
 - Revendor k8s.io/apiserver [\#193](https://github.com/kubedb/postgres/pull/193) ([tamalsaha](https://github.com/tamalsaha))
 - Revendor kubernetes-1.11.3 [\#192](https://github.com/kubedb/postgres/pull/192) ([tamalsaha](https://github.com/tamalsaha))
 - Support UpdateStrategy [\#190](https://github.com/kubedb/postgres/pull/190) ([tamalsaha](https://github.com/tamalsaha))
