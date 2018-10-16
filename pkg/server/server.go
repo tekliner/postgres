@@ -109,15 +109,22 @@ func (c completedConfig) New() (*PostgresServer, error) {
 	if err != nil {
 		return nil, err
 	}
-	c.ExtraConfig.AdmissionHooks = []hooks.AdmissionHook{
-		&mgAdmsn.PostgresValidator{},
-		&mgAdmsn.PostgresMutator{},
-		&snapshot.SnapshotValidator{},
-		&dormantdatabase.DormantDatabaseValidator{},
-		&namespace.NamespaceValidator{
-			Resources: []string{api.ResourcePluralPostgres},
-		},
+
+	if c.OperatorConfig.EnableMutatingWebhook {
+		c.ExtraConfig.AdmissionHooks = []hooks.AdmissionHook{
+			&mgAdmsn.PostgresMutator{},
+		}
 	}
+	if c.OperatorConfig.EnableValidatingWebhook {
+		c.ExtraConfig.AdmissionHooks = append(c.ExtraConfig.AdmissionHooks,
+			&mgAdmsn.PostgresValidator{},
+			&snapshot.SnapshotValidator{},
+			&dormantdatabase.DormantDatabaseValidator{},
+			&namespace.NamespaceValidator{
+				Resources: []string{api.ResourcePluralPostgres},
+			})
+	}
+
 	ctrl, err := c.OperatorConfig.New()
 	if err != nil {
 		return nil, err
