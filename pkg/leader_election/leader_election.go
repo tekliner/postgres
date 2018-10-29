@@ -2,6 +2,7 @@ package leader_election
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"log"
 	"os"
@@ -14,6 +15,7 @@ import (
 	"github.com/appscode/go/ioutil"
 	core_util "github.com/appscode/kutil/core/v1"
 	"github.com/appscode/kutil/tools/clientcmd"
+	_ "github.com/lib/pq"
 	core "k8s.io/api/core/v1"
 	kerr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -29,6 +31,34 @@ const (
 	RoleReplica = "replica"
 )
 
+//Юзать коллбэки на начало и конец лидерства, а тот, где простыня не юзать.
+//Перенести чек на доступность мастера в го и мочь отменить его через context.
+
+func getEnv(key, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return fallback
+}
+
+func pg_conn_string() string {
+
+	hostname := getEnv("PRIMARY_HOST", "localhost")
+	username := getEnv("POSTGRES_USER", "postgres")
+	password := getEnv("POSTGRES_PASSWORD", "postgres")
+
+	info := fmt.Sprintf("host=%s port=%s dbname=%s "+
+		"sslmode=%s user=%s password=%s ",
+		hostname,
+		5432,
+		"postgres",
+		"disable",
+		username,
+		password,
+	)
+	return info
+}
+
 func RunLeaderElection() {
 
 	leaderElectionLease := 3 * time.Second
@@ -39,6 +69,7 @@ func RunLeaderElection() {
 	}
 
 	// Change owner of Postgres data directory
+	// нахуя это делать в коде, если конфик собирается скриптом?
 	if err := setPermission(); err != nil {
 		log.Fatalln(err)
 	}
@@ -84,6 +115,7 @@ func RunLeaderElection() {
 	}
 
 	runningFirstTime := true
+	start_as_master := make(chan int, 10)
 
 	go func() {
 		leaderelection.RunOrDie(context.Background(), leaderelection.LeaderElectionConfig{
@@ -93,12 +125,13 @@ func RunLeaderElection() {
 			RetryPeriod:   leaderElectionLease / 3,
 			Callbacks: leaderelection.LeaderCallbacks{
 				OnStartedLeading: func(ctx context.Context) {
-					fmt.Println("Got leadership, now do your jobs")
+					start_as_master <- 1
 				},
 				OnStoppedLeading: func() {
 					fmt.Println("Lost leadership, now quit")
 					os.Exit(1)
 				},
+				// вызывается при поиске лидера, если его нет попытаться его получить
 				OnNewLeader: func(identity string) {
 					statefulSet, err := kubeClient.AppsV1().StatefulSets(namespace).Get(statefulSetName, metav1.GetOptions{})
 					if err != nil {
@@ -126,6 +159,37 @@ func RunLeaderElection() {
 					role := RoleReplica
 					if identity == hostname {
 						role = RolePrimary
+					}
+
+					// добавить тест мастера с помощью select 1
+					// при ошибке опроса через канал сообщить о том, что мастер труп в другие рутины
+					// начать восстановление как мастера в рутине OnStartedLeading
+
+					db, err := sql.Open("postgres", pg_conn_string())
+					conn_error := false
+					if err != nil {
+						conn_error = true
+					}
+
+					defer db.Close()
+
+					_, err = db.Exec("SELECT 1;")
+					query_error := false
+					if err != nil {
+						query_error = true
+					}
+
+					if conn_error || query_error {
+						for {
+							time.Sleep(time.Second)
+							select {
+							case trigger := <-start_as_master:
+								fmt.Println("Got leadership:", trigger)
+								role = RolePrimary
+							default:
+								// nothing
+							}
+						}
 					}
 
 					if runningFirstTime {
