@@ -174,7 +174,7 @@ func RunLeaderElection() {
 					for role == RoleReplica {
 						log.Println("Checking connection to master")
 
-						if db, err := sql.Open("postgres", pg_conn_string()); err != nil {
+						if db, err := sql.Open("postgres", pg_conn_string()); db != nil {
 							defer db.Close()
 							_, err = db.Exec("SELECT 1;")
 							if err != nil {
