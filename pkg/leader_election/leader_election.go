@@ -61,7 +61,7 @@ func pg_conn_string() string {
 
 func RunLeaderElection() {
 
-	fmt.Println("Leader election started")
+	log.Println("Leader election started")
 
 	leaderElectionLease := 3 * time.Second
 
@@ -84,7 +84,7 @@ func RunLeaderElection() {
 	parts := strings.Split(hostname, "-")
 	statefulSetName := strings.Join(parts[:len(parts)-1], "-")
 
-	fmt.Println(fmt.Sprintf(`We want "%v" as our leader`, hostname))
+	log.Printf(`We want "%v" as our leader`, hostname)
 
 	config, err := restclient.InClusterConfig()
 	if err != nil {
@@ -127,16 +127,16 @@ func RunLeaderElection() {
 			RetryPeriod:   leaderElectionLease / 3,
 			Callbacks: leaderelection.LeaderCallbacks{
 				OnStartedLeading: func(ctx context.Context) {
-					fmt.Println("Received message to start as master")
+					log.Println("Received message to start as master")
 					start_as_master <- 1
 				},
 				OnStoppedLeading: func() {
-					fmt.Println("Lost leadership, now quit")
+					log.Println("Lost leadership, now quit")
 					os.Exit(1)
 				},
 				// вызывается при поиске лидера, если его нет попытаться его получить
 				OnNewLeader: func(identity string) {
-					fmt.Println("We got new leader!")
+					log.Println("We got new leader!")
 					statefulSet, err := kubeClient.AppsV1().StatefulSets(namespace).Get(statefulSetName, metav1.GetOptions{})
 					if err != nil {
 						log.Fatalln(err)
@@ -160,7 +160,7 @@ func RunLeaderElection() {
 						})
 					}
 
-					fmt.Println("Set default role to replica")
+					log.Println("Set default role to replica")
 
 					role := RoleReplica
 					if identity == hostname {
@@ -172,44 +172,37 @@ func RunLeaderElection() {
 					// начать восстановление как мастера в рутине OnStartedLeading
 
 					for {
-						query_error := false
-						conn_error := false
+						log.Println("Checking connection to master")
 
-						fmt.Println("Checking connection to master")
-
-						if conn_error || query_error {
-
-							db, err := sql.Open("postgres", pg_conn_string())
-							if err != nil {
-								conn_error = true
-								fmt.Println("Checking connection to master: connection error")
-							}
-
+						if db, err := sql.Open("postgres", pg_conn_string()); err != nil {
 							defer db.Close()
-
 							_, err = db.Exec("SELECT 1;")
 							if err != nil {
-								query_error = true
-								fmt.Println("Checking connection to master: query error")
+								log.Println("Checking connection to master: query error")
+							} else {
+								break
 							}
+						} else {
+							log.Println("Checking connection to master: connection error")
+						}
 
-							time.Sleep(time.Second * 5)
+						time.Sleep(time.Second * 5)
 
-							select {
-							case trigger := <-start_as_master:
-								fmt.Println("Got leadership:", trigger)
-								role = RolePrimary
-							default:
-								// nothing
-								fmt.Println("Can't connect to master server")
-							}
+						select {
+						case trigger := <-start_as_master:
+							log.Println("Got leadership:", trigger)
+							role = RolePrimary
+							break
+						default:
+							// nothing
+							log.Println("Can't connect to master server")
 						}
 					}
 
 					if runningFirstTime {
 						runningFirstTime = false
 						go func() {
-							fmt.Println("Starting script:", role)
+							log.Println("Starting script:", role)
 							// su-exec postgres /scripts/primary/run.sh
 							cmd := exec.Command("su-exec", "postgres", fmt.Sprintf("/scripts/%s/run.sh", role))
 							cmd.Stdout = os.Stdout
@@ -224,7 +217,6 @@ func RunLeaderElection() {
 						if identity == hostname {
 							if !ioutil.WriteString("/tmp/pg-failover-trigger", "") {
 								log.Fatalln("Failed to create trigger file")
-								fmt.Println("Failed to create trigger file")
 							}
 						}
 					}
