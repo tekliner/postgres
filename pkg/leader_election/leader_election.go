@@ -41,7 +41,7 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
-func pg_conn_string() string {
+func pgConnString() string {
 
 	hostname := getEnv("PRIMARY_HOST", "localhost")
 	username := getEnv("POSTGRES_USER", "postgres")
@@ -71,7 +71,6 @@ func RunLeaderElection() {
 	}
 
 	// Change owner of Postgres data directory
-	// нахуя это делать в коде, если конфик собирается скриптом?
 	if err := setPermission(); err != nil {
 		log.Fatalln(err)
 	}
@@ -117,7 +116,7 @@ func RunLeaderElection() {
 	}
 
 	runningFirstTime := true
-	start_as_master := make(chan int, 10)
+	startAsMaster := make(chan struct{})
 
 	go func() {
 		leaderelection.RunOrDie(context.Background(), leaderelection.LeaderElectionConfig{
@@ -128,13 +127,12 @@ func RunLeaderElection() {
 			Callbacks: leaderelection.LeaderCallbacks{
 				OnStartedLeading: func(ctx context.Context) {
 					log.Println("Received message to start as master")
-					start_as_master <- 1
+					startAsMaster <- struct{}{}
 				},
 				OnStoppedLeading: func() {
 					log.Println("Lost leadership, now quit")
 					os.Exit(1)
 				},
-				// вызывается при поиске лидера, если его нет попытаться его получить
 				OnNewLeader: func(identity string) {
 					log.Printf("We got new leader - %v!", identity)
 					statefulSet, err := kubeClient.AppsV1().StatefulSets(namespace).Get(statefulSetName, metav1.GetOptions{})
@@ -167,21 +165,15 @@ func RunLeaderElection() {
 						role = RolePrimary
 					}
 
-					// добавить тест мастера с помощью select 1
-					// при ошибке опроса через канал сообщить о том, что мастер труп в другие рутины
-					// начать восстановление как мастера в рутине OnStartedLeading
-
 					for role == RoleReplica {
 						log.Println("Checking connection to master")
 
-						if db, err := sql.Open("postgres", pg_conn_string()); db != nil {
+						if db, err := sql.Open("postgres", pgConnString()); db != nil {
 							defer db.Close()
-							_, err = db.Exec("SELECT 1;")
-							if err != nil {
-								log.Println("Checking connection to master: query error")
-							} else {
+							if _, err = db.Exec("SELECT 1;"); err == nil {
 								break
 							}
+							log.Println("Checking connection to master: query error")
 						} else {
 							log.Println("Checking connection to master: connection error")
 						}
@@ -189,7 +181,7 @@ func RunLeaderElection() {
 						time.Sleep(time.Second * 5)
 
 						select {
-						case trigger := <-start_as_master:
+						case trigger := <-startAsMaster:
 							log.Println("Got leadership:", trigger)
 							role = RolePrimary
 						default:
