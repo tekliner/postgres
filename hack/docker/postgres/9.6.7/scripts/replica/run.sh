@@ -13,18 +13,6 @@ export PGPASSWORD=${POSTGRES_PASSWORD:-postgres}
 
 export ARCHIVE=${ARCHIVE:-}
 
-# Waiting for running Postgres
-while true; do
-  pg_isready --host="$PRIMARY_HOST" --timeout=2 &>/dev/null && break
-  echo "Attempting pg_isready on primary"
-  sleep 2
-done
-while true; do
-  psql -h "$PRIMARY_HOST" --no-password --username=postgres --command="select now();" &>/dev/null && break
-  echo "Attempting query on primary"
-  sleep 2
-done
-
 # get basebackup
 pg_basebackup -X fetch --no-password --pgdata "$PGDATA" --username=postgres --host="$PRIMARY_HOST"
 
