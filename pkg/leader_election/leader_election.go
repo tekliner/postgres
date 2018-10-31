@@ -136,7 +136,7 @@ func RunLeaderElection() {
 				},
 				// вызывается при поиске лидера, если его нет попытаться его получить
 				OnNewLeader: func(identity string) {
-					log.Println("We got new leader!")
+					log.Printf("We got new leader - %v!", identity)
 					statefulSet, err := kubeClient.AppsV1().StatefulSets(namespace).Get(statefulSetName, metav1.GetOptions{})
 					if err != nil {
 						log.Fatalln(err)
@@ -171,7 +171,7 @@ func RunLeaderElection() {
 					// при ошибке опроса через канал сообщить о том, что мастер труп в другие рутины
 					// начать восстановление как мастера в рутине OnStartedLeading
 
-					for {
+					for role == RoleReplica {
 						log.Println("Checking connection to master")
 
 						if db, err := sql.Open("postgres", pg_conn_string()); err != nil {
@@ -192,7 +192,6 @@ func RunLeaderElection() {
 						case trigger := <-start_as_master:
 							log.Println("Got leadership:", trigger)
 							role = RolePrimary
-							break
 						default:
 							// nothing
 							log.Println("Can't connect to master server")
