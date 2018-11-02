@@ -47,7 +47,7 @@ func pgConnString() string {
 	username := getEnv("POSTGRES_USER", "postgres")
 	password := getEnv("POSTGRES_PASSWORD", "postgres")
 
-	info := fmt.Sprintf("host=%s port=%s dbname=%s "+
+	info := fmt.Sprintf("host=%s port=%d dbname=%s "+
 		"sslmode=%s user=%s password=%s ",
 		hostname,
 		5432,
@@ -56,6 +56,7 @@ func pgConnString() string {
 		username,
 		password,
 	)
+	log.Printf("posgres connection string: %v", info)
 	return info
 }
 
@@ -206,6 +207,7 @@ func RunLeaderElection() {
 						}()
 					} else {
 						if identity == hostname {
+							log.Fatalln("Creating trigger file")
 							if !ioutil.WriteString("/tmp/pg-failover-trigger", "") {
 								log.Fatalln("Failed to create trigger file")
 							}
