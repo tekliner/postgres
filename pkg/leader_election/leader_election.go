@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -31,9 +32,6 @@ const (
 	RoleReplica = "replica"
 )
 
-//Юзать коллбэки на начало и конец лидерства, а тот, где простыня не юзать.
-//Перенести чек на доступность мастера в го и мочь отменить его через context.
-
 func getEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
@@ -59,6 +57,101 @@ func pgConnString() string {
 	log.Printf("posgres connection string: %v", info)
 	return info
 }
+
+func isPgMasterOnline() bool {
+	log.Println("Checking connection to master")
+
+	if db, err := sql.Open("postgres", pgConnString()); db != nil {
+		defer db.Close()
+		if _, err = db.Exec("SELECT 1;"); err == nil {
+			return true
+		}
+		log.Println("Checking connection to master: query error")
+	} else {
+		log.Println("Checking connection to master: connection error")
+	}
+
+	time.Sleep(time.Second * 5)
+	return false
+}
+
+func waitPgMasterOnline() {
+	// authung! dangerous function, can't stop if master offline
+	// use with go and channels
+	for {
+		log.Println("Waiting connection to master")
+
+		if db, err := sql.Open("postgres", pgConnString()); db != nil {
+			defer db.Close()
+			if _, err = db.Exec("SELECT 1;"); err == nil {
+				break
+			}
+			log.Println("Checking connection to master: query error")
+		} else {
+			log.Println("Checking connection to master: connection error")
+		}
+
+		time.Sleep(time.Second * 5)
+
+	}
+
+}
+
+func runCmd(env []string, cmdname string, params ...string) {
+	log.Println("runCmd:", cmdname, params)
+	cmd := exec.Command(cmdname, params...)
+
+	// set env variables
+	cmd.Env = append(cmd.Env, os.Environ()...)
+	cmd.Env = append(cmd.Env, env...)
+
+	// set stdout, stderr
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	// if errors
+	if err := cmd.Run(); err != nil {
+		log.Println(err)
+	}
+	os.Exit(1)
+}
+
+func execWalgAction(walgCommand string, params ...string) {
+	var env []string
+	env = append(env, fmt.Sprintf("WALE_S3_PREFIX=%s", getEnv("ARCHIVE_S3_PREFIX", "")))
+	// auth for wal-g
+	env = append(env, fmt.Sprintf("PGUSER=%s", getEnv("POSTGRES_USER", "")))
+	env = append(env, fmt.Sprintf("PGPASSWORD=%s", getEnv("POSTGRES_PASSWORD", "")))
+
+	awsKeyFile := "/srv/wal-g/archive/secrets/AWS_ACCESS_KEY_ID"
+	awsSecretFile := "/srv/wal-g/archive/secrets/AWS_SECRET_ACCESS_KEY"
+
+	awsKey, err := ioutil.ReadFile(awsKeyFile)
+	// aws key file ansent
+	if err != nil {
+		log.Println(err)
+	}
+
+	awsSecret, err := ioutil.ReadFile(awsSecretFile)
+	// aws secret file absent
+	if err != nil {
+		log.Println(err)
+	}
+	env = append(env, fmt.Sprintf("AWS_ACCESS_KEY_ID=%s", awsKey))
+	env = append(env, fmt.Sprintf("AWS_SECRET_ACCESS_KEY=%s", awsSecret))
+	// need to forward "wal-g", walgCommand, params...
+	arg := []string{"postgres", "wal-g"}
+	arg = append(arg, walgCommand)
+	arg = append(arg, params...)
+	runCmd(env, "su-exec", arg...)
+}
+
+func execPostgresAction(action string) {
+	var env []string
+	runCmd(env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDaTA", "/var/pv/data"), "-w", action)
+}
+
+// TODO: generate PG configs
 
 func RunLeaderElection() {
 
@@ -117,7 +210,82 @@ func RunLeaderElection() {
 	}
 
 	runningFirstTime := true
-	startAsMaster := make(chan struct{})
+
+	type pgOpCommand int
+	const (
+		startMaster           pgOpCommand = 0
+		startSlave            pgOpCommand = 1
+		startRecovery         pgOpCommand = 2
+		createRecoveryTrigger pgOpCommand = 3
+		removeRecoveryTrigger pgOpCommand = 4
+		promoteToMaster       pgOpCommand = 5
+		promoteToSlave        pgOpCommand = 6
+		raiseError            pgOpCommand = 7
+		raiseFatalError       pgOpCommand = 8
+	)
+
+	type pgOpErrorType int
+	const (
+		masterUnreachable   pgOpErrorType = 0
+		masterNotFunctional pgOpErrorType = 1
+		backupUnreachable   pgOpErrorType = 2
+		lostSync            pgOpErrorType = 3
+		walgError           pgOpErrorType = 4
+		noLeader            pgOpErrorType = 5
+	)
+
+	type pgOpError struct {
+		ErrorType pgOpErrorType
+		ErrorText string
+	}
+
+	messagesBus := make(chan string)
+	commandsBus := make(chan pgOpCommand)
+	errorsBus := make(chan pgOpError)
+
+	go func() {
+		// master loop
+		for {
+			select {
+			case operatorCommand := <-commandsBus:
+				// receive message
+				if operatorCommand == startMaster {
+					log.Println("Received command start as master:", operatorCommand)
+					// some actions before start as master
+					// TODO: run config generation
+					execPostgresAction("start")
+				}
+				if operatorCommand == startSlave {
+					log.Println("Received command start as slave:", operatorCommand)
+					// some actions before start as slave
+					// TODO: run config generation
+					execPostgresAction("start")
+				}
+				if operatorCommand == startRecovery {
+					log.Println("Received command start recovery:", operatorCommand)
+					// some actions before start recovery
+					execPostgresAction("start")
+					// some actions to start recovery
+
+					// wait backup list to be fetched
+					// env:
+					// PITR=${PITR:-false}
+					// TARGET_INCLUSIVE=${TARGET_INCLUSIVE:-true}
+					// TARGET_TIME=${TARGET_TIME:-}
+					// TARGET_TIMELINE=${TARGET_TIMELINE:-}
+					// TARGET_XID=${TARGET_XID:-}
+					execWalgAction("backup-list")
+					execWalgAction("backup-fetch", getEnv("PGDaTA", "/var/pv/data"), getEnv("BACKUP_NAME", "LATEST"))
+					execPostgresAction("stop")
+				}
+			case operatorerror := <-errorsBus:
+				//
+			default:
+				// nothing
+				log.Println("Can't connect to master server")
+			}
+		}
+	}()
 
 	go func() {
 		leaderelection.RunOrDie(context.Background(), leaderelection.LeaderElectionConfig{
@@ -128,13 +296,14 @@ func RunLeaderElection() {
 			Callbacks: leaderelection.LeaderCallbacks{
 				OnStartedLeading: func(ctx context.Context) {
 					log.Println("Received message to start as master")
-					startAsMaster <- struct{}{}
 				},
 				OnStoppedLeading: func() {
 					log.Println("Lost leadership, now quit")
 					os.Exit(1)
 				},
 				OnNewLeader: func(identity string) {
+					// TODO: change hardcoded directory in setPermission to PGDATA
+
 					log.Printf("We got new leader - %v!", identity)
 					statefulSet, err := kubeClient.AppsV1().StatefulSets(namespace).Get(statefulSetName, metav1.GetOptions{})
 					if err != nil {
@@ -167,16 +336,16 @@ func RunLeaderElection() {
 					}
 
 					for role == RoleReplica {
-						log.Println("Checking connection to master")
+						log.Println("Waiting connection to master")
 
 						if db, err := sql.Open("postgres", pgConnString()); db != nil {
 							defer db.Close()
 							if _, err = db.Exec("SELECT 1;"); err == nil {
 								break
 							}
-							log.Println("Checking connection to master: query error")
+							log.Println("Waiting connection to master: query error")
 						} else {
-							log.Println("Checking connection to master: connection error")
+							log.Println("Waiting connection to master: connection error")
 						}
 
 						time.Sleep(time.Second * 5)
