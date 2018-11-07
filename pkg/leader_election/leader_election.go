@@ -3,8 +3,7 @@ package leader_election
 import (
 	"context"
 	"database/sql"
-	"fmt"
-	"io/ioutil"
+	"fmt" //"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -32,6 +31,27 @@ const (
 	RoleReplica = "replica"
 )
 
+func appendFile(filename string, lines []string) error {
+	f, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0600)
+	if err != nil {
+		return err
+	}
+
+	defer f.Close()
+
+	content := strings.Join(lines, "\n")
+	if _, err = f.WriteString(content); err != nil {
+		return err
+	}
+	return nil
+}
+
+func dataDirectoryCleanup() {
+	PGDATA := getEnv("PGDATA", "/var/pv/data")
+	os.RemoveAll(PGDATA)
+	os.MkdirAll(PGDATA, 0700)
+}
+
 func getEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
@@ -39,9 +59,9 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
-func pgConnString() string {
+func pgConnString(hostname string) string {
 
-	hostname := getEnv("PRIMARY_HOST", "localhost")
+	//hostname := getEnv("PRIMARY_HOST", "localhost")
 	username := getEnv("POSTGRES_USER", "postgres")
 	password := getEnv("POSTGRES_PASSWORD", "postgres")
 
@@ -54,47 +74,50 @@ func pgConnString() string {
 		username,
 		password,
 	)
-	log.Printf("posgres connection string: %v", info)
+	log.Printf("pgConnString: posgres connection string: %v", info)
 	return info
 }
 
-func isPgMasterOnline() bool {
-	log.Println("Checking connection to master")
+func setPosgresUserPassword(username, password string) {
+	log.Printf("setPostgresUserPassword: Trying to set password to Postgres user: %s", username)
 
-	if db, err := sql.Open("postgres", pgConnString()); db != nil {
+	if db, err := sql.Open("postgres", pgConnString("localhost")); db != nil {
 		defer db.Close()
-		if _, err = db.Exec("SELECT 1;"); err == nil {
-			return true
+		sqlQuery := fmt.Sprintf("ALTER USER %s WITH PASSWORD '%s';", username, password)
+		if _, err = db.Exec(sqlQuery); err == nil {
+			log.Printf("setPostgresUserPassword: Password successfully set to %s", password)
 		}
-		log.Println("Checking connection to master: query error")
+		log.Println("setPostgresUserPassword: query error")
 	} else {
-		log.Println("Checking connection to master: connection error")
+		log.Println("setPostgresUserPassword: connection error")
 	}
-
-	time.Sleep(time.Second * 5)
-	return false
 }
 
-func waitPgMasterOnline() {
-	// authung! dangerous function, can't stop if master offline
-	// use with go and channels
+func isPostgresOnline(hostname string, wait bool) bool {
+	// authung! dangerous function
+	//if wait == true function will wait until connection established
+	returnValue := false
 	for {
-		log.Println("Waiting connection to master")
+		log.Println("isPgMasterOnline: Checking connection to master")
 
-		if db, err := sql.Open("postgres", pgConnString()); db != nil {
+		if db, err := sql.Open("postgres", pgConnString(hostname)); db != nil {
 			defer db.Close()
 			if _, err = db.Exec("SELECT 1;"); err == nil {
-				break
+				returnValue = true
+				if wait {
+					break
+				}
 			}
-			log.Println("Checking connection to master: query error")
+			log.Println("isPgMasterOnline: query error")
 		} else {
-			log.Println("Checking connection to master: connection error")
+			log.Println("isPgMasterOnline: connection error")
 		}
-
+		if !wait {
+			break
+		}
 		time.Sleep(time.Second * 5)
-
 	}
-
+	return returnValue
 }
 
 func runCmd(env []string, cmdname string, params ...string) {
@@ -146,12 +169,85 @@ func execWalgAction(walgCommand string, params ...string) {
 	runCmd(env, "su-exec", arg...)
 }
 
+func execBaseBackup() {
+	var env []string
+	pgdata := getEnv("PGDaTA", "/var/pv/data")
+	pguser := fmt.Sprintf("--username=%s", getEnv("POSTGRES_USER", "postgres"))
+	pghost := fmt.Sprintf("--host=%s", getEnv("PRIMARY_HOST", ""))
+	runCmd(env, "pg_basebackup", "-X", "fetch", "--no-password", "--pgdata", pgdata, pguser, pghost)
+}
+
 func execPostgresAction(action string) {
 	var env []string
 	runCmd(env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDaTA", "/var/pv/data"), "-w", action)
 }
 
-// TODO: generate PG configs
+func postgresMakeEmptyDB() {
+	// Create empty database for postgres after dir cleanup and before start
+	var env []string
+	runCmd(env, "initdb", fmt.Sprintf("--pgdata=%s", getEnv("PGDATA", "/var/pv/data")))
+}
+
+func postgresMakeConfigs(role string) {
+	// Create config files for postgres after dir cleanup and before start
+	if role == RolePrimary {
+		var env []string
+		// copy template to /tmp
+		runCmd(env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
+
+		// append config
+		lines := []string{
+			"wal_level = replica",
+			"max_wal_senders = 99",
+			"wal_keep_segments = 32",
+		}
+		appendFile("/tmp/postgresql.conf", lines)
+
+		// move configs to PGDATA
+		runCmd(env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
+		runCmd(env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
+	}
+	if role == RoleReplica {
+		var env []string
+		// copy template to /tmp
+		runCmd(env, "cp", "/scripts/replica/recovery.conf", "/tmp/")
+
+		// append recovery.conf
+		lines := []string{
+			"recovery_target_timeline = 'latest'",
+			fmt.Sprintf("archive_cleanup_command = 'pg_archivecleanup %s %r'", getEnv("PGWAL", "")),
+			fmt.Sprintf("primary_conninfo = 'application_name=%s host=%s'", getEnv("HOSTNAME", ""), getEnv("PRIMARY_HOST", "")),
+		}
+		appendFile("/tmp/recovery.conf", lines)
+
+		// append postgresql.conf
+		runCmd(env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
+		lines = []string{
+			"wal_level = replica",
+			"max_wal_senders = 99",
+			"wal_keep_segments = 32",
+		}
+		if getEnv("STANDBY", "") == "hot" {
+			lines = append(lines, "hot_standby = on")
+		}
+		if getEnv("STREAMING", "") == "synchronous" {
+			// setup synchronous streaming replication
+			lines = append(lines, "synchronous_commit = remote_write")
+			lines = append(lines, "synchronous_standby_names = '*'")
+		}
+		if getEnv("ARCHIVE", "") == "wal-g" {
+			lines = append(lines, "archive_command = 'wal-g wal-push %p'")
+			lines = append(lines, "archive_timeout = 60")
+			lines = append(lines, "archive_mode = always")
+		}
+		appendFile("/tmp/postgresql.conf", lines)
+
+		// move configs to PGDATA
+		runCmd(env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
+		runCmd(env, "mv", "/tmp/recovery.conf", getEnv("PGDATA", "/var/pv/data"))
+		runCmd(env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
+	}
+}
 
 func RunLeaderElection() {
 
@@ -209,13 +305,11 @@ func RunLeaderElection() {
 		},
 	}
 
-	runningFirstTime := true
-
 	type pgOpCommand int
 	const (
-		startMaster           pgOpCommand = 0
-		startSlave            pgOpCommand = 1
-		startRecovery         pgOpCommand = 2
+		startMasterEmpty      pgOpCommand = 0
+		startMasterRecovery   pgOpCommand = 1
+		startSlave            pgOpCommand = 2
 		createRecoveryTrigger pgOpCommand = 3
 		removeRecoveryTrigger pgOpCommand = 4
 		promoteToMaster       pgOpCommand = 5
@@ -239,9 +333,10 @@ func RunLeaderElection() {
 		ErrorText string
 	}
 
-	messagesBus := make(chan string)
+	//messagesBus := make(chan string)
 	commandsBus := make(chan pgOpCommand)
 	errorsBus := make(chan pgOpError)
+	runningFirstTime := true
 
 	go func() {
 		// master loop
@@ -249,40 +344,55 @@ func RunLeaderElection() {
 			select {
 			case operatorCommand := <-commandsBus:
 				// receive message
-				if operatorCommand == startMaster {
-					log.Println("Received command start as master:", operatorCommand)
+				if operatorCommand == startMasterEmpty {
+					log.Println("master loop: Received command start as master:", operatorCommand)
 					// some actions before start as master
-					// TODO: run config generation
+					dataDirectoryCleanup()
+					postgresMakeConfigs(RolePrimary)
+					postgresMakeEmptyDB()
 					execPostgresAction("start")
 				}
-				if operatorCommand == startSlave {
-					log.Println("Received command start as slave:", operatorCommand)
-					// some actions before start as slave
-					// TODO: run config generation
-					execPostgresAction("start")
-				}
-				if operatorCommand == startRecovery {
-					log.Println("Received command start recovery:", operatorCommand)
+				if operatorCommand == startMasterRecovery {
+					log.Println("master loop: Received command start recovery:", operatorCommand)
 					// some actions before start recovery
-					execPostgresAction("start")
+					dataDirectoryCleanup()
+					postgresMakeConfigs(RolePrimary)
 					// some actions to start recovery
-
-					// wait backup list to be fetched
-					// env:
-					// PITR=${PITR:-false}
-					// TARGET_INCLUSIVE=${TARGET_INCLUSIVE:-true}
-					// TARGET_TIME=${TARGET_TIME:-}
-					// TARGET_TIMELINE=${TARGET_TIMELINE:-}
-					// TARGET_XID=${TARGET_XID:-}
 					execWalgAction("backup-list")
 					execWalgAction("backup-fetch", getEnv("PGDaTA", "/var/pv/data"), getEnv("BACKUP_NAME", "LATEST"))
-					execPostgresAction("stop")
+					setPermission()
+					// backup done, start Postgres
+					go execPostgresAction("start")
+					// if alien backup used set user and password to current deployment credentials
+					// be sure that current deployment role have rights to all required resources
+					if isPostgresOnline("localhost", true) {
+						setPosgresUserPassword(getEnv("POSTGRES_USER", "postgres"), getEnv("POSTGRES_PASSWORD", "postgres"))
+					}
+
 				}
-			case operatorerror := <-errorsBus:
-				//
+				if operatorCommand == startSlave {
+					log.Println("master loop: Received command start as slave:", operatorCommand)
+					// some actions before start as slave
+					dataDirectoryCleanup()
+					execBaseBackup()
+					postgresMakeConfigs(RoleReplica)
+					setPermission()
+					execPostgresAction("start")
+				}
+				if operatorCommand == createRecoveryTrigger {
+					log.Println("master loop: Received command create failover trigger:", operatorCommand)
+
+					if !ioutil.WriteString("/tmp/pg-failover-trigger", "") {
+						log.Fatalln("master loop: Failed to create trigger file")
+					}
+				}
+			case operatorError := <-errorsBus:
+				// TODO: create exceptions processing
+				log.Printf("master loop: Got error %v", operatorError)
+
 			default:
-				// nothing
-				log.Println("Can't connect to master server")
+				// nothing, sleep to lower cpu usage
+				time.Sleep(time.Second)
 			}
 		}
 	}()
@@ -295,16 +405,14 @@ func RunLeaderElection() {
 			RetryPeriod:   leaderElectionLease / 3,
 			Callbacks: leaderelection.LeaderCallbacks{
 				OnStartedLeading: func(ctx context.Context) {
-					log.Println("Received message to start as master")
+					log.Println("RunOrDie: Received message to start as master")
 				},
 				OnStoppedLeading: func() {
-					log.Println("Lost leadership, now quit")
+					log.Println("RunOrDie: Lost leadership, now quit")
 					os.Exit(1)
 				},
 				OnNewLeader: func(identity string) {
-					// TODO: change hardcoded directory in setPermission to PGDATA
-
-					log.Printf("We got new leader - %v!", identity)
+					log.Printf("RunOrDie: We got new leader - %v!", identity)
 					statefulSet, err := kubeClient.AppsV1().StatefulSets(namespace).Get(statefulSetName, metav1.GetOptions{})
 					if err != nil {
 						log.Fatalln(err)
@@ -328,60 +436,31 @@ func RunLeaderElection() {
 						})
 					}
 
-					log.Println("Set default role to replica")
-
-					role := RoleReplica
-					if identity == hostname {
-						role = RolePrimary
-					}
-
-					for role == RoleReplica {
-						log.Println("Waiting connection to master")
-
-						if db, err := sql.Open("postgres", pgConnString()); db != nil {
-							defer db.Close()
-							if _, err = db.Exec("SELECT 1;"); err == nil {
-								break
-							}
-							log.Println("Waiting connection to master: query error")
-						} else {
-							log.Println("Waiting connection to master: connection error")
-						}
-
-						time.Sleep(time.Second * 5)
-
-						select {
-						case trigger := <-startAsMaster:
-							log.Println("Got leadership:", trigger)
-							role = RolePrimary
-						default:
-							// nothing
-							log.Println("Can't connect to master server")
-						}
-					}
-
 					if runningFirstTime {
 						runningFirstTime = false
-						go func() {
-							log.Println("Starting script:", role)
-							// su-exec postgres /scripts/primary/run.sh
-							cmd := exec.Command("su-exec", "postgres", fmt.Sprintf("/scripts/%s/run.sh", role))
-							cmd.Stdout = os.Stdout
-							cmd.Stderr = os.Stderr
-
-							if err = cmd.Run(); err != nil {
-								log.Println(err)
-							}
-							os.Exit(1)
-						}()
-					} else {
+						log.Println("RunOrDie: Pod started first time")
 						if identity == hostname {
-							log.Fatalln("Creating trigger file")
-							if !ioutil.WriteString("/tmp/pg-failover-trigger", "") {
-								log.Fatalln("Failed to create trigger file")
+							log.Println("RunOrDie: Pod started as master server")
+							// OS env variable RESTORE contains true or false
+							if getEnv("RESTORE", "false") == "true" {
+								log.Println("RunOrDie: $RESTORE is true, sending signal to start recovery")
+								commandsBus <- startMasterRecovery
+							} else {
+								log.Println("RunOrDie: $RESTORE is false, sending signal to start empty master")
+								commandsBus <- startMasterEmpty
 							}
+						} else {
+							log.Println("RunOrDie: Pod started as slave server")
+							commandsBus <- startSlave
+						}
+
+					} else {
+						log.Println("RunOrDie: Pod NOT started first time")
+						if identity == hostname {
+							commandsBus <- createRecoveryTrigger
 						}
 					}
+
 				},
 			},
 		})
