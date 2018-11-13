@@ -232,7 +232,7 @@ func execBaseBackup() bool {
 	var env []string
 	env = append(env, fmt.Sprintf("PGUSER=%s", getEnv("POSTGRES_USER", "postgres")))
 	env = append(env, fmt.Sprintf("PGPASSWORD=%s", getEnv("POSTGRES_PASSWORD", "postgres")))
-	pgdata := getEnv("PGDaTA", "/var/pv/data")
+	pgdata := getEnv("PGDATA", "/var/pv/data")
 	pghost := fmt.Sprintf("--host=%s", getEnv("PRIMARY_HOST", ""))
 	return runCmd(env, "pg_basebackup", "-X", "fetch", "--no-password", "--pgdata", pgdata, pghost)
 }
@@ -261,7 +261,7 @@ func execPostgresAction(action string) {
 	}
 	env = append(env, fmt.Sprintf("AWS_ACCESS_KEY_ID=%s", awsKey))
 	env = append(env, fmt.Sprintf("AWS_SECRET_ACCESS_KEY=%s", awsSecret))
-	runCmd(env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDaTA", "/var/pv/data"), "-w", action)
+	runCmd(env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDATA", "/var/pv/data"), "-w", action)
 }
 
 func postgresMakeEmptyDB() {
@@ -311,7 +311,7 @@ func postgresMakeConfigs(role string) {
 		// append recovery.conf
 		lines := []string{
 			"recovery_target_timeline = 'latest'",
-			fmt.Sprintf("archive_cleanup_command = 'pg_archivecleanup %s %r'", getEnv("PGWAL", "")),
+			fmt.Sprintf("archive_cleanup_command = 'pg_archivecleanup %s %%r'", getEnv("PGWAL", "")),
 			fmt.Sprintf("primary_conninfo = 'application_name=%s host=%s'", getEnv("HOSTNAME", ""), getEnv("PRIMARY_HOST", "")),
 		}
 		appendFile("/tmp/recovery.conf", lines)
@@ -371,7 +371,7 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 
 				// some actions to start recovery
 				execWalgAction("backup-list")
-				restoreComplete := execWalgAction("backup-fetch", getEnv("PGDaTA", "/var/pv/data"), getEnv("BACKUP_NAME", "LATEST"))
+				restoreComplete := execWalgAction("backup-fetch", getEnv("PGDATA", "/var/pv/data"), getEnv("BACKUP_NAME", "LATEST"))
 				dataDirectoryCreateAfterWalg()
 				postgresMakeConfigs(RolePrimary)
 
@@ -405,7 +405,7 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 				setPermission()
 				go execPostgresAction("start")
 				// backup done, start Postgres
-				if restoreComplete == false {
+				if restoreComplete == true {
 					recoverySuccessful <- true
 				} else {
 					recoverySuccessful <- false
@@ -438,7 +438,7 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 					restoreComplete := execBaseBackup()
 					postgresMakeConfigs(RoleReplica)
 					setPermission()
-					if restoreComplete == false {
+					if restoreComplete == true {
 						recoverySuccessful <- true
 					} else {
 						recoverySuccessful <- false
@@ -577,8 +577,10 @@ func RunLeaderElection() {
 								recoveryComplete := <-recoverySuccessful
 								if recoveryComplete == true {
 									databaseRestored = true
+									log.Println("RunOrDie: receviced signal database restored")
 								} else {
 									databaseRestored = false
+									log.Println("RunOrDie: receviced signal database NOT restored")
 								}
 
 							} else {
@@ -591,8 +593,10 @@ func RunLeaderElection() {
 							recoveryComplete := <-recoverySuccessful
 							if recoveryComplete == true {
 								databaseRestored = true
+								log.Println("RunOrDie: receviced signal database restored")
 							} else {
 								databaseRestored = false
+								log.Println("RunOrDie: receviced signal database NOT restored")
 							}
 						}
 
@@ -624,8 +628,8 @@ func RunLeaderElection() {
 func setPermission() bool {
 	log.Println("setPermission: chown data directory")
 	var env []string
-	runCmd(env, "chown", "-R", "postgres:postgres", getEnv("PGDaTA", "/var/pv/data"))
-	runCmd(env, "chmod", "-R", "700", getEnv("PGDaTA", "/var/pv/data"))
+	runCmd(env, "chown", "-R", "postgres:postgres", getEnv("PGDATA", "/var/pv/data"))
+	runCmd(env, "chmod", "-R", "700", getEnv("PGDATA", "/var/pv/data"))
 	return true
 }
 
