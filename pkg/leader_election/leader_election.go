@@ -3,7 +3,6 @@ package leader_election
 import (
 	"context"
 	"fmt" //"io/ioutil"
-	"github.com/appscode/go/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -11,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/appscode/go/ioutil"
 	core_util "github.com/appscode/kutil/core/v1"
 	"github.com/appscode/kutil/tools/clientcmd"
 	_ "github.com/lib/pq"
@@ -280,6 +280,7 @@ func RunLeaderElection() {
 	}()
 
 	go masterLoop(mlCtx, commandsBus, recoverySuccessful)
+	select {}
 }
 
 func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySuccessful chan error) {
