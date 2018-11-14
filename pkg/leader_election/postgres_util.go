@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"time"
+	_ "github.com/lib/pq"
 )
 
 func pgConnString(hostname string) string {
@@ -35,7 +36,7 @@ func setPosgresUserPassword(username, password string) {
 	if db, err := sql.Open("postgres", pgConnString("localhost")); db != nil {
 		defer db.Close()
 
-		if _, err = db.Query("ALTER USER ? WITH PASSWORD ?;", username, password); err == nil {
+		if _, err = db.Query("ALTER USER $1 WITH PASSWORD $2;", username, password); err == nil {
 			log.Printf("Password successfully set to %s", password)
 		}
 		log.Println("query error")
@@ -48,13 +49,11 @@ func isPostgresOnline(ctx context.Context, hostname string, wait bool) bool {
 	// authung! dangerous function
 	//if wait == true function will wait until connection established
 	returnValue := false
-	exitLoop := false
-	for exitLoop == false {
+
+	for  {
 		select {
 		case <-ctx.Done():
-			exitLoop = true
-			returnValue = false
-			break
+			return returnValue
 		default:
 		}
 

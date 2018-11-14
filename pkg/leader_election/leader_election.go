@@ -13,7 +13,6 @@ import (
 	"github.com/appscode/go/ioutil"
 	core_util "github.com/appscode/kutil/core/v1"
 	"github.com/appscode/kutil/tools/clientcmd"
-	_ "github.com/lib/pq"
 	core "k8s.io/api/core/v1"
 	kerr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -320,15 +319,23 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 					// be sure that current deployment role have rights to all required resources
 					ctxMasterRecovery, cancelMasterRecovery := context.WithCancel(ctx)
 					defer cancelMasterRecovery()
-					if isPostgresOnline(ctxMasterRecovery, "localhost", true) {
+					online := make(chan bool)
+					go func() { online <- isPostgresOnline(ctxMasterRecovery, "localhost", true) }()
+					select {
+					case <-online:
 						appendFile("/tmp/pg-failover-trigger", []string{})
 						waitForRecoveryDone(ctxMasterRecovery)
 						setPosgresUserPassword(getEnv("POSTGRES_USER", "postgres"), getEnv("POSTGRES_PASSWORD", "postgres"))
+					case <-ctxMasterRecovery.Done():
+						return
 					}
 				case startSlave:
 					ctxSlave, cancelSlave := context.WithCancel(ctx)
 					defer cancelSlave()
-					if isPostgresOnline(ctxSlave, getEnv("PRIMARY_HOST", ""), true) {
+					online := make(chan bool)
+					go func() { online <- isPostgresOnline(ctxSlave, getEnv("PRIMARY_HOST", ""), true) }()
+					select {
+					case <-online:
 						log.Println("master loop: Received command start as slave:", operatorCommand)
 						// some actions before start as slave
 						dataDirectoryCleanup()
@@ -341,8 +348,9 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 
 						recoverySuccessful <- restoreComplete
 						execPostgresAction(ctxSlave, "start")
+					case <-ctxSlave.Done():
+						return
 					}
-
 				case createRecoveryTrigger:
 					log.Println("Received command to create failover trigger:", operatorCommand)
 
