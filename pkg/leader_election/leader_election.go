@@ -336,10 +336,8 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 						setPermission()
 						if restoreComplete != nil {
 							log.Fatal("Restore from basebackup failed: %s", restoreComplete.Error())
-						} else {
-							log.Printf("Restore from basebackup failed: %s", restoreComplete.Error())
-
 						}
+
 						recoverySuccessful <- restoreComplete
 						execPostgresAction(ctxSlave, "start")
 					}
