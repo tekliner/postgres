@@ -3,13 +3,14 @@ package leader_election
 import (
 	"context"
 	"fmt" //"io/ioutil"
+	"github.com/appscode/go/ioutil"
 	"log"
 	"os"
 	"os/exec"
 	"strings"
+	"syscall"
 	"time"
 
-	"github.com/appscode/go/ioutil"
 	core_util "github.com/appscode/kutil/core/v1"
 	"github.com/appscode/kutil/tools/clientcmd"
 	_ "github.com/lib/pq"
@@ -81,8 +82,7 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
-
-func runCmd(env []string, cmdname string, params ...string) bool {
+func runCmd(ctx context.Context, env []string, cmdname string, params ...string) error {
 	log.Println("runCmd:", cmdname, params)
 	cmd := exec.Command(cmdname, params...)
 
@@ -95,14 +95,30 @@ func runCmd(env []string, cmdname string, params ...string) bool {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	// if errors
-	if err := cmd.Run(); err != nil {
-		log.Println(err)
-		return false
-	}
-	return true
-}
+	cmd.Start()
 
+	// Use a channel to signal completion so we can use a select statement
+	done := make(chan error)
+	go func() { done <- cmd.Wait() }()
+
+	// The select statement allows us to execute based on which channel
+	// we get a message from first.
+	select {
+	case <-ctx.Done():
+		// Timeout happened first, kill the process and print a message.
+		cmd.Process.Signal(syscall.SIGTERM)
+		time.AfterFunc(10*time.Second, func() {
+			if !cmd.ProcessState.Exited() {
+				cmd.Process.Kill()
+			}
+		})
+		return ctx.Err()
+	case err := <-done:
+		return err
+	}
+
+	return nil
+}
 
 func postgresInitDB() {
 	// TODO: Search INITDB directory for init files
@@ -113,6 +129,12 @@ func RunLeaderElection() {
 	log.Println("Leader election started")
 
 	leaderElectionLease := 3 * time.Second
+	commandsBus := make(chan pgOpCommand)
+	recoverySuccessful := make(chan error)
+	runningFirstTime := true
+	databaseRestored := false
+	mlCtx, mlCancel := context.WithCancel(context.Background())
+	defer mlCancel()
 
 	namespace := os.Getenv("NAMESPACE")
 	if namespace == "" {
@@ -164,15 +186,8 @@ func RunLeaderElection() {
 		},
 	}
 
-	commandsBus := make(chan pgOpCommand)
-	recoverySuccessful := make(chan bool)
-	runningFirstTime := true
-	databaseRestored := false
-	mlCtx, mlCancel := context.WithCancel(context.Background())
-	defer mlCancel()
-
 	go func() {
-		leaderelection.RunOrDie(context.Background(), leaderelection.LeaderElectionConfig{
+		leaderelection.RunOrDie(mlCtx, leaderelection.LeaderElectionConfig{
 			Lock:          resLock,
 			LeaseDuration: leaderElectionLease,
 			RenewDeadline: leaderElectionLease * 2 / 3,
@@ -221,9 +236,10 @@ func RunLeaderElection() {
 								// create context with cancel go master loop go routine
 								commandsBus <- startMasterRecovery
 								recoveryComplete := <-recoverySuccessful
-								if recoveryComplete == true {
+								if recoveryComplete == nil {
 									databaseRestored = true
 								} else {
+									log.Fatal("Database restore failed: %s", recoveryComplete.Error())
 									databaseRestored = false
 								}
 
@@ -235,16 +251,15 @@ func RunLeaderElection() {
 							log.Println("Pod started as slave server")
 							commandsBus <- startSlave
 							recoveryComplete := <-recoverySuccessful
-							if recoveryComplete == true {
+							if recoveryComplete == nil {
 								databaseRestored = true
 							} else {
+								log.Fatal("Database restore failed: %s", recoveryComplete.Error())
 								databaseRestored = false
 							}
 						}
 
 					} else {
-						mlCancel()
-						go masterLoop(mlCtx, commandsBus, recoverySuccessful)
 						if databaseRestored == true {
 							if identity == hostname {
 								log.Println("Creating recovery trigger")
@@ -265,12 +280,15 @@ func RunLeaderElection() {
 	}()
 
 	go masterLoop(mlCtx, commandsBus, recoverySuccessful)
-	select {}
 }
 
-func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySuccessful chan bool) {
+func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySuccessful chan error) {
 	log.Println("master loop welcomes you")
 	exitLoop := false
+	var (
+		commandCtx    context.Context
+		cancelCommand context.CancelFunc
+	)
 	for exitLoop == false {
 		select {
 		case <-ctx.Done():
@@ -278,66 +296,63 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 			break
 		case operatorCommand := <-commandsBus:
 			// receive message
-			if operatorCommand == startMasterEmpty {
-				log.Println("master loop: Received command start as master:", operatorCommand)
-				// some actions before start as master
-				dataDirectoryCleanup()
-				postgresMakeConfigs(RolePrimary)
-				postgresMakeEmptyDB()
-				setPermission()
-				execPostgresAction("start")
+			if commandCtx != nil {
+				cancelCommand()
 			}
-			if operatorCommand == startMasterRecovery {
-				log.Println("master loop: Received command start recovery:", operatorCommand)
-				recoverySuccessful <- restoreMasterFromBackup()
-
-				// if alien backup used set user and password to current deployment credentials
-				// be sure that current deployment role have rights to all required resources
-				ctxMasterRecovery, cancelMasterRecovery := context.WithCancel(ctx)
-				defer cancelMasterRecovery()
-				if isPostgresOnline(ctxMasterRecovery, "localhost", true) {
-					appendFile("/tmp/pg-failover-trigger", []string{})
-					recovery_done_file := getEnv("PGDATA", "/var/pv/data") + "/recovery.done"
-					for {
-						if _, err := os.Stat(recovery_done_file); !os.IsNotExist(err) {
-							break
-						}
-						log.Println("master loop: Waiting recovery.done to be created")
-						time.Sleep(time.Second)
-					}
-					setPosgresUserPassword(getEnv("POSTGRES_USER", "postgres"), getEnv("POSTGRES_PASSWORD", "postgres"))
-				}
-
-			}
-			if operatorCommand == startSlave {
-				ctxSlave, cancelSlave := context.WithCancel(ctx)
-				defer cancelSlave()
-				if isPostgresOnline(ctxSlave, getEnv("PRIMARY_HOST", ""), true) {
-					log.Println("master loop: Received command start as slave:", operatorCommand)
-					// some actions before start as slave
+			commandCtx, cancelCommand = context.WithCancel(ctx)
+			go func(ctx context.Context) {
+				switch operatorCommand {
+				case startMasterEmpty:
+					log.Println("Received command to start as master:", operatorCommand)
+					// some actions before start as master
 					dataDirectoryCleanup()
-					restoreComplete := execBaseBackup()
-					postgresMakeConfigs(RoleReplica)
+					postgresMakeConfigs(RolePrimary)
+					postgresContext, _ := context.WithCancel(commandCtx)
+					postgresMakeEmptyDB(postgresContext)
 					setPermission()
-					if restoreComplete == false {
-						recoverySuccessful <- true
-					} else {
-						recoverySuccessful <- false
+					execPostgresAction(commandCtx, "start")
+				case startMasterRecovery:
+					log.Println("master loop: Received command start recovery:", operatorCommand)
+					recoverySuccessful <- restoreMasterFromBackup(commandCtx)
+
+					// if alien backup used set user and password to current deployment credentials
+					// be sure that current deployment role have rights to all required resources
+					ctxMasterRecovery, cancelMasterRecovery := context.WithCancel(ctx)
+					defer cancelMasterRecovery()
+					if isPostgresOnline(ctxMasterRecovery, "localhost", true) {
+						appendFile("/tmp/pg-failover-trigger", []string{})
+						waitForRecoveryDone(ctxMasterRecovery)
+						setPosgresUserPassword(getEnv("POSTGRES_USER", "postgres"), getEnv("POSTGRES_PASSWORD", "postgres"))
 					}
-					execPostgresAction("start")
-				}
-			}
-			if operatorCommand == createRecoveryTrigger {
-				log.Println("master loop: Received command create failover trigger:", operatorCommand)
+				case startSlave:
+					ctxSlave, cancelSlave := context.WithCancel(ctx)
+					defer cancelSlave()
+					if isPostgresOnline(ctxSlave, getEnv("PRIMARY_HOST", ""), true) {
+						log.Println("master loop: Received command start as slave:", operatorCommand)
+						// some actions before start as slave
+						dataDirectoryCleanup()
+						restoreComplete := execBaseBackup(ctxSlave)
+						postgresMakeConfigs(RoleReplica)
+						setPermission()
+						if restoreComplete != nil {
+							log.Fatal("Restore from basebackup failed: %s", restoreComplete.Error())
+						} else {
+							log.Printf("Restore from basebackup failed: %s", restoreComplete.Error())
 
-				if !ioutil.WriteString("/tmp/pg-failover-trigger", "") {
-					log.Println("master loop: Failed to create trigger file")
-				}
-			}
+						}
+						recoverySuccessful <- restoreComplete
+						execPostgresAction(ctxSlave, "start")
+					}
 
-		default:
-			// nothing, sleep to lower cpu usage
-			time.Sleep(time.Second)
+				case createRecoveryTrigger:
+					log.Println("Received command to create failover trigger:", operatorCommand)
+
+					if !ioutil.WriteString("/tmp/pg-failover-trigger", "") {
+						log.Println("Failed to create trigger file")
+					}
+
+				}
+			}(commandCtx)
 		}
 	}
 }
@@ -345,8 +360,8 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 func setPermission() bool {
 	log.Println("setPermission: chown data directory")
 	var env []string
-	runCmd(env, "chown", "-R", "postgres:postgres", getEnv("PGDATA", "/var/pv/data"))
-	runCmd(env, "chmod", "-R", "700", getEnv("PGDATA", "/var/pv/data"))
+	runCmd(context.TODO(), env, "chown", "-R", "postgres:postgres", getEnv("PGDATA", "/var/pv/data"))
+	runCmd(context.TODO(), env, "chmod", "-R", "700", getEnv("PGDATA", "/var/pv/data"))
 	return true
 }
 

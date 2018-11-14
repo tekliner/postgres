@@ -25,7 +25,7 @@ func pgConnString(hostname string) string {
 		username,
 		password,
 	)
-	log.Printf("postgres connection string: %v", info)
+
 	return info
 }
 
@@ -34,8 +34,8 @@ func setPosgresUserPassword(username, password string) {
 
 	if db, err := sql.Open("postgres", pgConnString("localhost")); db != nil {
 		defer db.Close()
-		sqlQuery := fmt.Sprintf("ALTER USER %s WITH PASSWORD '%s';", username, password)
-		if _, err = db.Exec(sqlQuery); err == nil {
+
+		if _, err = db.Query("ALTER USER ? WITH PASSWORD ?;", username, password); err == nil {
 			log.Printf("Password successfully set to %s", password)
 		}
 		log.Println("query error")
@@ -55,6 +55,7 @@ func isPostgresOnline(ctx context.Context, hostname string, wait bool) bool {
 			exitLoop = true
 			returnValue = false
 			break
+		default:
 		}
 
 		log.Println("Checking connection to master")
@@ -63,9 +64,7 @@ func isPostgresOnline(ctx context.Context, hostname string, wait bool) bool {
 			defer db.Close()
 			if _, err = db.Exec("SELECT 1;"); err == nil {
 				returnValue = true
-				if wait {
-					break
-				}
+				break
 			}
 			log.Println("query error")
 			db.Close()
@@ -104,7 +103,7 @@ func dataDirectoryCreateAfterWalg() {
 	}
 }
 
-func execWalgAction(walgCommand string, params ...string) bool {
+func execWalgAction(ctx context.Context, walgCommand string, params ...string) error {
 	var env []string
 	env = append(env, fmt.Sprintf("WALE_S3_PREFIX=%s", getEnv("ARCHIVE_S3_PREFIX", "")))
 	// auth for wal-g
@@ -131,20 +130,20 @@ func execWalgAction(walgCommand string, params ...string) bool {
 	arg := []string{"root", "wal-g"}
 	arg = append(arg, walgCommand)
 	arg = append(arg, params...)
-	return runCmd(env, "su-exec", arg...)
+	return runCmd(ctx, env, "su-exec", arg...)
 }
 
-func execBaseBackup() bool {
+func execBaseBackup(ctx context.Context) error {
 	log.Println("execBaseBackup: running pg_basebackup")
 	var env []string
 	env = append(env, fmt.Sprintf("PGUSER=%s", getEnv("POSTGRES_USER", "postgres")))
 	env = append(env, fmt.Sprintf("PGPASSWORD=%s", getEnv("POSTGRES_PASSWORD", "postgres")))
 	pgdata := getEnv("PGDaTA", "/var/pv/data")
 	pghost := fmt.Sprintf("--host=%s", getEnv("PRIMARY_HOST", ""))
-	return runCmd(env, "pg_basebackup", "-X", "fetch", "--no-password", "--pgdata", pgdata, pghost)
+	return runCmd(ctx, env, "pg_basebackup", "-X", "fetch", "--no-password", "--pgdata", pgdata, pghost)
 }
 
-func execPostgresAction(action string) {
+func execPostgresAction(ctx context.Context, action string) {
 	log.Printf("execPostgresAction: %s", action)
 	var env []string
 	env = append(env, fmt.Sprintf("WALE_S3_PREFIX=%s", getEnv("ARCHIVE_S3_PREFIX", "")))
@@ -168,13 +167,13 @@ func execPostgresAction(action string) {
 	}
 	env = append(env, fmt.Sprintf("AWS_ACCESS_KEY_ID=%s", awsKey))
 	env = append(env, fmt.Sprintf("AWS_SECRET_ACCESS_KEY=%s", awsSecret))
-	runCmd(env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDATA", "/var/pv/data"), "-w", action)
+	runCmd(ctx, env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDATA", "/var/pv/data"), "-w", action)
 }
 
-func postgresMakeEmptyDB() {
+func postgresMakeEmptyDB(ctx context.Context) {
 	log.Println("postgresMakeEmptyDB: Create empty database for postgres")
 	var env []string
-	runCmd(env, "initdb", fmt.Sprintf("--pgdata=%s", getEnv("PGDATA", "/var/pv/data")))
+	runCmd(ctx, env, "initdb", fmt.Sprintf("--pgdata=%s", getEnv("PGDATA", "/var/pv/data")))
 }
 
 func postgresMakeConfigs(role string) {
@@ -182,7 +181,7 @@ func postgresMakeConfigs(role string) {
 	if role == RolePrimary {
 		var env []string
 		// copy template to /tmp
-		runCmd(env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
+		runCmd(context.TODO(), env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
 
 		// append config
 		lines := []string{
@@ -203,13 +202,13 @@ func postgresMakeConfigs(role string) {
 		appendFile("/tmp/postgresql.conf", lines)
 
 		// move configs to PGDATA
-		runCmd(env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
-		runCmd(env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
+		runCmd(context.TODO(), env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
+		runCmd(context.TODO(), env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
 	}
 	if role == RoleReplica {
 		var env []string
 		// copy template to /tmp
-		runCmd(env, "cp", "/scripts/replica/recovery.conf", "/tmp/")
+		runCmd(context.TODO(), env, "cp", "/scripts/replica/recovery.conf", "/tmp/")
 
 		// append recovery.conf
 		lines := []string{
@@ -220,7 +219,7 @@ func postgresMakeConfigs(role string) {
 		appendFile("/tmp/recovery.conf", lines)
 
 		// append postgresql.conf
-		runCmd(env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
+		runCmd(context.TODO(), env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
 		lines = []string{
 			"wal_level = replica",
 			"max_wal_senders = 99",
@@ -242,18 +241,18 @@ func postgresMakeConfigs(role string) {
 		appendFile("/tmp/postgresql.conf", lines)
 
 		// move configs to PGDATA
-		runCmd(env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
-		runCmd(env, "mv", "/tmp/recovery.conf", getEnv("PGDATA", "/var/pv/data"))
-		runCmd(env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
+		runCmd(context.TODO(), env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
+		runCmd(context.TODO(), env, "mv", "/tmp/recovery.conf", getEnv("PGDATA", "/var/pv/data"))
+		runCmd(context.TODO(), env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
 	}
 }
 
-func restoreMasterFromBackup() bool {
+func restoreMasterFromBackup(ctx context.Context) error {
 	// absolutely clean data directory
 	dataDirectoryCleanup()
 	// some actions to start recovery
-	execWalgAction("backup-list")
-	restoreComplete := execWalgAction("backup-fetch", getEnv("PGDATA", "/var/pv/data"), getEnv("BACKUP_NAME", "LATEST"))
+	execWalgAction(context.TODO(), "backup-list")
+	restoreComplete := execWalgAction(ctx, "backup-fetch", getEnv("PGDATA", "/var/pv/data"), getEnv("BACKUP_NAME", "LATEST"))
 	dataDirectoryCreateAfterWalg()
 	postgresMakeConfigs(RolePrimary)
 	// additional lines to recovery.conf
@@ -284,11 +283,24 @@ func restoreMasterFromBackup() bool {
 	appendFile(getEnv("PGDATA", "/var/pv/data")+"/recovery.conf", lines)
 	os.Remove(getEnv("PGDATA", "/var/pv/data") + "/recovery.done")
 	setPermission()
-	go execPostgresAction("start")
+	postgresContext, _ := context.WithCancel(ctx)
+	go execPostgresAction(postgresContext, "start")
 	// backup done, start Postgres
-	if restoreComplete == false {
-		return true
-	}
+	return restoreComplete
+}
 
-	return false
+func waitForRecoveryDone(ctx context.Context) {
+	recovery_done_file := getEnv("PGDATA", "/var/pv/data") + "/recovery.done"
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		default:
+			if _, err := os.Stat(recovery_done_file); !os.IsNotExist(err) {
+				return
+			}
+			log.Println("master loop: Waiting recovery.done to be created")
+			time.Sleep(time.Second)
+		}
+	}
 }
