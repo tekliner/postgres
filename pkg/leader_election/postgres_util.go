@@ -4,11 +4,11 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	_ "github.com/lib/pq"
 	"io/ioutil"
 	"log"
 	"os"
 	"time"
-	_ "github.com/lib/pq"
 )
 
 func pgConnString(hostname string) string {
@@ -36,7 +36,7 @@ func setPosgresUserPassword(username, password string) {
 	if db, err := sql.Open("postgres", pgConnString("localhost")); db != nil {
 		defer db.Close()
 
-		if _, err = db.Query("ALTER USER $1 WITH PASSWORD $2;", username, password); err == nil {
+		if _, err = db.Exec("ALTER USER $1 WITH PASSWORD $2", username, password); err == nil {
 			log.Printf("Password successfully set to %s", password)
 		}
 		log.Println("query error")

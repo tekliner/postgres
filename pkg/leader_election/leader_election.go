@@ -238,7 +238,7 @@ func RunLeaderElection() {
 								if recoveryComplete == nil {
 									databaseRestored = true
 								} else {
-									log.Fatal("Database restore failed: %s", recoveryComplete.Error())
+									log.Printf("Database restore failed: %s", recoveryComplete.Error())
 									databaseRestored = false
 								}
 
@@ -253,7 +253,7 @@ func RunLeaderElection() {
 							if recoveryComplete == nil {
 								databaseRestored = true
 							} else {
-								log.Fatal("Database restore failed: %s", recoveryComplete.Error())
+								log.Printf("Database restore failed: %s", recoveryComplete.Error())
 								databaseRestored = false
 							}
 						}
@@ -343,7 +343,7 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 						postgresMakeConfigs(RoleReplica)
 						setPermission()
 						if restoreComplete != nil {
-							log.Fatal("Restore from basebackup failed: %s", restoreComplete.Error())
+							log.Printf("Restore from basebackup failed: %s", restoreComplete.Error())
 						}
 
 						recoverySuccessful <- restoreComplete
