@@ -323,7 +323,10 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 					go func() { online <- isPostgresOnline(ctxMasterRecovery, "localhost", true) }()
 					select {
 					case <-online:
-						appendFile("/tmp/pg-failover-trigger", []string{})
+						err := appendFile("/tmp/pg-failover-trigger", []string{})
+						if err != nil {
+							log.Println("Can't create /tmp/pg-failover-trigger")
+						}
 						waitForRecoveryDone(ctxMasterRecovery)
 						setPosgresUserPassword(getEnv("POSTGRES_USER", "postgres"), getEnv("POSTGRES_PASSWORD", "postgres"))
 					case <-ctxMasterRecovery.Done():
@@ -367,8 +370,14 @@ func masterLoop(ctx context.Context, commandsBus chan pgOpCommand, recoverySucce
 func setPermission() bool {
 	log.Println("setPermission: chown data directory")
 	var env []string
-	runCmd(context.TODO(), env, "chown", "-R", "postgres:postgres", getEnv("PGDATA", "/var/pv/data"))
+	err := runCmd(context.TODO(), env, "chown", "-R", "postgres:postgres", getEnv("PGDATA", "/var/pv/data"))
+	if err != nil {
+		log.Println("Can't change data directory owner!")
+	}
 	runCmd(context.TODO(), env, "chmod", "-R", "700", getEnv("PGDATA", "/var/pv/data"))
+	if err != nil {
+		log.Println("Can't change data directory permissions!")
+	}
 	return true
 }
 

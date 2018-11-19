@@ -4,11 +4,12 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
 	"io/ioutil"
 	"log"
 	"os"
 	"time"
+
+	_ "github.com/lib/pq"
 )
 
 func pgConnString(hostname string) string {
@@ -50,7 +51,7 @@ func isPostgresOnline(ctx context.Context, hostname string, wait bool) bool {
 	//if wait == true function will wait until connection established
 	returnValue := false
 
-	for  {
+	for {
 		select {
 		case <-ctx.Done():
 			return returnValue
@@ -156,23 +157,31 @@ func execPostgresAction(ctx context.Context, action string) {
 	awsKey, err := ioutil.ReadFile(awsKeyFile)
 	// aws key file ansent
 	if err != nil {
-		log.Println(err)
+		log.Printf("Error opening file %v", err)
 	}
 
 	awsSecret, err := ioutil.ReadFile(awsSecretFile)
 	// aws secret file absent
 	if err != nil {
-		log.Println(err)
+		log.Printf("Error opening file %v", err)
 	}
 	env = append(env, fmt.Sprintf("AWS_ACCESS_KEY_ID=%s", awsKey))
 	env = append(env, fmt.Sprintf("AWS_SECRET_ACCESS_KEY=%s", awsSecret))
-	runCmd(ctx, env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDATA", "/var/pv/data"), "-w", action)
+	err = runCmd(ctx, env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDATA", "/var/pv/data"), "-w", action)
+	if err != nil {
+		log.Printf("Error happened during pg_ctl: %v", err)
+	}
+
 }
 
 func postgresMakeEmptyDB(ctx context.Context) {
 	log.Println("postgresMakeEmptyDB: Create empty database for postgres")
 	var env []string
-	runCmd(ctx, env, "initdb", fmt.Sprintf("--pgdata=%s", getEnv("PGDATA", "/var/pv/data")))
+	err := runCmd(ctx, env, "initdb", fmt.Sprintf("--pgdata=%s", getEnv("PGDATA", "/var/pv/data")))
+	if err != nil {
+		log.Printf("Error happened during initdb: %v", err)
+	}
+
 }
 
 func postgresMakeConfigs(role string) {
@@ -180,7 +189,10 @@ func postgresMakeConfigs(role string) {
 	if role == RolePrimary {
 		var env []string
 		// copy template to /tmp
-		runCmd(context.TODO(), env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
+		err := runCmd(context.TODO(), env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
+		if err != nil {
+			log.Printf("Error happened during cp /scripts/primary/postgresql.conf: %v", err)
+		}
 
 		// append config
 		lines := []string{
@@ -198,16 +210,28 @@ func postgresMakeConfigs(role string) {
 			lines = append(lines, "archive_timeout = 60")
 			lines = append(lines, "archive_mode = always")
 		}
-		appendFile("/tmp/postgresql.conf", lines)
+		err = appendFile("/tmp/postgresql.conf", lines)
+		if err != nil {
+			log.Printf("Error happened during appendFile /tmp/postgresql.conf: %v", err)
+		}
 
 		// move configs to PGDATA
-		runCmd(context.TODO(), env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
-		runCmd(context.TODO(), env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
+		err = runCmd(context.TODO(), env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
+		if err != nil {
+			log.Printf("Error happened during mv /tmp/postgresql.conf: %v", err)
+		}
+		err = runCmd(context.TODO(), env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
+		if err != nil {
+			log.Printf("Error happened during mv /scripts/primary/pg_hba.conf: %v", err)
+		}
 	}
 	if role == RoleReplica {
 		var env []string
 		// copy template to /tmp
-		runCmd(context.TODO(), env, "cp", "/scripts/replica/recovery.conf", "/tmp/")
+		err := runCmd(context.TODO(), env, "cp", "/scripts/replica/recovery.conf", "/tmp/")
+		if err != nil {
+			log.Printf("Error happened during cp /scripts/replica/recovery.conf: %v", err)
+		}
 
 		// append recovery.conf
 		lines := []string{
@@ -215,10 +239,16 @@ func postgresMakeConfigs(role string) {
 			fmt.Sprintf("archive_cleanup_command = 'pg_archivecleanup %s %r'", getEnv("PGWAL", "")),
 			fmt.Sprintf("primary_conninfo = 'application_name=%s host=%s'", getEnv("HOSTNAME", ""), getEnv("PRIMARY_HOST", "")),
 		}
-		appendFile("/tmp/recovery.conf", lines)
+		err = appendFile("/tmp/recovery.conf", lines)
+		if err != nil {
+			log.Printf("Error happened during appendFile /tmp/recovery.conf: %v", err)
+		}
 
 		// append postgresql.conf
-		runCmd(context.TODO(), env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
+		err = runCmd(context.TODO(), env, "cp", "/scripts/primary/postgresql.conf", "/tmp/")
+		if err != nil {
+			log.Printf("Error happened during cp /scripts/primary/postgresql.conf: %v", err)
+		}
 		lines = []string{
 			"wal_level = replica",
 			"max_wal_senders = 99",
@@ -237,12 +267,27 @@ func postgresMakeConfigs(role string) {
 			lines = append(lines, "archive_timeout = 60")
 			lines = append(lines, "archive_mode = always")
 		}
-		appendFile("/tmp/postgresql.conf", lines)
+		err = appendFile("/tmp/postgresql.conf", lines)
+		if err != nil {
+			log.Printf("Error happened during appendFile /tmp/postgresql.conf: %v", err)
+		}
 
 		// move configs to PGDATA
-		runCmd(context.TODO(), env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
-		runCmd(context.TODO(), env, "mv", "/tmp/recovery.conf", getEnv("PGDATA", "/var/pv/data"))
-		runCmd(context.TODO(), env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
+		err = runCmd(context.TODO(), env, "mv", "/tmp/postgresql.conf", getEnv("PGDATA", "/var/pv/data"))
+		if err != nil {
+			log.Printf("Error happened during mv /tmp/postgresql.conf: %v", err)
+		}
+
+		err = runCmd(context.TODO(), env, "mv", "/tmp/recovery.conf", getEnv("PGDATA", "/var/pv/data"))
+		if err != nil {
+			log.Printf("Error happened during mv /tmp/recovery.conf: %v", err)
+		}
+
+		err = runCmd(context.TODO(), env, "mv", "/scripts/primary/pg_hba.conf", getEnv("PGDATA", "/var/pv/data"))
+		if err != nil {
+			log.Printf("Error happened during mv /scripts/primary/pg_hba.conf: %v", err)
+		}
+
 	}
 }
 
@@ -250,8 +295,13 @@ func restoreMasterFromBackup(ctx context.Context) error {
 	// absolutely clean data directory
 	dataDirectoryCleanup()
 	// some actions to start recovery
-	execWalgAction(context.TODO(), "backup-list")
+	err := execWalgAction(context.TODO(), "backup-list")
+	if err != nil {
+		log.Printf("Error happened during execWalgAction: %v", err)
+	}
+
 	restoreComplete := execWalgAction(ctx, "backup-fetch", getEnv("PGDATA", "/var/pv/data"), getEnv("BACKUP_NAME", "LATEST"))
+
 	dataDirectoryCreateAfterWalg()
 	postgresMakeConfigs(RolePrimary)
 	// additional lines to recovery.conf
@@ -279,7 +329,11 @@ func restoreMasterFromBackup(ctx context.Context) error {
 
 	}
 	lines = append(lines, "restore_command = 'wal-g wal-fetch %f %p'")
-	appendFile(getEnv("PGDATA", "/var/pv/data")+"/recovery.conf", lines)
+	err = appendFile(getEnv("PGDATA", "/var/pv/data")+"/recovery.conf", lines)
+	if err != nil {
+		log.Printf("Error happened during appendFile recovery.conf: %v", err)
+	}
+
 	os.Remove(getEnv("PGDATA", "/var/pv/data") + "/recovery.done")
 	setPermission()
 	postgresContext, _ := context.WithCancel(ctx)
