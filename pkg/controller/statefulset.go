@@ -61,22 +61,57 @@ func (c *Controller) ensureStatefulSet(
 		in.Spec.Template.Labels = postgres.OffshootSelectors()
 		in.Spec.Template.Annotations = postgres.Spec.PodTemplate.Annotations
 		in.Spec.Template.Spec.InitContainers = core_util.UpsertContainers(in.Spec.Template.Spec.InitContainers, postgres.Spec.PodTemplate.Spec.InitContainers)
+
+		container := core.Container{
+			Name:           api.ResourceSingularPostgres,
+			Image:          postgresVersion.Spec.DB.Image,
+			Resources:      postgres.Spec.PodTemplate.Spec.Resources,
+			LivenessProbe:  postgres.Spec.PodTemplate.Spec.LivenessProbe,
+			ReadinessProbe: postgres.Spec.PodTemplate.Spec.ReadinessProbe,
+			Lifecycle:      postgres.Spec.PodTemplate.Spec.Lifecycle,
+			SecurityContext: &core.SecurityContext{
+				Privileged: types.BoolP(false),
+				Capabilities: &core.Capabilities{
+					Add: []core.Capability{"IPC_LOCK", "SYS_RESOURCE"},
+				},
+			},
+
+			VolumeMounts: []in.Spec.Template.Spec.Volumes,
+		}
+
+		// Create resource record if absent
+		// Indicates that new database cluster MAY needs some additional actions
+		// Works in pair with FirstRunConfigMap
+		if postgres.Spec.FirstRun == nil {
+			postgres.Spec.FirstRun = true
+		}
+
+		// Used to check before mount configmaps and execute planned actions
+		mountFirstRunConfigMap := false
+		if postgres.Spec.FirstRun && postgres.Spec.FirstRunConfigMap != nil {
+			mountFirstRunConfigMap = true
+		}
+
+		if mountFirstRunConfigMap {
+			// Create section in volumes
+			in.Spec.Template.Spec.Volumes =
+				[]core.Volume{
+					{
+						Name: postgres.Spec.FirstRunConfigMap.Name,
+						VolumeSource: core.VolumeSource{
+							ConfigMap: &core.ConfigMapVolumeSource{
+								LocalObjectReference: core.LocalObjectReference{Name: postgres.Spec.FirstRunConfigMap.Name },
+							},
+						},
+					},
+				}
+
+		}
+
 		in.Spec.Template.Spec.Containers = core_util.UpsertContainer(
 			in.Spec.Template.Spec.Containers,
-			core.Container{
-				Name:           api.ResourceSingularPostgres,
-				Image:          postgresVersion.Spec.DB.Image,
-				Resources:      postgres.Spec.PodTemplate.Spec.Resources,
-				LivenessProbe:  postgres.Spec.PodTemplate.Spec.LivenessProbe,
-				ReadinessProbe: postgres.Spec.PodTemplate.Spec.ReadinessProbe,
-				Lifecycle:      postgres.Spec.PodTemplate.Spec.Lifecycle,
-				SecurityContext: &core.SecurityContext{
-					Privileged: types.BoolP(false),
-					Capabilities: &core.Capabilities{
-						Add: []core.Capability{"IPC_LOCK", "SYS_RESOURCE"},
-					},
-				},
-			})
+			container)
+
 		in = upsertEnv(in, postgres, envList)
 		in = upsertUserEnv(in, postgres)
 		in = upsertPort(in)

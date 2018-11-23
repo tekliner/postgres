@@ -144,6 +144,13 @@ func execBaseBackup(ctx context.Context) error {
 }
 
 func execPostgresAction(ctx context.Context, action string) {
+
+	var postgresOptions string
+	// Check if value came with context
+	if v := ctx.Value("options"); v != nil {
+		postgresOptions = fmt.Sprintf("-o '%s'", v)
+	}
+
 	log.Printf("execPostgresAction: %s", action)
 	var env []string
 	env = append(env, fmt.Sprintf("WALE_S3_PREFIX=%s", getEnv("ARCHIVE_S3_PREFIX", "")))
@@ -167,7 +174,7 @@ func execPostgresAction(ctx context.Context, action string) {
 	}
 	env = append(env, fmt.Sprintf("AWS_ACCESS_KEY_ID=%s", awsKey))
 	env = append(env, fmt.Sprintf("AWS_SECRET_ACCESS_KEY=%s", awsSecret))
-	err = runCmd(ctx, env, "su-exec", "postgres", "pg_ctl", "-D", getEnv("PGDATA", "/var/pv/data"), "-w", action)
+	err = runCmd(ctx, env, "su-exec", "postgres", "p	g_ctl", "-D", getEnv("PGDATA", "/var/pv/data"), "-w", postgresOptions, action)
 	if err != nil {
 		log.Printf("Error happened during pg_ctl: %v", err)
 	}
@@ -236,7 +243,7 @@ func postgresMakeConfigs(role string) {
 		// append recovery.conf
 		lines := []string{
 			"recovery_target_timeline = 'latest'",
-			fmt.Sprintf("archive_cleanup_command = 'pg_archivecleanup %s %r'", getEnv("PGWAL", "")),
+			fmt.Sprintf("archive_cleanup_command = 'pg_archivecleanup %s %%r'", getEnv("PGWAL", "")),
 			fmt.Sprintf("primary_conninfo = 'application_name=%s host=%s'", getEnv("HOSTNAME", ""), getEnv("PRIMARY_HOST", "")),
 		}
 		err = appendFile("/tmp/recovery.conf", lines)
@@ -336,6 +343,48 @@ func restoreMasterFromBackup(ctx context.Context) error {
 
 	os.Remove(getEnv("PGDATA", "/var/pv/data") + "/recovery.done")
 	setPermission()
+
+
+	// TODO: make code if error, directory may be not created
+	if v, _ := isDirectoryEmpty("/firstfun"); v {
+		type contextKey string
+		bindTo := contextKey("options")
+
+		// use cancelpostgresContextActions to shutdown postgres after actions
+		postgresContextActions, cancelpostgresContextActions := context.WithCancel(ctx)
+		defer cancelpostgresContextActions()
+
+		// Tell in Postgres options network interface to bind
+		postgresContextActionsVal = context.WithValue(postgresContextActions, bindTo, "-h 127.0.0.1")
+		go execPostgresAction(postgresContextActionsVal, "start")
+
+		// Wait until postgres start febore actions
+		ctxFirstRunWait, cancelFirstRunWait := context.WithCancel(ctx)
+		defer cancelFirstRunWait()
+		go func() { online <- isPostgresOnline(ctxFirstRunWait, "localhost", true) }()
+		select {
+		case <-online:
+			// At last! Now we checking mounted configmap directory
+			if scripts, err := getDirectoryContent("/firstrun"); err == nil {
+				log.Print("Found scripts in configmap mount directory", scripts)
+
+				//Now ready to run
+				// TODO: Make runCmd circle
+
+			} else {
+				log.Print("Error during reading contents of mounted configmap directory")
+			}
+
+			// Turn off postgres
+			// TODO: make context cancel
+
+		case <-ctxFirstRunWait.Done():
+			// in case of cancel
+		}
+
+	}
+
+	// Now run as usual
 	postgresContext, _ := context.WithCancel(ctx)
 	go execPostgresAction(postgresContext, "start")
 	// backup done, start Postgres
