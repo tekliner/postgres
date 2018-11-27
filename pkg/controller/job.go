@@ -6,7 +6,7 @@ import (
 	"github.com/appscode/go/log"
 	core_util "github.com/appscode/kutil/core/v1"
 	"github.com/appscode/kutil/tools/analytics"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	batch "k8s.io/api/batch/v1"
 	core "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

@@ -1,28 +1,18 @@
 package leader_election
 
 import (
-	"io"
 	"io/ioutil"
-	"os"
+	"log"
 )
 
-func isDirectoryEmpty(directoryName string) (bool, error) {
-	f, err := os.Open(directoryName)
+func getDirectoryContent(directoryName string) []string {
+	files, err := ioutil.ReadDir(".")
 	if err != nil {
-		return false, err
+		log.Fatal(err)
 	}
-	defer f.Close()
-
-	_, err = f.Readdirnames(1) // Or f.Readdir(1)
-	if err == io.EOF {
-		return true, nil
+	var filesList []string
+	for _, file := range files {
+		filesList = append(filesList, file.Name())
 	}
-	return false, err // Either not empty or error, suits both cases
+	return filesList
 }
-
-// TODO: finish it
-func getDirectoryContent(directoryName string) ([]string, error) {
-	ioutil.ReadDir(directoryName)
-	return []string{"a", "b"}, nil
-}
-

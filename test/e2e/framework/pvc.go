@@ -3,8 +3,8 @@ package framework
 import (
 	"time"
 
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
 	. "github.com/onsi/gomega"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	core "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

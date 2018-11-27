@@ -344,9 +344,8 @@ func restoreMasterFromBackup(ctx context.Context) error {
 	os.Remove(getEnv("PGDATA", "/var/pv/data") + "/recovery.done")
 	setPermission()
 
-
 	// TODO: make code if error, directory may be not created
-	if v, _ := isDirectoryEmpty("/firstfun"); v {
+	if scriptsDirList := getDirectoryContent("/firstfun"); scriptsDirList != nil {
 		type contextKey string
 		bindTo := contextKey("options")
 
@@ -355,33 +354,30 @@ func restoreMasterFromBackup(ctx context.Context) error {
 		defer cancelpostgresContextActions()
 
 		// Tell in Postgres options network interface to bind
-		postgresContextActionsVal = context.WithValue(postgresContextActions, bindTo, "-h 127.0.0.1")
+		postgresContextActionsVal := context.WithValue(postgresContextActions, bindTo, "-h 127.0.0.1")
 		go execPostgresAction(postgresContextActionsVal, "start")
 
 		// Wait until postgres start febore actions
-		ctxFirstRunWait, cancelFirstRunWait := context.WithCancel(ctx)
+		ctxFirstRunWait, cancelFirstRunWait := context.WithCancel(postgresContextActions)
 		defer cancelFirstRunWait()
-		go func() { online <- isPostgresOnline(ctxFirstRunWait, "localhost", true) }()
+		online := make(chan bool)
+		go func() { online <- isPostgresOnline(ctxFirstRunWait, "127.0.0.1", true) }()
 		select {
 		case <-online:
-			// At last! Now we checking mounted configmap directory
-			if scripts, err := getDirectoryContent("/firstrun"); err == nil {
-				log.Print("Found scripts in configmap mount directory", scripts)
-
-				//Now ready to run
-				// TODO: Make runCmd circle
-
-			} else {
-				log.Print("Error during reading contents of mounted configmap directory")
+			var env []string
+			// We already have directory list in scriptsDirList variable
+			// Lets circle it and run scripts
+			for _, scriptName := range scriptsDirList {
+				scriptContext, cancelScript := context.WithCancel(ctxFirstRunWait)
+				defer cancelScript()
+				runCmd(scriptContext, env, scriptName)
 			}
 
-			// Turn off postgres
-			// TODO: make context cancel
-
 		case <-ctxFirstRunWait.Done():
-			// in case of cancel
+			// in case of cancel break a glass
 		}
-
+		// Turn off postgres
+		cancelpostgresContextActions()
 	}
 
 	// Now run as usual

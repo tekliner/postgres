@@ -10,9 +10,9 @@ import (
 	app_util "github.com/appscode/kutil/apps/v1"
 	core_util "github.com/appscode/kutil/core/v1"
 	meta_util "github.com/appscode/kutil/meta"
-	catalog "github.com/kubedb/apimachinery/apis/catalog/v1alpha1"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
-	"github.com/kubedb/apimachinery/pkg/eventer"
+	catalog "github.com/tekliner/apimachinery/apis/catalog/v1alpha1"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
+	"github.com/tekliner/apimachinery/pkg/eventer"
 	apps "k8s.io/api/apps/v1"
 	core "k8s.io/api/core/v1"
 	kerr "k8s.io/apimachinery/pkg/api/errors"
@@ -100,7 +100,7 @@ func (c *Controller) ensureStatefulSet(
 						Name: postgres.Spec.FirstRunConfigMap.Name,
 						VolumeSource: core.VolumeSource{
 							ConfigMap: &core.ConfigMapVolumeSource{
-								LocalObjectReference: core.LocalObjectReference{Name: postgres.Spec.FirstRunConfigMap.Name },
+								LocalObjectReference: core.LocalObjectReference{Name: postgres.Spec.FirstRunConfigMap.Name},
 							},
 						},
 					},
