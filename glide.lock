@@ -1,5 +1,5 @@
-hash: 74351147172fad89ffe38fe876a11e2ce966aca29b8315f79cc6b7e8f7ea68f3
-updated: 2018-10-15T01:25:35.564897077-07:00
+hash: 6ca899980883ab9400834dc550465f4219e1fe9ca4739a2a88527a2e803bb1fb
+updated: 2018-11-27T13:26:09.263416008+07:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
@@ -9,7 +9,7 @@ imports:
   - compute/metadata
   - internal
 - name: github.com/appscode/go
-  version: 0499c350ad263174dc8c1e3006b2d3300ff398e6
+  version: a6d58457b39324ead2ffb1f24be7a0a638c9f112
   subpackages:
   - analytics
   - arrays
@@ -37,7 +37,7 @@ imports:
   - admission/v1beta1
   - registry/admissionreview/v1beta1
 - name: github.com/appscode/kutil
-  version: 25382b15981e816818803a66b6e1a1270efa89ab
+  version: 5e4dc08e9e6e00fcf397b7186a3918dc4dcb9426
   subpackages:
   - admissionregistration/v1beta1
   - apiextensions/v1beta1
@@ -350,7 +350,7 @@ imports:
 - name: github.com/json-iterator/go
   version: 1624edc4454b8682399def8740d46db5e4362ba4
 - name: github.com/kubedb/apimachinery
-  version: ca4c5b415bee4ce837f3bb19f5602f215e18c48a
+  version: 2a7cb21fc0d7604e31ae2149d5ee9097fe4340eb
   subpackages:
   - apis
   - apis/authorization
@@ -361,7 +361,6 @@ imports:
   - apis/kubedb
   - apis/kubedb/v1alpha1
   - client/clientset/versioned
-  - client/clientset/versioned/fake
   - client/clientset/versioned/scheme
   - client/clientset/versioned/typed/authorization/v1alpha1
   - client/clientset/versioned/typed/authorization/v1alpha1/fake
@@ -384,13 +383,8 @@ imports:
   - client/listers/catalog/v1alpha1
   - client/listers/kubedb/v1alpha1
   - pkg/admission
-  - pkg/admission/dormantdatabase
-  - pkg/admission/namespace
-  - pkg/admission/snapshot
   - pkg/controller
-  - pkg/controller/dormantdatabase
   - pkg/controller/job
-  - pkg/controller/snapshot
   - pkg/eventer
   - pkg/validator
 - name: github.com/lib/pq
@@ -414,7 +408,7 @@ imports:
 - name: github.com/modern-go/reflect2
   version: 05fbef0ca5da472bbf96c9322b84a53edc03c9fd
 - name: github.com/ncw/swift
-  version: 6f907bcc698fc1d24fa918255b18c6c5668b8b2b
+  version: 6f342da371d063863f2f354f183e4ab0ef72d287
 - name: github.com/NYTimes/gziphandler
   version: 56545f4a5d46df9a6648819d1664c3a03a13ffdb
 - name: github.com/onsi/ginkgo
@@ -505,6 +499,26 @@ imports:
   - doc
 - name: github.com/spf13/pflag
   version: 298182f68c66c05229eb03ac171abe6e309ee79a
+- name: github.com/tekliner/apimachinery
+  version: 28755909634630e252c7f7fe243e118969192677
+  subpackages:
+  - apis
+  - apis/catalog/v1alpha1
+  - apis/kubedb/v1alpha1
+  - client/clientset/versioned
+  - client/clientset/versioned/fake
+  - client/clientset/versioned/scheme
+  - client/clientset/versioned/typed/kubedb/v1alpha1/util
+  - client/informers/externalversions
+  - client/listers/kubedb/v1alpha1
+  - pkg/admission/dormantdatabase
+  - pkg/admission/namespace
+  - pkg/admission/snapshot
+  - pkg/controller
+  - pkg/controller/dormantdatabase
+  - pkg/controller/snapshot
+  - pkg/eventer
+  - pkg/validator
 - name: github.com/ugorji/go
   version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
   subpackages:
@@ -676,7 +690,7 @@ imports:
   - pkg/client/clientset/clientset/scheme
   - pkg/client/clientset/clientset/typed/apiextensions/v1beta1
 - name: k8s.io/apimachinery
-  version: 8d7a0c3d7f0948197f384288363dfe20cd1f00e4
+  version: 00edbc532482e56a75224c794deaa1366dd292cb
   repo: https://github.com/kmodules/apimachinery.git
   vcs: git
   subpackages:
@@ -1032,7 +1046,7 @@ imports:
   - pkg/util
   - pkg/util/proto
 - name: kmodules.xyz/custom-resources
-  version: 043b10a889fd23491f5f4ed5f91a3220f83dd96e
+  version: 6d398bd2d81b1d6a811ad026c1dd24f1564a1f3c
   repo: https://github.com/kmodules/custom-resources.git
   vcs: git
   subpackages:
@@ -1041,7 +1055,7 @@ imports:
   - client/clientset/versioned/scheme
   - client/clientset/versioned/typed/appcatalog/v1alpha1
 - name: kmodules.xyz/monitoring-agent-api
-  version: 626ef00ec8baebe0d2b451cf8f06450c2588f237
+  version: c68fa034fbbaeb8c930c17d1ec0790a4ea46bad3
   repo: https://github.com/kmodules/monitoring-agent-api.git
   vcs: git
   subpackages:
@@ -1057,7 +1071,7 @@ imports:
   - api/v1
   - osm
 - name: kmodules.xyz/offshoot-api
-  version: 5fe79fb4d96949b8d85410ca8af200226a676aac
+  version: 2ab6d9decb219e8465875d80be5d6bc754052bd9
   repo: https://github.com/kmodules/offshoot-api.git
   vcs: git
   subpackages:

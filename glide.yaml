@@ -1,4 +1,4 @@
-package: github.com/kubedb/postgres
+package: github.com/tekliner/postgres
 import:
 - package: github.com/appscode/go
   version: master
@@ -26,8 +26,7 @@ import:
   version: 3639d6d93f377f39a1de765fa4ef37b3c7ca8bd9
 - package: cloud.google.com/go
   version: v0.2.0
-- package: github.com/jpillora/go-ogle-analytics
-- package: github.com/kubedb/apimachinery
+- package: github.com/tekliner/apimachinery
   version: master
 - package: github.com/lib/pq
 - package: github.com/onsi/ginkgo

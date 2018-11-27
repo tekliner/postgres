@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/graymeta/stow"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"kmodules.xyz/objectstore-api/osm"
 )
