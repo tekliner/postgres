@@ -42,8 +42,8 @@ type PostgresSpec struct {
 	// First run
 	// Made to perform actions during database cluster creating.
 	// For example, upgrade to new version or structure change
-	FirstRun          *PostgresFirstRun          `json:"firstrun,omitempty"`
-	FirstRunConfigMap *PostgresFirstRunConfigMap `json:"firstrunconfigmap,omitempty"`
+	FirstRun          bool   `json:"firstrun,omitempty"`
+	FirstRunConfigMap string `json:"firstrunconfigmap,omitempty"`
 
 	// Streaming mode
 	StreamingMode *PostgresStreamingMode `json:"streamingMode,omitempty"`
@@ -190,9 +190,6 @@ type RecoveryTarget struct {
 }
 
 type PostgresStandbyMode string
-
-type PostgresFirstRun bool
-type PostgresFirstRunConfigMap string
 
 const (
 	HotPostgresStandbyMode  PostgresStandbyMode = "Hot"

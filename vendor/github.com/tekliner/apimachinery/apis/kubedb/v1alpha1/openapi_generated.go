@@ -34,381 +34,381 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/appscode/go/encoding/json/types.IntHash":                               schema_go_encoding_json_types_IntHash(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec":           schema_apimachinery_apis_kubedb_v1alpha1_BackupScheduleSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabase":              schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabase(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseList":          schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseSpec":          schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseStatus":        schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Elasticsearch":                schema_apimachinery_apis_kubedb_v1alpha1_Elasticsearch(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchClusterTopology": schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchClusterTopology(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchList":            schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode":            schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchNode(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec":            schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchStatus":          schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSummary":         schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchSummary(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Etcd":                         schema_apimachinery_apis_kubedb_v1alpha1_Etcd(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdList":                     schema_apimachinery_apis_kubedb_v1alpha1_EtcdList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdSpec":                     schema_apimachinery_apis_kubedb_v1alpha1_EtcdSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdStatus":                   schema_apimachinery_apis_kubedb_v1alpha1_EtcdStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec":                     schema_apimachinery_apis_kubedb_v1alpha1_InitSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemberSecret":                 schema_apimachinery_apis_kubedb_v1alpha1_MemberSecret(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Memcached":                    schema_apimachinery_apis_kubedb_v1alpha1_Memcached(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedList":                schema_apimachinery_apis_kubedb_v1alpha1_MemcachedList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec":                schema_apimachinery_apis_kubedb_v1alpha1_MemcachedSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedStatus":              schema_apimachinery_apis_kubedb_v1alpha1_MemcachedStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDB":                      schema_apimachinery_apis_kubedb_v1alpha1_MongoDB(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBList":                  schema_apimachinery_apis_kubedb_v1alpha1_MongoDBList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBReplicaSet":            schema_apimachinery_apis_kubedb_v1alpha1_MongoDBReplicaSet(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec":                  schema_apimachinery_apis_kubedb_v1alpha1_MongoDBSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBStatus":                schema_apimachinery_apis_kubedb_v1alpha1_MongoDBStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQL":                        schema_apimachinery_apis_kubedb_v1alpha1_MySQL(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLList":                    schema_apimachinery_apis_kubedb_v1alpha1_MySQLList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLSpec":                    schema_apimachinery_apis_kubedb_v1alpha1_MySQLSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLStatus":                  schema_apimachinery_apis_kubedb_v1alpha1_MySQLStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Origin":                       schema_apimachinery_apis_kubedb_v1alpha1_Origin(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.OriginSpec":                   schema_apimachinery_apis_kubedb_v1alpha1_OriginSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Postgres":                     schema_apimachinery_apis_kubedb_v1alpha1_Postgres(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresArchiverSpec":         schema_apimachinery_apis_kubedb_v1alpha1_PostgresArchiverSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresList":                 schema_apimachinery_apis_kubedb_v1alpha1_PostgresList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSchemaInfo":           schema_apimachinery_apis_kubedb_v1alpha1_PostgresSchemaInfo(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSpec":                 schema_apimachinery_apis_kubedb_v1alpha1_PostgresSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresStatus":               schema_apimachinery_apis_kubedb_v1alpha1_PostgresStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSummary":              schema_apimachinery_apis_kubedb_v1alpha1_PostgresSummary(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresTableInfo":            schema_apimachinery_apis_kubedb_v1alpha1_PostgresTableInfo(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresWALSourceSpec":        schema_apimachinery_apis_kubedb_v1alpha1_PostgresWALSourceSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RecoveryTarget":               schema_apimachinery_apis_kubedb_v1alpha1_RecoveryTarget(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Redis":                        schema_apimachinery_apis_kubedb_v1alpha1_Redis(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisClusterSpec":             schema_apimachinery_apis_kubedb_v1alpha1_RedisClusterSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisList":                    schema_apimachinery_apis_kubedb_v1alpha1_RedisList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisSpec":                    schema_apimachinery_apis_kubedb_v1alpha1_RedisSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisStatus":                  schema_apimachinery_apis_kubedb_v1alpha1_RedisStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Report":                       schema_apimachinery_apis_kubedb_v1alpha1_Report(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ReportStatus":                 schema_apimachinery_apis_kubedb_v1alpha1_ReportStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ReportSummary":                schema_apimachinery_apis_kubedb_v1alpha1_ReportSummary(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ScriptSourceSpec":             schema_apimachinery_apis_kubedb_v1alpha1_ScriptSourceSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Snapshot":                     schema_apimachinery_apis_kubedb_v1alpha1_Snapshot(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotList":                 schema_apimachinery_apis_kubedb_v1alpha1_SnapshotList(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotSourceSpec":           schema_apimachinery_apis_kubedb_v1alpha1_SnapshotSourceSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotSpec":                 schema_apimachinery_apis_kubedb_v1alpha1_SnapshotSpec(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotStatus":               schema_apimachinery_apis_kubedb_v1alpha1_SnapshotStatus(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.TLSPolicy":                    schema_apimachinery_apis_kubedb_v1alpha1_TLSPolicy(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.elasticsearchApp":             schema_apimachinery_apis_kubedb_v1alpha1_elasticsearchApp(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.elasticsearchStatsService":    schema_apimachinery_apis_kubedb_v1alpha1_elasticsearchStatsService(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.etcdApp":                      schema_apimachinery_apis_kubedb_v1alpha1_etcdApp(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.etcdStatsService":             schema_apimachinery_apis_kubedb_v1alpha1_etcdStatsService(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.memcachedApp":                 schema_apimachinery_apis_kubedb_v1alpha1_memcachedApp(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.memcachedStatsService":        schema_apimachinery_apis_kubedb_v1alpha1_memcachedStatsService(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.mongoDBApp":                   schema_apimachinery_apis_kubedb_v1alpha1_mongoDBApp(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.mongoDBStatsService":          schema_apimachinery_apis_kubedb_v1alpha1_mongoDBStatsService(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.mysqlApp":                     schema_apimachinery_apis_kubedb_v1alpha1_mysqlApp(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.mysqlStatsService":            schema_apimachinery_apis_kubedb_v1alpha1_mysqlStatsService(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.postgresApp":                  schema_apimachinery_apis_kubedb_v1alpha1_postgresApp(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.postgresStatsService":         schema_apimachinery_apis_kubedb_v1alpha1_postgresStatsService(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.redisApp":                     schema_apimachinery_apis_kubedb_v1alpha1_redisApp(ref),
-		"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.redisStatsService":            schema_apimachinery_apis_kubedb_v1alpha1_redisStatsService(ref),
-		"k8s.io/api/apps/v1.ControllerRevision":                                            schema_k8sio_api_apps_v1_ControllerRevision(ref),
-		"k8s.io/api/apps/v1.ControllerRevisionList":                                        schema_k8sio_api_apps_v1_ControllerRevisionList(ref),
-		"k8s.io/api/apps/v1.DaemonSet":                                                     schema_k8sio_api_apps_v1_DaemonSet(ref),
-		"k8s.io/api/apps/v1.DaemonSetCondition":                                            schema_k8sio_api_apps_v1_DaemonSetCondition(ref),
-		"k8s.io/api/apps/v1.DaemonSetList":                                                 schema_k8sio_api_apps_v1_DaemonSetList(ref),
-		"k8s.io/api/apps/v1.DaemonSetSpec":                                                 schema_k8sio_api_apps_v1_DaemonSetSpec(ref),
-		"k8s.io/api/apps/v1.DaemonSetStatus":                                               schema_k8sio_api_apps_v1_DaemonSetStatus(ref),
-		"k8s.io/api/apps/v1.DaemonSetUpdateStrategy":                                       schema_k8sio_api_apps_v1_DaemonSetUpdateStrategy(ref),
-		"k8s.io/api/apps/v1.Deployment":                                                    schema_k8sio_api_apps_v1_Deployment(ref),
-		"k8s.io/api/apps/v1.DeploymentCondition":                                           schema_k8sio_api_apps_v1_DeploymentCondition(ref),
-		"k8s.io/api/apps/v1.DeploymentList":                                                schema_k8sio_api_apps_v1_DeploymentList(ref),
-		"k8s.io/api/apps/v1.DeploymentSpec":                                                schema_k8sio_api_apps_v1_DeploymentSpec(ref),
-		"k8s.io/api/apps/v1.DeploymentStatus":                                              schema_k8sio_api_apps_v1_DeploymentStatus(ref),
-		"k8s.io/api/apps/v1.DeploymentStrategy":                                            schema_k8sio_api_apps_v1_DeploymentStrategy(ref),
-		"k8s.io/api/apps/v1.ReplicaSet":                                                    schema_k8sio_api_apps_v1_ReplicaSet(ref),
-		"k8s.io/api/apps/v1.ReplicaSetCondition":                                           schema_k8sio_api_apps_v1_ReplicaSetCondition(ref),
-		"k8s.io/api/apps/v1.ReplicaSetList":                                                schema_k8sio_api_apps_v1_ReplicaSetList(ref),
-		"k8s.io/api/apps/v1.ReplicaSetSpec":                                                schema_k8sio_api_apps_v1_ReplicaSetSpec(ref),
-		"k8s.io/api/apps/v1.ReplicaSetStatus":                                              schema_k8sio_api_apps_v1_ReplicaSetStatus(ref),
-		"k8s.io/api/apps/v1.RollingUpdateDaemonSet":                                        schema_k8sio_api_apps_v1_RollingUpdateDaemonSet(ref),
-		"k8s.io/api/apps/v1.RollingUpdateDeployment":                                       schema_k8sio_api_apps_v1_RollingUpdateDeployment(ref),
-		"k8s.io/api/apps/v1.RollingUpdateStatefulSetStrategy":                              schema_k8sio_api_apps_v1_RollingUpdateStatefulSetStrategy(ref),
-		"k8s.io/api/apps/v1.StatefulSet":                                                   schema_k8sio_api_apps_v1_StatefulSet(ref),
-		"k8s.io/api/apps/v1.StatefulSetCondition":                                          schema_k8sio_api_apps_v1_StatefulSetCondition(ref),
-		"k8s.io/api/apps/v1.StatefulSetList":                                               schema_k8sio_api_apps_v1_StatefulSetList(ref),
-		"k8s.io/api/apps/v1.StatefulSetSpec":                                               schema_k8sio_api_apps_v1_StatefulSetSpec(ref),
-		"k8s.io/api/apps/v1.StatefulSetStatus":                                             schema_k8sio_api_apps_v1_StatefulSetStatus(ref),
-		"k8s.io/api/apps/v1.StatefulSetUpdateStrategy":                                     schema_k8sio_api_apps_v1_StatefulSetUpdateStrategy(ref),
-		"k8s.io/api/core/v1.AWSElasticBlockStoreVolumeSource":                              schema_k8sio_api_core_v1_AWSElasticBlockStoreVolumeSource(ref),
-		"k8s.io/api/core/v1.Affinity":                                                      schema_k8sio_api_core_v1_Affinity(ref),
-		"k8s.io/api/core/v1.AttachedVolume":                                                schema_k8sio_api_core_v1_AttachedVolume(ref),
-		"k8s.io/api/core/v1.AvoidPods":                                                     schema_k8sio_api_core_v1_AvoidPods(ref),
-		"k8s.io/api/core/v1.AzureDiskVolumeSource":                                         schema_k8sio_api_core_v1_AzureDiskVolumeSource(ref),
-		"k8s.io/api/core/v1.AzureFilePersistentVolumeSource":                               schema_k8sio_api_core_v1_AzureFilePersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.AzureFileVolumeSource":                                         schema_k8sio_api_core_v1_AzureFileVolumeSource(ref),
-		"k8s.io/api/core/v1.Binding":                                                       schema_k8sio_api_core_v1_Binding(ref),
-		"k8s.io/api/core/v1.CSIPersistentVolumeSource":                                     schema_k8sio_api_core_v1_CSIPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.Capabilities":                                                  schema_k8sio_api_core_v1_Capabilities(ref),
-		"k8s.io/api/core/v1.CephFSPersistentVolumeSource":                                  schema_k8sio_api_core_v1_CephFSPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.CephFSVolumeSource":                                            schema_k8sio_api_core_v1_CephFSVolumeSource(ref),
-		"k8s.io/api/core/v1.CinderPersistentVolumeSource":                                  schema_k8sio_api_core_v1_CinderPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.CinderVolumeSource":                                            schema_k8sio_api_core_v1_CinderVolumeSource(ref),
-		"k8s.io/api/core/v1.ClientIPConfig":                                                schema_k8sio_api_core_v1_ClientIPConfig(ref),
-		"k8s.io/api/core/v1.ComponentCondition":                                            schema_k8sio_api_core_v1_ComponentCondition(ref),
-		"k8s.io/api/core/v1.ComponentStatus":                                               schema_k8sio_api_core_v1_ComponentStatus(ref),
-		"k8s.io/api/core/v1.ComponentStatusList":                                           schema_k8sio_api_core_v1_ComponentStatusList(ref),
-		"k8s.io/api/core/v1.ConfigMap":                                                     schema_k8sio_api_core_v1_ConfigMap(ref),
-		"k8s.io/api/core/v1.ConfigMapEnvSource":                                            schema_k8sio_api_core_v1_ConfigMapEnvSource(ref),
-		"k8s.io/api/core/v1.ConfigMapKeySelector":                                          schema_k8sio_api_core_v1_ConfigMapKeySelector(ref),
-		"k8s.io/api/core/v1.ConfigMapList":                                                 schema_k8sio_api_core_v1_ConfigMapList(ref),
-		"k8s.io/api/core/v1.ConfigMapNodeConfigSource":                                     schema_k8sio_api_core_v1_ConfigMapNodeConfigSource(ref),
-		"k8s.io/api/core/v1.ConfigMapProjection":                                           schema_k8sio_api_core_v1_ConfigMapProjection(ref),
-		"k8s.io/api/core/v1.ConfigMapVolumeSource":                                         schema_k8sio_api_core_v1_ConfigMapVolumeSource(ref),
-		"k8s.io/api/core/v1.Container":                                                     schema_k8sio_api_core_v1_Container(ref),
-		"k8s.io/api/core/v1.ContainerImage":                                                schema_k8sio_api_core_v1_ContainerImage(ref),
-		"k8s.io/api/core/v1.ContainerPort":                                                 schema_k8sio_api_core_v1_ContainerPort(ref),
-		"k8s.io/api/core/v1.ContainerState":                                                schema_k8sio_api_core_v1_ContainerState(ref),
-		"k8s.io/api/core/v1.ContainerStateRunning":                                         schema_k8sio_api_core_v1_ContainerStateRunning(ref),
-		"k8s.io/api/core/v1.ContainerStateTerminated":                                      schema_k8sio_api_core_v1_ContainerStateTerminated(ref),
-		"k8s.io/api/core/v1.ContainerStateWaiting":                                         schema_k8sio_api_core_v1_ContainerStateWaiting(ref),
-		"k8s.io/api/core/v1.ContainerStatus":                                               schema_k8sio_api_core_v1_ContainerStatus(ref),
-		"k8s.io/api/core/v1.DaemonEndpoint":                                                schema_k8sio_api_core_v1_DaemonEndpoint(ref),
-		"k8s.io/api/core/v1.DownwardAPIProjection":                                         schema_k8sio_api_core_v1_DownwardAPIProjection(ref),
-		"k8s.io/api/core/v1.DownwardAPIVolumeFile":                                         schema_k8sio_api_core_v1_DownwardAPIVolumeFile(ref),
-		"k8s.io/api/core/v1.DownwardAPIVolumeSource":                                       schema_k8sio_api_core_v1_DownwardAPIVolumeSource(ref),
-		"k8s.io/api/core/v1.EmptyDirVolumeSource":                                          schema_k8sio_api_core_v1_EmptyDirVolumeSource(ref),
-		"k8s.io/api/core/v1.EndpointAddress":                                               schema_k8sio_api_core_v1_EndpointAddress(ref),
-		"k8s.io/api/core/v1.EndpointPort":                                                  schema_k8sio_api_core_v1_EndpointPort(ref),
-		"k8s.io/api/core/v1.EndpointSubset":                                                schema_k8sio_api_core_v1_EndpointSubset(ref),
-		"k8s.io/api/core/v1.Endpoints":                                                     schema_k8sio_api_core_v1_Endpoints(ref),
-		"k8s.io/api/core/v1.EndpointsList":                                                 schema_k8sio_api_core_v1_EndpointsList(ref),
-		"k8s.io/api/core/v1.EnvFromSource":                                                 schema_k8sio_api_core_v1_EnvFromSource(ref),
-		"k8s.io/api/core/v1.EnvVar":                                                        schema_k8sio_api_core_v1_EnvVar(ref),
-		"k8s.io/api/core/v1.EnvVarSource":                                                  schema_k8sio_api_core_v1_EnvVarSource(ref),
-		"k8s.io/api/core/v1.Event":                                                         schema_k8sio_api_core_v1_Event(ref),
-		"k8s.io/api/core/v1.EventList":                                                     schema_k8sio_api_core_v1_EventList(ref),
-		"k8s.io/api/core/v1.EventSeries":                                                   schema_k8sio_api_core_v1_EventSeries(ref),
-		"k8s.io/api/core/v1.EventSource":                                                   schema_k8sio_api_core_v1_EventSource(ref),
-		"k8s.io/api/core/v1.ExecAction":                                                    schema_k8sio_api_core_v1_ExecAction(ref),
-		"k8s.io/api/core/v1.FCVolumeSource":                                                schema_k8sio_api_core_v1_FCVolumeSource(ref),
-		"k8s.io/api/core/v1.FlexPersistentVolumeSource":                                    schema_k8sio_api_core_v1_FlexPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.FlexVolumeSource":                                              schema_k8sio_api_core_v1_FlexVolumeSource(ref),
-		"k8s.io/api/core/v1.FlockerVolumeSource":                                           schema_k8sio_api_core_v1_FlockerVolumeSource(ref),
-		"k8s.io/api/core/v1.GCEPersistentDiskVolumeSource":                                 schema_k8sio_api_core_v1_GCEPersistentDiskVolumeSource(ref),
-		"k8s.io/api/core/v1.GitRepoVolumeSource":                                           schema_k8sio_api_core_v1_GitRepoVolumeSource(ref),
-		"k8s.io/api/core/v1.GlusterfsVolumeSource":                                         schema_k8sio_api_core_v1_GlusterfsVolumeSource(ref),
-		"k8s.io/api/core/v1.HTTPGetAction":                                                 schema_k8sio_api_core_v1_HTTPGetAction(ref),
-		"k8s.io/api/core/v1.HTTPHeader":                                                    schema_k8sio_api_core_v1_HTTPHeader(ref),
-		"k8s.io/api/core/v1.Handler":                                                       schema_k8sio_api_core_v1_Handler(ref),
-		"k8s.io/api/core/v1.HostAlias":                                                     schema_k8sio_api_core_v1_HostAlias(ref),
-		"k8s.io/api/core/v1.HostPathVolumeSource":                                          schema_k8sio_api_core_v1_HostPathVolumeSource(ref),
-		"k8s.io/api/core/v1.ISCSIPersistentVolumeSource":                                   schema_k8sio_api_core_v1_ISCSIPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.ISCSIVolumeSource":                                             schema_k8sio_api_core_v1_ISCSIVolumeSource(ref),
-		"k8s.io/api/core/v1.KeyToPath":                                                     schema_k8sio_api_core_v1_KeyToPath(ref),
-		"k8s.io/api/core/v1.Lifecycle":                                                     schema_k8sio_api_core_v1_Lifecycle(ref),
-		"k8s.io/api/core/v1.LimitRange":                                                    schema_k8sio_api_core_v1_LimitRange(ref),
-		"k8s.io/api/core/v1.LimitRangeItem":                                                schema_k8sio_api_core_v1_LimitRangeItem(ref),
-		"k8s.io/api/core/v1.LimitRangeList":                                                schema_k8sio_api_core_v1_LimitRangeList(ref),
-		"k8s.io/api/core/v1.LimitRangeSpec":                                                schema_k8sio_api_core_v1_LimitRangeSpec(ref),
-		"k8s.io/api/core/v1.List":                                                          schema_k8sio_api_core_v1_List(ref),
-		"k8s.io/api/core/v1.LoadBalancerIngress":                                           schema_k8sio_api_core_v1_LoadBalancerIngress(ref),
-		"k8s.io/api/core/v1.LoadBalancerStatus":                                            schema_k8sio_api_core_v1_LoadBalancerStatus(ref),
-		"k8s.io/api/core/v1.LocalObjectReference":                                          schema_k8sio_api_core_v1_LocalObjectReference(ref),
-		"k8s.io/api/core/v1.LocalVolumeSource":                                             schema_k8sio_api_core_v1_LocalVolumeSource(ref),
-		"k8s.io/api/core/v1.NFSVolumeSource":                                               schema_k8sio_api_core_v1_NFSVolumeSource(ref),
-		"k8s.io/api/core/v1.Namespace":                                                     schema_k8sio_api_core_v1_Namespace(ref),
-		"k8s.io/api/core/v1.NamespaceList":                                                 schema_k8sio_api_core_v1_NamespaceList(ref),
-		"k8s.io/api/core/v1.NamespaceSpec":                                                 schema_k8sio_api_core_v1_NamespaceSpec(ref),
-		"k8s.io/api/core/v1.NamespaceStatus":                                               schema_k8sio_api_core_v1_NamespaceStatus(ref),
-		"k8s.io/api/core/v1.Node":                                                          schema_k8sio_api_core_v1_Node(ref),
-		"k8s.io/api/core/v1.NodeAddress":                                                   schema_k8sio_api_core_v1_NodeAddress(ref),
-		"k8s.io/api/core/v1.NodeAffinity":                                                  schema_k8sio_api_core_v1_NodeAffinity(ref),
-		"k8s.io/api/core/v1.NodeCondition":                                                 schema_k8sio_api_core_v1_NodeCondition(ref),
-		"k8s.io/api/core/v1.NodeConfigSource":                                              schema_k8sio_api_core_v1_NodeConfigSource(ref),
-		"k8s.io/api/core/v1.NodeConfigStatus":                                              schema_k8sio_api_core_v1_NodeConfigStatus(ref),
-		"k8s.io/api/core/v1.NodeDaemonEndpoints":                                           schema_k8sio_api_core_v1_NodeDaemonEndpoints(ref),
-		"k8s.io/api/core/v1.NodeList":                                                      schema_k8sio_api_core_v1_NodeList(ref),
-		"k8s.io/api/core/v1.NodeProxyOptions":                                              schema_k8sio_api_core_v1_NodeProxyOptions(ref),
-		"k8s.io/api/core/v1.NodeResources":                                                 schema_k8sio_api_core_v1_NodeResources(ref),
-		"k8s.io/api/core/v1.NodeSelector":                                                  schema_k8sio_api_core_v1_NodeSelector(ref),
-		"k8s.io/api/core/v1.NodeSelectorRequirement":                                       schema_k8sio_api_core_v1_NodeSelectorRequirement(ref),
-		"k8s.io/api/core/v1.NodeSelectorTerm":                                              schema_k8sio_api_core_v1_NodeSelectorTerm(ref),
-		"k8s.io/api/core/v1.NodeSpec":                                                      schema_k8sio_api_core_v1_NodeSpec(ref),
-		"k8s.io/api/core/v1.NodeStatus":                                                    schema_k8sio_api_core_v1_NodeStatus(ref),
-		"k8s.io/api/core/v1.NodeSystemInfo":                                                schema_k8sio_api_core_v1_NodeSystemInfo(ref),
-		"k8s.io/api/core/v1.ObjectFieldSelector":                                           schema_k8sio_api_core_v1_ObjectFieldSelector(ref),
-		"k8s.io/api/core/v1.ObjectReference":                                               schema_k8sio_api_core_v1_ObjectReference(ref),
-		"k8s.io/api/core/v1.PersistentVolume":                                              schema_k8sio_api_core_v1_PersistentVolume(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaim":                                         schema_k8sio_api_core_v1_PersistentVolumeClaim(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimCondition":                                schema_k8sio_api_core_v1_PersistentVolumeClaimCondition(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimList":                                     schema_k8sio_api_core_v1_PersistentVolumeClaimList(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimSpec":                                     schema_k8sio_api_core_v1_PersistentVolumeClaimSpec(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimStatus":                                   schema_k8sio_api_core_v1_PersistentVolumeClaimStatus(ref),
-		"k8s.io/api/core/v1.PersistentVolumeClaimVolumeSource":                             schema_k8sio_api_core_v1_PersistentVolumeClaimVolumeSource(ref),
-		"k8s.io/api/core/v1.PersistentVolumeList":                                          schema_k8sio_api_core_v1_PersistentVolumeList(ref),
-		"k8s.io/api/core/v1.PersistentVolumeSource":                                        schema_k8sio_api_core_v1_PersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.PersistentVolumeSpec":                                          schema_k8sio_api_core_v1_PersistentVolumeSpec(ref),
-		"k8s.io/api/core/v1.PersistentVolumeStatus":                                        schema_k8sio_api_core_v1_PersistentVolumeStatus(ref),
-		"k8s.io/api/core/v1.PhotonPersistentDiskVolumeSource":                              schema_k8sio_api_core_v1_PhotonPersistentDiskVolumeSource(ref),
-		"k8s.io/api/core/v1.Pod":                                                           schema_k8sio_api_core_v1_Pod(ref),
-		"k8s.io/api/core/v1.PodAffinity":                                                   schema_k8sio_api_core_v1_PodAffinity(ref),
-		"k8s.io/api/core/v1.PodAffinityTerm":                                               schema_k8sio_api_core_v1_PodAffinityTerm(ref),
-		"k8s.io/api/core/v1.PodAntiAffinity":                                               schema_k8sio_api_core_v1_PodAntiAffinity(ref),
-		"k8s.io/api/core/v1.PodAttachOptions":                                              schema_k8sio_api_core_v1_PodAttachOptions(ref),
-		"k8s.io/api/core/v1.PodCondition":                                                  schema_k8sio_api_core_v1_PodCondition(ref),
-		"k8s.io/api/core/v1.PodDNSConfig":                                                  schema_k8sio_api_core_v1_PodDNSConfig(ref),
-		"k8s.io/api/core/v1.PodDNSConfigOption":                                            schema_k8sio_api_core_v1_PodDNSConfigOption(ref),
-		"k8s.io/api/core/v1.PodExecOptions":                                                schema_k8sio_api_core_v1_PodExecOptions(ref),
-		"k8s.io/api/core/v1.PodList":                                                       schema_k8sio_api_core_v1_PodList(ref),
-		"k8s.io/api/core/v1.PodLogOptions":                                                 schema_k8sio_api_core_v1_PodLogOptions(ref),
-		"k8s.io/api/core/v1.PodPortForwardOptions":                                         schema_k8sio_api_core_v1_PodPortForwardOptions(ref),
-		"k8s.io/api/core/v1.PodProxyOptions":                                               schema_k8sio_api_core_v1_PodProxyOptions(ref),
-		"k8s.io/api/core/v1.PodReadinessGate":                                              schema_k8sio_api_core_v1_PodReadinessGate(ref),
-		"k8s.io/api/core/v1.PodSecurityContext":                                            schema_k8sio_api_core_v1_PodSecurityContext(ref),
-		"k8s.io/api/core/v1.PodSignature":                                                  schema_k8sio_api_core_v1_PodSignature(ref),
-		"k8s.io/api/core/v1.PodSpec":                                                       schema_k8sio_api_core_v1_PodSpec(ref),
-		"k8s.io/api/core/v1.PodStatus":                                                     schema_k8sio_api_core_v1_PodStatus(ref),
-		"k8s.io/api/core/v1.PodStatusResult":                                               schema_k8sio_api_core_v1_PodStatusResult(ref),
-		"k8s.io/api/core/v1.PodTemplate":                                                   schema_k8sio_api_core_v1_PodTemplate(ref),
-		"k8s.io/api/core/v1.PodTemplateList":                                               schema_k8sio_api_core_v1_PodTemplateList(ref),
-		"k8s.io/api/core/v1.PodTemplateSpec":                                               schema_k8sio_api_core_v1_PodTemplateSpec(ref),
-		"k8s.io/api/core/v1.PortworxVolumeSource":                                          schema_k8sio_api_core_v1_PortworxVolumeSource(ref),
-		"k8s.io/api/core/v1.PreferAvoidPodsEntry":                                          schema_k8sio_api_core_v1_PreferAvoidPodsEntry(ref),
-		"k8s.io/api/core/v1.PreferredSchedulingTerm":                                       schema_k8sio_api_core_v1_PreferredSchedulingTerm(ref),
-		"k8s.io/api/core/v1.Probe":                                                         schema_k8sio_api_core_v1_Probe(ref),
-		"k8s.io/api/core/v1.ProjectedVolumeSource":                                         schema_k8sio_api_core_v1_ProjectedVolumeSource(ref),
-		"k8s.io/api/core/v1.QuobyteVolumeSource":                                           schema_k8sio_api_core_v1_QuobyteVolumeSource(ref),
-		"k8s.io/api/core/v1.RBDPersistentVolumeSource":                                     schema_k8sio_api_core_v1_RBDPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.RBDVolumeSource":                                               schema_k8sio_api_core_v1_RBDVolumeSource(ref),
-		"k8s.io/api/core/v1.RangeAllocation":                                               schema_k8sio_api_core_v1_RangeAllocation(ref),
-		"k8s.io/api/core/v1.ReplicationController":                                         schema_k8sio_api_core_v1_ReplicationController(ref),
-		"k8s.io/api/core/v1.ReplicationControllerCondition":                                schema_k8sio_api_core_v1_ReplicationControllerCondition(ref),
-		"k8s.io/api/core/v1.ReplicationControllerList":                                     schema_k8sio_api_core_v1_ReplicationControllerList(ref),
-		"k8s.io/api/core/v1.ReplicationControllerSpec":                                     schema_k8sio_api_core_v1_ReplicationControllerSpec(ref),
-		"k8s.io/api/core/v1.ReplicationControllerStatus":                                   schema_k8sio_api_core_v1_ReplicationControllerStatus(ref),
-		"k8s.io/api/core/v1.ResourceFieldSelector":                                         schema_k8sio_api_core_v1_ResourceFieldSelector(ref),
-		"k8s.io/api/core/v1.ResourceQuota":                                                 schema_k8sio_api_core_v1_ResourceQuota(ref),
-		"k8s.io/api/core/v1.ResourceQuotaList":                                             schema_k8sio_api_core_v1_ResourceQuotaList(ref),
-		"k8s.io/api/core/v1.ResourceQuotaSpec":                                             schema_k8sio_api_core_v1_ResourceQuotaSpec(ref),
-		"k8s.io/api/core/v1.ResourceQuotaStatus":                                           schema_k8sio_api_core_v1_ResourceQuotaStatus(ref),
-		"k8s.io/api/core/v1.ResourceRequirements":                                          schema_k8sio_api_core_v1_ResourceRequirements(ref),
-		"k8s.io/api/core/v1.SELinuxOptions":                                                schema_k8sio_api_core_v1_SELinuxOptions(ref),
-		"k8s.io/api/core/v1.ScaleIOPersistentVolumeSource":                                 schema_k8sio_api_core_v1_ScaleIOPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.ScaleIOVolumeSource":                                           schema_k8sio_api_core_v1_ScaleIOVolumeSource(ref),
-		"k8s.io/api/core/v1.ScopeSelector":                                                 schema_k8sio_api_core_v1_ScopeSelector(ref),
-		"k8s.io/api/core/v1.ScopedResourceSelectorRequirement":                             schema_k8sio_api_core_v1_ScopedResourceSelectorRequirement(ref),
-		"k8s.io/api/core/v1.Secret":                                                        schema_k8sio_api_core_v1_Secret(ref),
-		"k8s.io/api/core/v1.SecretEnvSource":                                               schema_k8sio_api_core_v1_SecretEnvSource(ref),
-		"k8s.io/api/core/v1.SecretKeySelector":                                             schema_k8sio_api_core_v1_SecretKeySelector(ref),
-		"k8s.io/api/core/v1.SecretList":                                                    schema_k8sio_api_core_v1_SecretList(ref),
-		"k8s.io/api/core/v1.SecretProjection":                                              schema_k8sio_api_core_v1_SecretProjection(ref),
-		"k8s.io/api/core/v1.SecretReference":                                               schema_k8sio_api_core_v1_SecretReference(ref),
-		"k8s.io/api/core/v1.SecretVolumeSource":                                            schema_k8sio_api_core_v1_SecretVolumeSource(ref),
-		"k8s.io/api/core/v1.SecurityContext":                                               schema_k8sio_api_core_v1_SecurityContext(ref),
-		"k8s.io/api/core/v1.SerializedReference":                                           schema_k8sio_api_core_v1_SerializedReference(ref),
-		"k8s.io/api/core/v1.Service":                                                       schema_k8sio_api_core_v1_Service(ref),
-		"k8s.io/api/core/v1.ServiceAccount":                                                schema_k8sio_api_core_v1_ServiceAccount(ref),
-		"k8s.io/api/core/v1.ServiceAccountList":                                            schema_k8sio_api_core_v1_ServiceAccountList(ref),
-		"k8s.io/api/core/v1.ServiceAccountTokenProjection":                                 schema_k8sio_api_core_v1_ServiceAccountTokenProjection(ref),
-		"k8s.io/api/core/v1.ServiceList":                                                   schema_k8sio_api_core_v1_ServiceList(ref),
-		"k8s.io/api/core/v1.ServicePort":                                                   schema_k8sio_api_core_v1_ServicePort(ref),
-		"k8s.io/api/core/v1.ServiceProxyOptions":                                           schema_k8sio_api_core_v1_ServiceProxyOptions(ref),
-		"k8s.io/api/core/v1.ServiceSpec":                                                   schema_k8sio_api_core_v1_ServiceSpec(ref),
-		"k8s.io/api/core/v1.ServiceStatus":                                                 schema_k8sio_api_core_v1_ServiceStatus(ref),
-		"k8s.io/api/core/v1.SessionAffinityConfig":                                         schema_k8sio_api_core_v1_SessionAffinityConfig(ref),
-		"k8s.io/api/core/v1.StorageOSPersistentVolumeSource":                               schema_k8sio_api_core_v1_StorageOSPersistentVolumeSource(ref),
-		"k8s.io/api/core/v1.StorageOSVolumeSource":                                         schema_k8sio_api_core_v1_StorageOSVolumeSource(ref),
-		"k8s.io/api/core/v1.Sysctl":                                                        schema_k8sio_api_core_v1_Sysctl(ref),
-		"k8s.io/api/core/v1.TCPSocketAction":                                               schema_k8sio_api_core_v1_TCPSocketAction(ref),
-		"k8s.io/api/core/v1.Taint":                                                         schema_k8sio_api_core_v1_Taint(ref),
-		"k8s.io/api/core/v1.Toleration":                                                    schema_k8sio_api_core_v1_Toleration(ref),
-		"k8s.io/api/core/v1.TopologySelectorLabelRequirement":                              schema_k8sio_api_core_v1_TopologySelectorLabelRequirement(ref),
-		"k8s.io/api/core/v1.TopologySelectorTerm":                                          schema_k8sio_api_core_v1_TopologySelectorTerm(ref),
-		"k8s.io/api/core/v1.TypedLocalObjectReference":                                     schema_k8sio_api_core_v1_TypedLocalObjectReference(ref),
-		"k8s.io/api/core/v1.Volume":                                                        schema_k8sio_api_core_v1_Volume(ref),
-		"k8s.io/api/core/v1.VolumeDevice":                                                  schema_k8sio_api_core_v1_VolumeDevice(ref),
-		"k8s.io/api/core/v1.VolumeMount":                                                   schema_k8sio_api_core_v1_VolumeMount(ref),
-		"k8s.io/api/core/v1.VolumeNodeAffinity":                                            schema_k8sio_api_core_v1_VolumeNodeAffinity(ref),
-		"k8s.io/api/core/v1.VolumeProjection":                                              schema_k8sio_api_core_v1_VolumeProjection(ref),
-		"k8s.io/api/core/v1.VolumeSource":                                                  schema_k8sio_api_core_v1_VolumeSource(ref),
-		"k8s.io/api/core/v1.VsphereVirtualDiskVolumeSource":                                schema_k8sio_api_core_v1_VsphereVirtualDiskVolumeSource(ref),
-		"k8s.io/api/core/v1.WeightedPodAffinityTerm":                                       schema_k8sio_api_core_v1_WeightedPodAffinityTerm(ref),
-		"k8s.io/api/rbac/v1.AggregationRule":                                               schema_k8sio_api_rbac_v1_AggregationRule(ref),
-		"k8s.io/api/rbac/v1.ClusterRole":                                                   schema_k8sio_api_rbac_v1_ClusterRole(ref),
-		"k8s.io/api/rbac/v1.ClusterRoleBinding":                                            schema_k8sio_api_rbac_v1_ClusterRoleBinding(ref),
-		"k8s.io/api/rbac/v1.ClusterRoleBindingList":                                        schema_k8sio_api_rbac_v1_ClusterRoleBindingList(ref),
-		"k8s.io/api/rbac/v1.ClusterRoleList":                                               schema_k8sio_api_rbac_v1_ClusterRoleList(ref),
-		"k8s.io/api/rbac/v1.PolicyRule":                                                    schema_k8sio_api_rbac_v1_PolicyRule(ref),
-		"k8s.io/api/rbac/v1.Role":                                                          schema_k8sio_api_rbac_v1_Role(ref),
-		"k8s.io/api/rbac/v1.RoleBinding":                                                   schema_k8sio_api_rbac_v1_RoleBinding(ref),
-		"k8s.io/api/rbac/v1.RoleBindingList":                                               schema_k8sio_api_rbac_v1_RoleBindingList(ref),
-		"k8s.io/api/rbac/v1.RoleList":                                                      schema_k8sio_api_rbac_v1_RoleList(ref),
-		"k8s.io/api/rbac/v1.RoleRef":                                                       schema_k8sio_api_rbac_v1_RoleRef(ref),
-		"k8s.io/api/rbac/v1.Subject":                                                       schema_k8sio_api_rbac_v1_Subject(ref),
-		"k8s.io/apimachinery/pkg/api/resource.Quantity":                                    schema_apimachinery_pkg_api_resource_Quantity(ref),
-		"k8s.io/apimachinery/pkg/api/resource.int64Amount":                                 schema_apimachinery_pkg_api_resource_int64Amount(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup":                                    schema_pkg_apis_meta_v1_APIGroup(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroupList":                                schema_pkg_apis_meta_v1_APIGroupList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResource":                                 schema_pkg_apis_meta_v1_APIResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResourceList":                             schema_pkg_apis_meta_v1_APIResourceList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIVersions":                                 schema_pkg_apis_meta_v1_APIVersions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.CreateOptions":                               schema_pkg_apis_meta_v1_CreateOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions":                               schema_pkg_apis_meta_v1_DeleteOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Duration":                                    schema_pkg_apis_meta_v1_Duration(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ExportOptions":                               schema_pkg_apis_meta_v1_ExportOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GetOptions":                                  schema_pkg_apis_meta_v1_GetOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupKind":                                   schema_pkg_apis_meta_v1_GroupKind(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupResource":                               schema_pkg_apis_meta_v1_GroupResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersion":                                schema_pkg_apis_meta_v1_GroupVersion(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery":                    schema_pkg_apis_meta_v1_GroupVersionForDiscovery(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionKind":                            schema_pkg_apis_meta_v1_GroupVersionKind(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionResource":                        schema_pkg_apis_meta_v1_GroupVersionResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Initializer":                                 schema_pkg_apis_meta_v1_Initializer(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Initializers":                                schema_pkg_apis_meta_v1_Initializers(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.InternalEvent":                               schema_pkg_apis_meta_v1_InternalEvent(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector":                               schema_pkg_apis_meta_v1_LabelSelector(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement":                    schema_pkg_apis_meta_v1_LabelSelectorRequirement(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.List":                                        schema_pkg_apis_meta_v1_List(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta":                                    schema_pkg_apis_meta_v1_ListMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ListOptions":                                 schema_pkg_apis_meta_v1_ListOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime":                                   schema_pkg_apis_meta_v1_MicroTime(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta":                                  schema_pkg_apis_meta_v1_ObjectMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference":                              schema_pkg_apis_meta_v1_OwnerReference(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Patch":                                       schema_pkg_apis_meta_v1_Patch(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions":                               schema_pkg_apis_meta_v1_Preconditions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.RootPaths":                                   schema_pkg_apis_meta_v1_RootPaths(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR":                   schema_pkg_apis_meta_v1_ServerAddressByClientCIDR(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Status":                                      schema_pkg_apis_meta_v1_Status(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause":                                 schema_pkg_apis_meta_v1_StatusCause(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails":                               schema_pkg_apis_meta_v1_StatusDetails(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Time":                                        schema_pkg_apis_meta_v1_Time(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Timestamp":                                   schema_pkg_apis_meta_v1_Timestamp(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta":                                    schema_pkg_apis_meta_v1_TypeMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.UpdateOptions":                               schema_pkg_apis_meta_v1_UpdateOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.WatchEvent":                                  schema_pkg_apis_meta_v1_WatchEvent(ref),
-		"k8s.io/apimachinery/pkg/runtime.RawExtension":                                     schema_k8sio_apimachinery_pkg_runtime_RawExtension(ref),
-		"k8s.io/apimachinery/pkg/runtime.TypeMeta":                                         schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
-		"k8s.io/apimachinery/pkg/runtime.Unknown":                                          schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
-		"k8s.io/apimachinery/pkg/util/intstr.IntOrString":                                  schema_apimachinery_pkg_util_intstr_IntOrString(ref),
-		"k8s.io/apimachinery/pkg/version.Info":                                             schema_k8sio_apimachinery_pkg_version_Info(ref),
-		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.AppBinding":                schema_custom_resources_apis_appcatalog_v1alpha1_AppBinding(ref),
-		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.AppBindingList":            schema_custom_resources_apis_appcatalog_v1alpha1_AppBindingList(ref),
-		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.AppBindingSpec":            schema_custom_resources_apis_appcatalog_v1alpha1_AppBindingSpec(ref),
-		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.AppReference":              schema_custom_resources_apis_appcatalog_v1alpha1_AppReference(ref),
-		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.ClientConfig":              schema_custom_resources_apis_appcatalog_v1alpha1_ClientConfig(ref),
-		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.ServiceReference":          schema_custom_resources_apis_appcatalog_v1alpha1_ServiceReference(ref),
-		"kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec":                               schema_kmodulesxyz_monitoring_agent_api_api_v1_AgentSpec(ref),
-		"kmodules.xyz/monitoring-agent-api/api/v1.PrometheusSpec":                          schema_kmodulesxyz_monitoring_agent_api_api_v1_PrometheusSpec(ref),
-		"kmodules.xyz/objectstore-api/api/v1.AzureSpec":                                    schema_kmodulesxyz_objectstore_api_api_v1_AzureSpec(ref),
-		"kmodules.xyz/objectstore-api/api/v1.B2Spec":                                       schema_kmodulesxyz_objectstore_api_api_v1_B2Spec(ref),
-		"kmodules.xyz/objectstore-api/api/v1.Backend":                                      schema_kmodulesxyz_objectstore_api_api_v1_Backend(ref),
-		"kmodules.xyz/objectstore-api/api/v1.GCSSpec":                                      schema_kmodulesxyz_objectstore_api_api_v1_GCSSpec(ref),
-		"kmodules.xyz/objectstore-api/api/v1.LocalSpec":                                    schema_kmodulesxyz_objectstore_api_api_v1_LocalSpec(ref),
-		"kmodules.xyz/objectstore-api/api/v1.RestServerSpec":                               schema_kmodulesxyz_objectstore_api_api_v1_RestServerSpec(ref),
-		"kmodules.xyz/objectstore-api/api/v1.S3Spec":                                       schema_kmodulesxyz_objectstore_api_api_v1_S3Spec(ref),
-		"kmodules.xyz/objectstore-api/api/v1.SwiftSpec":                                    schema_kmodulesxyz_objectstore_api_api_v1_SwiftSpec(ref),
-		"kmodules.xyz/offshoot-api/api/v1.ObjectMeta":                                      schema_kmodulesxyz_offshoot_api_api_v1_ObjectMeta(ref),
-		"kmodules.xyz/offshoot-api/api/v1.PodSpec":                                         schema_kmodulesxyz_offshoot_api_api_v1_PodSpec(ref),
-		"kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec":                                 schema_kmodulesxyz_offshoot_api_api_v1_PodTemplateSpec(ref),
-		"kmodules.xyz/offshoot-api/api/v1.ServicePort":                                     schema_kmodulesxyz_offshoot_api_api_v1_ServicePort(ref),
-		"kmodules.xyz/offshoot-api/api/v1.ServiceSpec":                                     schema_kmodulesxyz_offshoot_api_api_v1_ServiceSpec(ref),
-		"kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec":                             schema_kmodulesxyz_offshoot_api_api_v1_ServiceTemplateSpec(ref),
+		"github.com/appscode/go/encoding/json/types.IntHash":                                 schema_go_encoding_json_types_IntHash(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec":           schema_apimachinery_apis_kubedb_v1alpha1_BackupScheduleSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabase":              schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabase(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseList":          schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseSpec":          schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseStatus":        schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Elasticsearch":                schema_apimachinery_apis_kubedb_v1alpha1_Elasticsearch(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchClusterTopology": schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchClusterTopology(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchList":            schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode":            schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchNode(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec":            schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchStatus":          schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSummary":         schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchSummary(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Etcd":                         schema_apimachinery_apis_kubedb_v1alpha1_Etcd(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdList":                     schema_apimachinery_apis_kubedb_v1alpha1_EtcdList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdSpec":                     schema_apimachinery_apis_kubedb_v1alpha1_EtcdSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdStatus":                   schema_apimachinery_apis_kubedb_v1alpha1_EtcdStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec":                     schema_apimachinery_apis_kubedb_v1alpha1_InitSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemberSecret":                 schema_apimachinery_apis_kubedb_v1alpha1_MemberSecret(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Memcached":                    schema_apimachinery_apis_kubedb_v1alpha1_Memcached(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedList":                schema_apimachinery_apis_kubedb_v1alpha1_MemcachedList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec":                schema_apimachinery_apis_kubedb_v1alpha1_MemcachedSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedStatus":              schema_apimachinery_apis_kubedb_v1alpha1_MemcachedStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDB":                      schema_apimachinery_apis_kubedb_v1alpha1_MongoDB(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBList":                  schema_apimachinery_apis_kubedb_v1alpha1_MongoDBList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBReplicaSet":            schema_apimachinery_apis_kubedb_v1alpha1_MongoDBReplicaSet(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec":                  schema_apimachinery_apis_kubedb_v1alpha1_MongoDBSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBStatus":                schema_apimachinery_apis_kubedb_v1alpha1_MongoDBStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQL":                        schema_apimachinery_apis_kubedb_v1alpha1_MySQL(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLList":                    schema_apimachinery_apis_kubedb_v1alpha1_MySQLList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLSpec":                    schema_apimachinery_apis_kubedb_v1alpha1_MySQLSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLStatus":                  schema_apimachinery_apis_kubedb_v1alpha1_MySQLStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Origin":                       schema_apimachinery_apis_kubedb_v1alpha1_Origin(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.OriginSpec":                   schema_apimachinery_apis_kubedb_v1alpha1_OriginSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Postgres":                     schema_apimachinery_apis_kubedb_v1alpha1_Postgres(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresArchiverSpec":         schema_apimachinery_apis_kubedb_v1alpha1_PostgresArchiverSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresList":                 schema_apimachinery_apis_kubedb_v1alpha1_PostgresList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSchemaInfo":           schema_apimachinery_apis_kubedb_v1alpha1_PostgresSchemaInfo(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSpec":                 schema_apimachinery_apis_kubedb_v1alpha1_PostgresSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresStatus":               schema_apimachinery_apis_kubedb_v1alpha1_PostgresStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSummary":              schema_apimachinery_apis_kubedb_v1alpha1_PostgresSummary(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresTableInfo":            schema_apimachinery_apis_kubedb_v1alpha1_PostgresTableInfo(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresWALSourceSpec":        schema_apimachinery_apis_kubedb_v1alpha1_PostgresWALSourceSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RecoveryTarget":               schema_apimachinery_apis_kubedb_v1alpha1_RecoveryTarget(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Redis":                        schema_apimachinery_apis_kubedb_v1alpha1_Redis(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisClusterSpec":             schema_apimachinery_apis_kubedb_v1alpha1_RedisClusterSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisList":                    schema_apimachinery_apis_kubedb_v1alpha1_RedisList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisSpec":                    schema_apimachinery_apis_kubedb_v1alpha1_RedisSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisStatus":                  schema_apimachinery_apis_kubedb_v1alpha1_RedisStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Report":                       schema_apimachinery_apis_kubedb_v1alpha1_Report(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ReportStatus":                 schema_apimachinery_apis_kubedb_v1alpha1_ReportStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ReportSummary":                schema_apimachinery_apis_kubedb_v1alpha1_ReportSummary(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ScriptSourceSpec":             schema_apimachinery_apis_kubedb_v1alpha1_ScriptSourceSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Snapshot":                     schema_apimachinery_apis_kubedb_v1alpha1_Snapshot(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotList":                 schema_apimachinery_apis_kubedb_v1alpha1_SnapshotList(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotSourceSpec":           schema_apimachinery_apis_kubedb_v1alpha1_SnapshotSourceSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotSpec":                 schema_apimachinery_apis_kubedb_v1alpha1_SnapshotSpec(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotStatus":               schema_apimachinery_apis_kubedb_v1alpha1_SnapshotStatus(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.TLSPolicy":                    schema_apimachinery_apis_kubedb_v1alpha1_TLSPolicy(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.elasticsearchApp":             schema_apimachinery_apis_kubedb_v1alpha1_elasticsearchApp(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.elasticsearchStatsService":    schema_apimachinery_apis_kubedb_v1alpha1_elasticsearchStatsService(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.etcdApp":                      schema_apimachinery_apis_kubedb_v1alpha1_etcdApp(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.etcdStatsService":             schema_apimachinery_apis_kubedb_v1alpha1_etcdStatsService(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.memcachedApp":                 schema_apimachinery_apis_kubedb_v1alpha1_memcachedApp(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.memcachedStatsService":        schema_apimachinery_apis_kubedb_v1alpha1_memcachedStatsService(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.mongoDBApp":                   schema_apimachinery_apis_kubedb_v1alpha1_mongoDBApp(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.mongoDBStatsService":          schema_apimachinery_apis_kubedb_v1alpha1_mongoDBStatsService(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.mysqlApp":                     schema_apimachinery_apis_kubedb_v1alpha1_mysqlApp(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.mysqlStatsService":            schema_apimachinery_apis_kubedb_v1alpha1_mysqlStatsService(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.postgresApp":                  schema_apimachinery_apis_kubedb_v1alpha1_postgresApp(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.postgresStatsService":         schema_apimachinery_apis_kubedb_v1alpha1_postgresStatsService(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.redisApp":                     schema_apimachinery_apis_kubedb_v1alpha1_redisApp(ref),
+		"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.redisStatsService":            schema_apimachinery_apis_kubedb_v1alpha1_redisStatsService(ref),
+		"k8s.io/api/apps/v1.ControllerRevision":                                              schema_k8sio_api_apps_v1_ControllerRevision(ref),
+		"k8s.io/api/apps/v1.ControllerRevisionList":                                          schema_k8sio_api_apps_v1_ControllerRevisionList(ref),
+		"k8s.io/api/apps/v1.DaemonSet":                                                       schema_k8sio_api_apps_v1_DaemonSet(ref),
+		"k8s.io/api/apps/v1.DaemonSetCondition":                                              schema_k8sio_api_apps_v1_DaemonSetCondition(ref),
+		"k8s.io/api/apps/v1.DaemonSetList":                                                   schema_k8sio_api_apps_v1_DaemonSetList(ref),
+		"k8s.io/api/apps/v1.DaemonSetSpec":                                                   schema_k8sio_api_apps_v1_DaemonSetSpec(ref),
+		"k8s.io/api/apps/v1.DaemonSetStatus":                                                 schema_k8sio_api_apps_v1_DaemonSetStatus(ref),
+		"k8s.io/api/apps/v1.DaemonSetUpdateStrategy":                                         schema_k8sio_api_apps_v1_DaemonSetUpdateStrategy(ref),
+		"k8s.io/api/apps/v1.Deployment":                                                      schema_k8sio_api_apps_v1_Deployment(ref),
+		"k8s.io/api/apps/v1.DeploymentCondition":                                             schema_k8sio_api_apps_v1_DeploymentCondition(ref),
+		"k8s.io/api/apps/v1.DeploymentList":                                                  schema_k8sio_api_apps_v1_DeploymentList(ref),
+		"k8s.io/api/apps/v1.DeploymentSpec":                                                  schema_k8sio_api_apps_v1_DeploymentSpec(ref),
+		"k8s.io/api/apps/v1.DeploymentStatus":                                                schema_k8sio_api_apps_v1_DeploymentStatus(ref),
+		"k8s.io/api/apps/v1.DeploymentStrategy":                                              schema_k8sio_api_apps_v1_DeploymentStrategy(ref),
+		"k8s.io/api/apps/v1.ReplicaSet":                                                      schema_k8sio_api_apps_v1_ReplicaSet(ref),
+		"k8s.io/api/apps/v1.ReplicaSetCondition":                                             schema_k8sio_api_apps_v1_ReplicaSetCondition(ref),
+		"k8s.io/api/apps/v1.ReplicaSetList":                                                  schema_k8sio_api_apps_v1_ReplicaSetList(ref),
+		"k8s.io/api/apps/v1.ReplicaSetSpec":                                                  schema_k8sio_api_apps_v1_ReplicaSetSpec(ref),
+		"k8s.io/api/apps/v1.ReplicaSetStatus":                                                schema_k8sio_api_apps_v1_ReplicaSetStatus(ref),
+		"k8s.io/api/apps/v1.RollingUpdateDaemonSet":                                          schema_k8sio_api_apps_v1_RollingUpdateDaemonSet(ref),
+		"k8s.io/api/apps/v1.RollingUpdateDeployment":                                         schema_k8sio_api_apps_v1_RollingUpdateDeployment(ref),
+		"k8s.io/api/apps/v1.RollingUpdateStatefulSetStrategy":                                schema_k8sio_api_apps_v1_RollingUpdateStatefulSetStrategy(ref),
+		"k8s.io/api/apps/v1.StatefulSet":                                                     schema_k8sio_api_apps_v1_StatefulSet(ref),
+		"k8s.io/api/apps/v1.StatefulSetCondition":                                            schema_k8sio_api_apps_v1_StatefulSetCondition(ref),
+		"k8s.io/api/apps/v1.StatefulSetList":                                                 schema_k8sio_api_apps_v1_StatefulSetList(ref),
+		"k8s.io/api/apps/v1.StatefulSetSpec":                                                 schema_k8sio_api_apps_v1_StatefulSetSpec(ref),
+		"k8s.io/api/apps/v1.StatefulSetStatus":                                               schema_k8sio_api_apps_v1_StatefulSetStatus(ref),
+		"k8s.io/api/apps/v1.StatefulSetUpdateStrategy":                                       schema_k8sio_api_apps_v1_StatefulSetUpdateStrategy(ref),
+		"k8s.io/api/core/v1.AWSElasticBlockStoreVolumeSource":                                schema_k8sio_api_core_v1_AWSElasticBlockStoreVolumeSource(ref),
+		"k8s.io/api/core/v1.Affinity":                                                        schema_k8sio_api_core_v1_Affinity(ref),
+		"k8s.io/api/core/v1.AttachedVolume":                                                  schema_k8sio_api_core_v1_AttachedVolume(ref),
+		"k8s.io/api/core/v1.AvoidPods":                                                       schema_k8sio_api_core_v1_AvoidPods(ref),
+		"k8s.io/api/core/v1.AzureDiskVolumeSource":                                           schema_k8sio_api_core_v1_AzureDiskVolumeSource(ref),
+		"k8s.io/api/core/v1.AzureFilePersistentVolumeSource":                                 schema_k8sio_api_core_v1_AzureFilePersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.AzureFileVolumeSource":                                           schema_k8sio_api_core_v1_AzureFileVolumeSource(ref),
+		"k8s.io/api/core/v1.Binding":                                                         schema_k8sio_api_core_v1_Binding(ref),
+		"k8s.io/api/core/v1.CSIPersistentVolumeSource":                                       schema_k8sio_api_core_v1_CSIPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.Capabilities":                                                    schema_k8sio_api_core_v1_Capabilities(ref),
+		"k8s.io/api/core/v1.CephFSPersistentVolumeSource":                                    schema_k8sio_api_core_v1_CephFSPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.CephFSVolumeSource":                                              schema_k8sio_api_core_v1_CephFSVolumeSource(ref),
+		"k8s.io/api/core/v1.CinderPersistentVolumeSource":                                    schema_k8sio_api_core_v1_CinderPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.CinderVolumeSource":                                              schema_k8sio_api_core_v1_CinderVolumeSource(ref),
+		"k8s.io/api/core/v1.ClientIPConfig":                                                  schema_k8sio_api_core_v1_ClientIPConfig(ref),
+		"k8s.io/api/core/v1.ComponentCondition":                                              schema_k8sio_api_core_v1_ComponentCondition(ref),
+		"k8s.io/api/core/v1.ComponentStatus":                                                 schema_k8sio_api_core_v1_ComponentStatus(ref),
+		"k8s.io/api/core/v1.ComponentStatusList":                                             schema_k8sio_api_core_v1_ComponentStatusList(ref),
+		"k8s.io/api/core/v1.ConfigMap":                                                       schema_k8sio_api_core_v1_ConfigMap(ref),
+		"k8s.io/api/core/v1.ConfigMapEnvSource":                                              schema_k8sio_api_core_v1_ConfigMapEnvSource(ref),
+		"k8s.io/api/core/v1.ConfigMapKeySelector":                                            schema_k8sio_api_core_v1_ConfigMapKeySelector(ref),
+		"k8s.io/api/core/v1.ConfigMapList":                                                   schema_k8sio_api_core_v1_ConfigMapList(ref),
+		"k8s.io/api/core/v1.ConfigMapNodeConfigSource":                                       schema_k8sio_api_core_v1_ConfigMapNodeConfigSource(ref),
+		"k8s.io/api/core/v1.ConfigMapProjection":                                             schema_k8sio_api_core_v1_ConfigMapProjection(ref),
+		"k8s.io/api/core/v1.ConfigMapVolumeSource":                                           schema_k8sio_api_core_v1_ConfigMapVolumeSource(ref),
+		"k8s.io/api/core/v1.Container":                                                       schema_k8sio_api_core_v1_Container(ref),
+		"k8s.io/api/core/v1.ContainerImage":                                                  schema_k8sio_api_core_v1_ContainerImage(ref),
+		"k8s.io/api/core/v1.ContainerPort":                                                   schema_k8sio_api_core_v1_ContainerPort(ref),
+		"k8s.io/api/core/v1.ContainerState":                                                  schema_k8sio_api_core_v1_ContainerState(ref),
+		"k8s.io/api/core/v1.ContainerStateRunning":                                           schema_k8sio_api_core_v1_ContainerStateRunning(ref),
+		"k8s.io/api/core/v1.ContainerStateTerminated":                                        schema_k8sio_api_core_v1_ContainerStateTerminated(ref),
+		"k8s.io/api/core/v1.ContainerStateWaiting":                                           schema_k8sio_api_core_v1_ContainerStateWaiting(ref),
+		"k8s.io/api/core/v1.ContainerStatus":                                                 schema_k8sio_api_core_v1_ContainerStatus(ref),
+		"k8s.io/api/core/v1.DaemonEndpoint":                                                  schema_k8sio_api_core_v1_DaemonEndpoint(ref),
+		"k8s.io/api/core/v1.DownwardAPIProjection":                                           schema_k8sio_api_core_v1_DownwardAPIProjection(ref),
+		"k8s.io/api/core/v1.DownwardAPIVolumeFile":                                           schema_k8sio_api_core_v1_DownwardAPIVolumeFile(ref),
+		"k8s.io/api/core/v1.DownwardAPIVolumeSource":                                         schema_k8sio_api_core_v1_DownwardAPIVolumeSource(ref),
+		"k8s.io/api/core/v1.EmptyDirVolumeSource":                                            schema_k8sio_api_core_v1_EmptyDirVolumeSource(ref),
+		"k8s.io/api/core/v1.EndpointAddress":                                                 schema_k8sio_api_core_v1_EndpointAddress(ref),
+		"k8s.io/api/core/v1.EndpointPort":                                                    schema_k8sio_api_core_v1_EndpointPort(ref),
+		"k8s.io/api/core/v1.EndpointSubset":                                                  schema_k8sio_api_core_v1_EndpointSubset(ref),
+		"k8s.io/api/core/v1.Endpoints":                                                       schema_k8sio_api_core_v1_Endpoints(ref),
+		"k8s.io/api/core/v1.EndpointsList":                                                   schema_k8sio_api_core_v1_EndpointsList(ref),
+		"k8s.io/api/core/v1.EnvFromSource":                                                   schema_k8sio_api_core_v1_EnvFromSource(ref),
+		"k8s.io/api/core/v1.EnvVar":                                                          schema_k8sio_api_core_v1_EnvVar(ref),
+		"k8s.io/api/core/v1.EnvVarSource":                                                    schema_k8sio_api_core_v1_EnvVarSource(ref),
+		"k8s.io/api/core/v1.Event":                                                           schema_k8sio_api_core_v1_Event(ref),
+		"k8s.io/api/core/v1.EventList":                                                       schema_k8sio_api_core_v1_EventList(ref),
+		"k8s.io/api/core/v1.EventSeries":                                                     schema_k8sio_api_core_v1_EventSeries(ref),
+		"k8s.io/api/core/v1.EventSource":                                                     schema_k8sio_api_core_v1_EventSource(ref),
+		"k8s.io/api/core/v1.ExecAction":                                                      schema_k8sio_api_core_v1_ExecAction(ref),
+		"k8s.io/api/core/v1.FCVolumeSource":                                                  schema_k8sio_api_core_v1_FCVolumeSource(ref),
+		"k8s.io/api/core/v1.FlexPersistentVolumeSource":                                      schema_k8sio_api_core_v1_FlexPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.FlexVolumeSource":                                                schema_k8sio_api_core_v1_FlexVolumeSource(ref),
+		"k8s.io/api/core/v1.FlockerVolumeSource":                                             schema_k8sio_api_core_v1_FlockerVolumeSource(ref),
+		"k8s.io/api/core/v1.GCEPersistentDiskVolumeSource":                                   schema_k8sio_api_core_v1_GCEPersistentDiskVolumeSource(ref),
+		"k8s.io/api/core/v1.GitRepoVolumeSource":                                             schema_k8sio_api_core_v1_GitRepoVolumeSource(ref),
+		"k8s.io/api/core/v1.GlusterfsVolumeSource":                                           schema_k8sio_api_core_v1_GlusterfsVolumeSource(ref),
+		"k8s.io/api/core/v1.HTTPGetAction":                                                   schema_k8sio_api_core_v1_HTTPGetAction(ref),
+		"k8s.io/api/core/v1.HTTPHeader":                                                      schema_k8sio_api_core_v1_HTTPHeader(ref),
+		"k8s.io/api/core/v1.Handler":                                                         schema_k8sio_api_core_v1_Handler(ref),
+		"k8s.io/api/core/v1.HostAlias":                                                       schema_k8sio_api_core_v1_HostAlias(ref),
+		"k8s.io/api/core/v1.HostPathVolumeSource":                                            schema_k8sio_api_core_v1_HostPathVolumeSource(ref),
+		"k8s.io/api/core/v1.ISCSIPersistentVolumeSource":                                     schema_k8sio_api_core_v1_ISCSIPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.ISCSIVolumeSource":                                               schema_k8sio_api_core_v1_ISCSIVolumeSource(ref),
+		"k8s.io/api/core/v1.KeyToPath":                                                       schema_k8sio_api_core_v1_KeyToPath(ref),
+		"k8s.io/api/core/v1.Lifecycle":                                                       schema_k8sio_api_core_v1_Lifecycle(ref),
+		"k8s.io/api/core/v1.LimitRange":                                                      schema_k8sio_api_core_v1_LimitRange(ref),
+		"k8s.io/api/core/v1.LimitRangeItem":                                                  schema_k8sio_api_core_v1_LimitRangeItem(ref),
+		"k8s.io/api/core/v1.LimitRangeList":                                                  schema_k8sio_api_core_v1_LimitRangeList(ref),
+		"k8s.io/api/core/v1.LimitRangeSpec":                                                  schema_k8sio_api_core_v1_LimitRangeSpec(ref),
+		"k8s.io/api/core/v1.List":                                                            schema_k8sio_api_core_v1_List(ref),
+		"k8s.io/api/core/v1.LoadBalancerIngress":                                             schema_k8sio_api_core_v1_LoadBalancerIngress(ref),
+		"k8s.io/api/core/v1.LoadBalancerStatus":                                              schema_k8sio_api_core_v1_LoadBalancerStatus(ref),
+		"k8s.io/api/core/v1.LocalObjectReference":                                            schema_k8sio_api_core_v1_LocalObjectReference(ref),
+		"k8s.io/api/core/v1.LocalVolumeSource":                                               schema_k8sio_api_core_v1_LocalVolumeSource(ref),
+		"k8s.io/api/core/v1.NFSVolumeSource":                                                 schema_k8sio_api_core_v1_NFSVolumeSource(ref),
+		"k8s.io/api/core/v1.Namespace":                                                       schema_k8sio_api_core_v1_Namespace(ref),
+		"k8s.io/api/core/v1.NamespaceList":                                                   schema_k8sio_api_core_v1_NamespaceList(ref),
+		"k8s.io/api/core/v1.NamespaceSpec":                                                   schema_k8sio_api_core_v1_NamespaceSpec(ref),
+		"k8s.io/api/core/v1.NamespaceStatus":                                                 schema_k8sio_api_core_v1_NamespaceStatus(ref),
+		"k8s.io/api/core/v1.Node":                                                            schema_k8sio_api_core_v1_Node(ref),
+		"k8s.io/api/core/v1.NodeAddress":                                                     schema_k8sio_api_core_v1_NodeAddress(ref),
+		"k8s.io/api/core/v1.NodeAffinity":                                                    schema_k8sio_api_core_v1_NodeAffinity(ref),
+		"k8s.io/api/core/v1.NodeCondition":                                                   schema_k8sio_api_core_v1_NodeCondition(ref),
+		"k8s.io/api/core/v1.NodeConfigSource":                                                schema_k8sio_api_core_v1_NodeConfigSource(ref),
+		"k8s.io/api/core/v1.NodeConfigStatus":                                                schema_k8sio_api_core_v1_NodeConfigStatus(ref),
+		"k8s.io/api/core/v1.NodeDaemonEndpoints":                                             schema_k8sio_api_core_v1_NodeDaemonEndpoints(ref),
+		"k8s.io/api/core/v1.NodeList":                                                        schema_k8sio_api_core_v1_NodeList(ref),
+		"k8s.io/api/core/v1.NodeProxyOptions":                                                schema_k8sio_api_core_v1_NodeProxyOptions(ref),
+		"k8s.io/api/core/v1.NodeResources":                                                   schema_k8sio_api_core_v1_NodeResources(ref),
+		"k8s.io/api/core/v1.NodeSelector":                                                    schema_k8sio_api_core_v1_NodeSelector(ref),
+		"k8s.io/api/core/v1.NodeSelectorRequirement":                                         schema_k8sio_api_core_v1_NodeSelectorRequirement(ref),
+		"k8s.io/api/core/v1.NodeSelectorTerm":                                                schema_k8sio_api_core_v1_NodeSelectorTerm(ref),
+		"k8s.io/api/core/v1.NodeSpec":                                                        schema_k8sio_api_core_v1_NodeSpec(ref),
+		"k8s.io/api/core/v1.NodeStatus":                                                      schema_k8sio_api_core_v1_NodeStatus(ref),
+		"k8s.io/api/core/v1.NodeSystemInfo":                                                  schema_k8sio_api_core_v1_NodeSystemInfo(ref),
+		"k8s.io/api/core/v1.ObjectFieldSelector":                                             schema_k8sio_api_core_v1_ObjectFieldSelector(ref),
+		"k8s.io/api/core/v1.ObjectReference":                                                 schema_k8sio_api_core_v1_ObjectReference(ref),
+		"k8s.io/api/core/v1.PersistentVolume":                                                schema_k8sio_api_core_v1_PersistentVolume(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaim":                                           schema_k8sio_api_core_v1_PersistentVolumeClaim(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimCondition":                                  schema_k8sio_api_core_v1_PersistentVolumeClaimCondition(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimList":                                       schema_k8sio_api_core_v1_PersistentVolumeClaimList(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimSpec":                                       schema_k8sio_api_core_v1_PersistentVolumeClaimSpec(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimStatus":                                     schema_k8sio_api_core_v1_PersistentVolumeClaimStatus(ref),
+		"k8s.io/api/core/v1.PersistentVolumeClaimVolumeSource":                               schema_k8sio_api_core_v1_PersistentVolumeClaimVolumeSource(ref),
+		"k8s.io/api/core/v1.PersistentVolumeList":                                            schema_k8sio_api_core_v1_PersistentVolumeList(ref),
+		"k8s.io/api/core/v1.PersistentVolumeSource":                                          schema_k8sio_api_core_v1_PersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.PersistentVolumeSpec":                                            schema_k8sio_api_core_v1_PersistentVolumeSpec(ref),
+		"k8s.io/api/core/v1.PersistentVolumeStatus":                                          schema_k8sio_api_core_v1_PersistentVolumeStatus(ref),
+		"k8s.io/api/core/v1.PhotonPersistentDiskVolumeSource":                                schema_k8sio_api_core_v1_PhotonPersistentDiskVolumeSource(ref),
+		"k8s.io/api/core/v1.Pod":                                                             schema_k8sio_api_core_v1_Pod(ref),
+		"k8s.io/api/core/v1.PodAffinity":                                                     schema_k8sio_api_core_v1_PodAffinity(ref),
+		"k8s.io/api/core/v1.PodAffinityTerm":                                                 schema_k8sio_api_core_v1_PodAffinityTerm(ref),
+		"k8s.io/api/core/v1.PodAntiAffinity":                                                 schema_k8sio_api_core_v1_PodAntiAffinity(ref),
+		"k8s.io/api/core/v1.PodAttachOptions":                                                schema_k8sio_api_core_v1_PodAttachOptions(ref),
+		"k8s.io/api/core/v1.PodCondition":                                                    schema_k8sio_api_core_v1_PodCondition(ref),
+		"k8s.io/api/core/v1.PodDNSConfig":                                                    schema_k8sio_api_core_v1_PodDNSConfig(ref),
+		"k8s.io/api/core/v1.PodDNSConfigOption":                                              schema_k8sio_api_core_v1_PodDNSConfigOption(ref),
+		"k8s.io/api/core/v1.PodExecOptions":                                                  schema_k8sio_api_core_v1_PodExecOptions(ref),
+		"k8s.io/api/core/v1.PodList":                                                         schema_k8sio_api_core_v1_PodList(ref),
+		"k8s.io/api/core/v1.PodLogOptions":                                                   schema_k8sio_api_core_v1_PodLogOptions(ref),
+		"k8s.io/api/core/v1.PodPortForwardOptions":                                           schema_k8sio_api_core_v1_PodPortForwardOptions(ref),
+		"k8s.io/api/core/v1.PodProxyOptions":                                                 schema_k8sio_api_core_v1_PodProxyOptions(ref),
+		"k8s.io/api/core/v1.PodReadinessGate":                                                schema_k8sio_api_core_v1_PodReadinessGate(ref),
+		"k8s.io/api/core/v1.PodSecurityContext":                                              schema_k8sio_api_core_v1_PodSecurityContext(ref),
+		"k8s.io/api/core/v1.PodSignature":                                                    schema_k8sio_api_core_v1_PodSignature(ref),
+		"k8s.io/api/core/v1.PodSpec":                                                         schema_k8sio_api_core_v1_PodSpec(ref),
+		"k8s.io/api/core/v1.PodStatus":                                                       schema_k8sio_api_core_v1_PodStatus(ref),
+		"k8s.io/api/core/v1.PodStatusResult":                                                 schema_k8sio_api_core_v1_PodStatusResult(ref),
+		"k8s.io/api/core/v1.PodTemplate":                                                     schema_k8sio_api_core_v1_PodTemplate(ref),
+		"k8s.io/api/core/v1.PodTemplateList":                                                 schema_k8sio_api_core_v1_PodTemplateList(ref),
+		"k8s.io/api/core/v1.PodTemplateSpec":                                                 schema_k8sio_api_core_v1_PodTemplateSpec(ref),
+		"k8s.io/api/core/v1.PortworxVolumeSource":                                            schema_k8sio_api_core_v1_PortworxVolumeSource(ref),
+		"k8s.io/api/core/v1.PreferAvoidPodsEntry":                                            schema_k8sio_api_core_v1_PreferAvoidPodsEntry(ref),
+		"k8s.io/api/core/v1.PreferredSchedulingTerm":                                         schema_k8sio_api_core_v1_PreferredSchedulingTerm(ref),
+		"k8s.io/api/core/v1.Probe":                                                           schema_k8sio_api_core_v1_Probe(ref),
+		"k8s.io/api/core/v1.ProjectedVolumeSource":                                           schema_k8sio_api_core_v1_ProjectedVolumeSource(ref),
+		"k8s.io/api/core/v1.QuobyteVolumeSource":                                             schema_k8sio_api_core_v1_QuobyteVolumeSource(ref),
+		"k8s.io/api/core/v1.RBDPersistentVolumeSource":                                       schema_k8sio_api_core_v1_RBDPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.RBDVolumeSource":                                                 schema_k8sio_api_core_v1_RBDVolumeSource(ref),
+		"k8s.io/api/core/v1.RangeAllocation":                                                 schema_k8sio_api_core_v1_RangeAllocation(ref),
+		"k8s.io/api/core/v1.ReplicationController":                                           schema_k8sio_api_core_v1_ReplicationController(ref),
+		"k8s.io/api/core/v1.ReplicationControllerCondition":                                  schema_k8sio_api_core_v1_ReplicationControllerCondition(ref),
+		"k8s.io/api/core/v1.ReplicationControllerList":                                       schema_k8sio_api_core_v1_ReplicationControllerList(ref),
+		"k8s.io/api/core/v1.ReplicationControllerSpec":                                       schema_k8sio_api_core_v1_ReplicationControllerSpec(ref),
+		"k8s.io/api/core/v1.ReplicationControllerStatus":                                     schema_k8sio_api_core_v1_ReplicationControllerStatus(ref),
+		"k8s.io/api/core/v1.ResourceFieldSelector":                                           schema_k8sio_api_core_v1_ResourceFieldSelector(ref),
+		"k8s.io/api/core/v1.ResourceQuota":                                                   schema_k8sio_api_core_v1_ResourceQuota(ref),
+		"k8s.io/api/core/v1.ResourceQuotaList":                                               schema_k8sio_api_core_v1_ResourceQuotaList(ref),
+		"k8s.io/api/core/v1.ResourceQuotaSpec":                                               schema_k8sio_api_core_v1_ResourceQuotaSpec(ref),
+		"k8s.io/api/core/v1.ResourceQuotaStatus":                                             schema_k8sio_api_core_v1_ResourceQuotaStatus(ref),
+		"k8s.io/api/core/v1.ResourceRequirements":                                            schema_k8sio_api_core_v1_ResourceRequirements(ref),
+		"k8s.io/api/core/v1.SELinuxOptions":                                                  schema_k8sio_api_core_v1_SELinuxOptions(ref),
+		"k8s.io/api/core/v1.ScaleIOPersistentVolumeSource":                                   schema_k8sio_api_core_v1_ScaleIOPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.ScaleIOVolumeSource":                                             schema_k8sio_api_core_v1_ScaleIOVolumeSource(ref),
+		"k8s.io/api/core/v1.ScopeSelector":                                                   schema_k8sio_api_core_v1_ScopeSelector(ref),
+		"k8s.io/api/core/v1.ScopedResourceSelectorRequirement":                               schema_k8sio_api_core_v1_ScopedResourceSelectorRequirement(ref),
+		"k8s.io/api/core/v1.Secret":                                                          schema_k8sio_api_core_v1_Secret(ref),
+		"k8s.io/api/core/v1.SecretEnvSource":                                                 schema_k8sio_api_core_v1_SecretEnvSource(ref),
+		"k8s.io/api/core/v1.SecretKeySelector":                                               schema_k8sio_api_core_v1_SecretKeySelector(ref),
+		"k8s.io/api/core/v1.SecretList":                                                      schema_k8sio_api_core_v1_SecretList(ref),
+		"k8s.io/api/core/v1.SecretProjection":                                                schema_k8sio_api_core_v1_SecretProjection(ref),
+		"k8s.io/api/core/v1.SecretReference":                                                 schema_k8sio_api_core_v1_SecretReference(ref),
+		"k8s.io/api/core/v1.SecretVolumeSource":                                              schema_k8sio_api_core_v1_SecretVolumeSource(ref),
+		"k8s.io/api/core/v1.SecurityContext":                                                 schema_k8sio_api_core_v1_SecurityContext(ref),
+		"k8s.io/api/core/v1.SerializedReference":                                             schema_k8sio_api_core_v1_SerializedReference(ref),
+		"k8s.io/api/core/v1.Service":                                                         schema_k8sio_api_core_v1_Service(ref),
+		"k8s.io/api/core/v1.ServiceAccount":                                                  schema_k8sio_api_core_v1_ServiceAccount(ref),
+		"k8s.io/api/core/v1.ServiceAccountList":                                              schema_k8sio_api_core_v1_ServiceAccountList(ref),
+		"k8s.io/api/core/v1.ServiceAccountTokenProjection":                                   schema_k8sio_api_core_v1_ServiceAccountTokenProjection(ref),
+		"k8s.io/api/core/v1.ServiceList":                                                     schema_k8sio_api_core_v1_ServiceList(ref),
+		"k8s.io/api/core/v1.ServicePort":                                                     schema_k8sio_api_core_v1_ServicePort(ref),
+		"k8s.io/api/core/v1.ServiceProxyOptions":                                             schema_k8sio_api_core_v1_ServiceProxyOptions(ref),
+		"k8s.io/api/core/v1.ServiceSpec":                                                     schema_k8sio_api_core_v1_ServiceSpec(ref),
+		"k8s.io/api/core/v1.ServiceStatus":                                                   schema_k8sio_api_core_v1_ServiceStatus(ref),
+		"k8s.io/api/core/v1.SessionAffinityConfig":                                           schema_k8sio_api_core_v1_SessionAffinityConfig(ref),
+		"k8s.io/api/core/v1.StorageOSPersistentVolumeSource":                                 schema_k8sio_api_core_v1_StorageOSPersistentVolumeSource(ref),
+		"k8s.io/api/core/v1.StorageOSVolumeSource":                                           schema_k8sio_api_core_v1_StorageOSVolumeSource(ref),
+		"k8s.io/api/core/v1.Sysctl":                                                          schema_k8sio_api_core_v1_Sysctl(ref),
+		"k8s.io/api/core/v1.TCPSocketAction":                                                 schema_k8sio_api_core_v1_TCPSocketAction(ref),
+		"k8s.io/api/core/v1.Taint":                                                           schema_k8sio_api_core_v1_Taint(ref),
+		"k8s.io/api/core/v1.Toleration":                                                      schema_k8sio_api_core_v1_Toleration(ref),
+		"k8s.io/api/core/v1.TopologySelectorLabelRequirement":                                schema_k8sio_api_core_v1_TopologySelectorLabelRequirement(ref),
+		"k8s.io/api/core/v1.TopologySelectorTerm":                                            schema_k8sio_api_core_v1_TopologySelectorTerm(ref),
+		"k8s.io/api/core/v1.TypedLocalObjectReference":                                       schema_k8sio_api_core_v1_TypedLocalObjectReference(ref),
+		"k8s.io/api/core/v1.Volume":                                                          schema_k8sio_api_core_v1_Volume(ref),
+		"k8s.io/api/core/v1.VolumeDevice":                                                    schema_k8sio_api_core_v1_VolumeDevice(ref),
+		"k8s.io/api/core/v1.VolumeMount":                                                     schema_k8sio_api_core_v1_VolumeMount(ref),
+		"k8s.io/api/core/v1.VolumeNodeAffinity":                                              schema_k8sio_api_core_v1_VolumeNodeAffinity(ref),
+		"k8s.io/api/core/v1.VolumeProjection":                                                schema_k8sio_api_core_v1_VolumeProjection(ref),
+		"k8s.io/api/core/v1.VolumeSource":                                                    schema_k8sio_api_core_v1_VolumeSource(ref),
+		"k8s.io/api/core/v1.VsphereVirtualDiskVolumeSource":                                  schema_k8sio_api_core_v1_VsphereVirtualDiskVolumeSource(ref),
+		"k8s.io/api/core/v1.WeightedPodAffinityTerm":                                         schema_k8sio_api_core_v1_WeightedPodAffinityTerm(ref),
+		"k8s.io/api/rbac/v1.AggregationRule":                                                 schema_k8sio_api_rbac_v1_AggregationRule(ref),
+		"k8s.io/api/rbac/v1.ClusterRole":                                                     schema_k8sio_api_rbac_v1_ClusterRole(ref),
+		"k8s.io/api/rbac/v1.ClusterRoleBinding":                                              schema_k8sio_api_rbac_v1_ClusterRoleBinding(ref),
+		"k8s.io/api/rbac/v1.ClusterRoleBindingList":                                          schema_k8sio_api_rbac_v1_ClusterRoleBindingList(ref),
+		"k8s.io/api/rbac/v1.ClusterRoleList":                                                 schema_k8sio_api_rbac_v1_ClusterRoleList(ref),
+		"k8s.io/api/rbac/v1.PolicyRule":                                                      schema_k8sio_api_rbac_v1_PolicyRule(ref),
+		"k8s.io/api/rbac/v1.Role":                                                            schema_k8sio_api_rbac_v1_Role(ref),
+		"k8s.io/api/rbac/v1.RoleBinding":                                                     schema_k8sio_api_rbac_v1_RoleBinding(ref),
+		"k8s.io/api/rbac/v1.RoleBindingList":                                                 schema_k8sio_api_rbac_v1_RoleBindingList(ref),
+		"k8s.io/api/rbac/v1.RoleList":                                                        schema_k8sio_api_rbac_v1_RoleList(ref),
+		"k8s.io/api/rbac/v1.RoleRef":                                                         schema_k8sio_api_rbac_v1_RoleRef(ref),
+		"k8s.io/api/rbac/v1.Subject":                                                         schema_k8sio_api_rbac_v1_Subject(ref),
+		"k8s.io/apimachinery/pkg/api/resource.Quantity":                                      schema_apimachinery_pkg_api_resource_Quantity(ref),
+		"k8s.io/apimachinery/pkg/api/resource.int64Amount":                                   schema_apimachinery_pkg_api_resource_int64Amount(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup":                                      schema_pkg_apis_meta_v1_APIGroup(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroupList":                                  schema_pkg_apis_meta_v1_APIGroupList(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResource":                                   schema_pkg_apis_meta_v1_APIResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResourceList":                               schema_pkg_apis_meta_v1_APIResourceList(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIVersions":                                   schema_pkg_apis_meta_v1_APIVersions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.CreateOptions":                                 schema_pkg_apis_meta_v1_CreateOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions":                                 schema_pkg_apis_meta_v1_DeleteOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Duration":                                      schema_pkg_apis_meta_v1_Duration(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ExportOptions":                                 schema_pkg_apis_meta_v1_ExportOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GetOptions":                                    schema_pkg_apis_meta_v1_GetOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupKind":                                     schema_pkg_apis_meta_v1_GroupKind(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupResource":                                 schema_pkg_apis_meta_v1_GroupResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersion":                                  schema_pkg_apis_meta_v1_GroupVersion(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery":                      schema_pkg_apis_meta_v1_GroupVersionForDiscovery(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionKind":                              schema_pkg_apis_meta_v1_GroupVersionKind(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionResource":                          schema_pkg_apis_meta_v1_GroupVersionResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Initializer":                                   schema_pkg_apis_meta_v1_Initializer(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Initializers":                                  schema_pkg_apis_meta_v1_Initializers(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.InternalEvent":                                 schema_pkg_apis_meta_v1_InternalEvent(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector":                                 schema_pkg_apis_meta_v1_LabelSelector(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement":                      schema_pkg_apis_meta_v1_LabelSelectorRequirement(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.List":                                          schema_pkg_apis_meta_v1_List(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta":                                      schema_pkg_apis_meta_v1_ListMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ListOptions":                                   schema_pkg_apis_meta_v1_ListOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime":                                     schema_pkg_apis_meta_v1_MicroTime(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta":                                    schema_pkg_apis_meta_v1_ObjectMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference":                                schema_pkg_apis_meta_v1_OwnerReference(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Patch":                                         schema_pkg_apis_meta_v1_Patch(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions":                                 schema_pkg_apis_meta_v1_Preconditions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.RootPaths":                                     schema_pkg_apis_meta_v1_RootPaths(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR":                     schema_pkg_apis_meta_v1_ServerAddressByClientCIDR(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Status":                                        schema_pkg_apis_meta_v1_Status(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause":                                   schema_pkg_apis_meta_v1_StatusCause(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails":                                 schema_pkg_apis_meta_v1_StatusDetails(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Time":                                          schema_pkg_apis_meta_v1_Time(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Timestamp":                                     schema_pkg_apis_meta_v1_Timestamp(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta":                                      schema_pkg_apis_meta_v1_TypeMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.UpdateOptions":                                 schema_pkg_apis_meta_v1_UpdateOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.WatchEvent":                                    schema_pkg_apis_meta_v1_WatchEvent(ref),
+		"k8s.io/apimachinery/pkg/runtime.RawExtension":                                       schema_k8sio_apimachinery_pkg_runtime_RawExtension(ref),
+		"k8s.io/apimachinery/pkg/runtime.TypeMeta":                                           schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
+		"k8s.io/apimachinery/pkg/runtime.Unknown":                                            schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
+		"k8s.io/apimachinery/pkg/util/intstr.IntOrString":                                    schema_apimachinery_pkg_util_intstr_IntOrString(ref),
+		"k8s.io/apimachinery/pkg/version.Info":                                               schema_k8sio_apimachinery_pkg_version_Info(ref),
+		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.AppBinding":                  schema_custom_resources_apis_appcatalog_v1alpha1_AppBinding(ref),
+		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.AppBindingList":              schema_custom_resources_apis_appcatalog_v1alpha1_AppBindingList(ref),
+		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.AppBindingSpec":              schema_custom_resources_apis_appcatalog_v1alpha1_AppBindingSpec(ref),
+		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.AppReference":                schema_custom_resources_apis_appcatalog_v1alpha1_AppReference(ref),
+		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.ClientConfig":                schema_custom_resources_apis_appcatalog_v1alpha1_ClientConfig(ref),
+		"kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1.ServiceReference":            schema_custom_resources_apis_appcatalog_v1alpha1_ServiceReference(ref),
+		"kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec":                                 schema_kmodulesxyz_monitoring_agent_api_api_v1_AgentSpec(ref),
+		"kmodules.xyz/monitoring-agent-api/api/v1.PrometheusSpec":                            schema_kmodulesxyz_monitoring_agent_api_api_v1_PrometheusSpec(ref),
+		"kmodules.xyz/objectstore-api/api/v1.AzureSpec":                                      schema_kmodulesxyz_objectstore_api_api_v1_AzureSpec(ref),
+		"kmodules.xyz/objectstore-api/api/v1.B2Spec":                                         schema_kmodulesxyz_objectstore_api_api_v1_B2Spec(ref),
+		"kmodules.xyz/objectstore-api/api/v1.Backend":                                        schema_kmodulesxyz_objectstore_api_api_v1_Backend(ref),
+		"kmodules.xyz/objectstore-api/api/v1.GCSSpec":                                        schema_kmodulesxyz_objectstore_api_api_v1_GCSSpec(ref),
+		"kmodules.xyz/objectstore-api/api/v1.LocalSpec":                                      schema_kmodulesxyz_objectstore_api_api_v1_LocalSpec(ref),
+		"kmodules.xyz/objectstore-api/api/v1.RestServerSpec":                                 schema_kmodulesxyz_objectstore_api_api_v1_RestServerSpec(ref),
+		"kmodules.xyz/objectstore-api/api/v1.S3Spec":                                         schema_kmodulesxyz_objectstore_api_api_v1_S3Spec(ref),
+		"kmodules.xyz/objectstore-api/api/v1.SwiftSpec":                                      schema_kmodulesxyz_objectstore_api_api_v1_SwiftSpec(ref),
+		"kmodules.xyz/offshoot-api/api/v1.ObjectMeta":                                        schema_kmodulesxyz_offshoot_api_api_v1_ObjectMeta(ref),
+		"kmodules.xyz/offshoot-api/api/v1.PodSpec":                                           schema_kmodulesxyz_offshoot_api_api_v1_PodSpec(ref),
+		"kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec":                                   schema_kmodulesxyz_offshoot_api_api_v1_PodTemplateSpec(ref),
+		"kmodules.xyz/offshoot-api/api/v1.ServicePort":                                       schema_kmodulesxyz_offshoot_api_api_v1_ServicePort(ref),
+		"kmodules.xyz/offshoot-api/api/v1.ServiceSpec":                                       schema_kmodulesxyz_offshoot_api_api_v1_ServiceSpec(ref),
+		"kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec":                               schema_kmodulesxyz_offshoot_api_api_v1_ServiceTemplateSpec(ref),
 	}
 }
 
@@ -517,19 +517,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabase(ref common.Referen
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabaseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -564,7 +564,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseList(ref common.Ref
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabase"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabase"),
 									},
 								},
 							},
@@ -574,7 +574,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseList(ref common.Ref
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabase", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabase", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -593,7 +593,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseSpec(ref common.Ref
 					"origin": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Origin to store original database information",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Origin"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Origin"),
 						},
 					},
 				},
@@ -601,7 +601,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_DormantDatabaseSpec(ref common.Ref
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Origin"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Origin"},
 	}
 }
 
@@ -673,19 +673,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Elasticsearch(ref common.Reference
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -696,17 +696,17 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchClusterTopology(ref c
 				Properties: map[string]spec.Schema{
 					"master": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode"),
 						},
 					},
 					"data": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode"),
 						},
 					},
 					"client": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode"),
 						},
 					},
 				},
@@ -714,7 +714,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchClusterTopology(ref c
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchNode"},
 	}
 }
 
@@ -749,7 +749,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchList(ref common.Refer
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"),
 									},
 								},
 							},
@@ -759,7 +759,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchList(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Elasticsearch", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Elasticsearch", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -823,7 +823,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchSpec(ref common.Refer
 					"topology": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Elasticsearch topology for node specification",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchClusterTopology"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchClusterTopology"),
 						},
 					},
 					"enableSSL": {
@@ -868,13 +868,13 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchSpec(ref common.Refer
 					"init": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Init is used to initialize database",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
 						},
 					},
 					"backupSchedule": {
 						SchemaProps: spec.SchemaProps{
 							Description: "BackupSchedule spec to specify how database backup will be taken",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
 						},
 					},
 					"monitor": {
@@ -985,7 +985,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ElasticsearchSpec(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchClusterTopology", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecretVolumeSource", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchClusterTopology", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecretVolumeSource", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
 	}
 }
 
@@ -1086,19 +1086,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Etcd(ref common.ReferenceCallback)
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -1133,7 +1133,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_EtcdList(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Etcd"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Etcd"),
 									},
 								},
 							},
@@ -1143,7 +1143,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_EtcdList(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Etcd", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Etcd", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -1188,13 +1188,13 @@ func schema_apimachinery_apis_kubedb_v1alpha1_EtcdSpec(ref common.ReferenceCallb
 					"init": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Init is used to initialize database",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
 						},
 					},
 					"backupSchedule": {
 						SchemaProps: spec.SchemaProps{
 							Description: "BackupSchedule spec to specify how database backup will be taken",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
 						},
 					},
 					"monitor": {
@@ -1206,7 +1206,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_EtcdSpec(ref common.ReferenceCallb
 					"tls": {
 						SchemaProps: spec.SchemaProps{
 							Description: "etcd cluster TLS configuration",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.TLSPolicy"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.TLSPolicy"),
 						},
 					},
 					"podTemplate": {
@@ -1239,7 +1239,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_EtcdSpec(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.TLSPolicy", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.SecretVolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.TLSPolicy", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.SecretVolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
 	}
 }
 
@@ -1281,24 +1281,24 @@ func schema_apimachinery_apis_kubedb_v1alpha1_InitSpec(ref common.ReferenceCallb
 				Properties: map[string]spec.Schema{
 					"scriptSource": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ScriptSourceSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ScriptSourceSpec"),
 						},
 					},
 					"snapshotSource": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotSourceSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotSourceSpec"),
 						},
 					},
 					"postgresWAL": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresWALSourceSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresWALSourceSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresWALSourceSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ScriptSourceSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotSourceSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresWALSourceSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ScriptSourceSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotSourceSpec"},
 	}
 }
 
@@ -1355,19 +1355,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Memcached(ref common.ReferenceCall
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -1402,7 +1402,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MemcachedList(ref common.Reference
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Memcached"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Memcached"),
 									},
 								},
 							},
@@ -1412,7 +1412,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MemcachedList(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Memcached", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Memcached", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -1605,19 +1605,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MongoDB(ref common.ReferenceCallba
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -1652,7 +1652,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MongoDBList(ref common.ReferenceCa
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDB"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDB"),
 									},
 								},
 							},
@@ -1662,7 +1662,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MongoDBList(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDB", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDB", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -1713,7 +1713,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MongoDBSpec(ref common.ReferenceCa
 					"replicaSet": {
 						SchemaProps: spec.SchemaProps{
 							Description: "MongoDB replica set",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBReplicaSet"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBReplicaSet"),
 						},
 					},
 					"storageType": {
@@ -1738,13 +1738,13 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MongoDBSpec(ref common.ReferenceCa
 					"init": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Init is used to initialize database",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
 						},
 					},
 					"backupSchedule": {
 						SchemaProps: spec.SchemaProps{
 							Description: "BackupSchedule spec to specify how database backup will be taken",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
 						},
 					},
 					"monitor": {
@@ -1855,7 +1855,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MongoDBSpec(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBReplicaSet", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecretVolumeSource", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBReplicaSet", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecretVolumeSource", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
 	}
 }
 
@@ -1917,19 +1917,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MySQL(ref common.ReferenceCallback
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -1964,7 +1964,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MySQLList(ref common.ReferenceCall
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQL"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQL"),
 									},
 								},
 							},
@@ -1974,7 +1974,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MySQLList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQL", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQL", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -2019,13 +2019,13 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MySQLSpec(ref common.ReferenceCall
 					"init": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Init is used to initialize database",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
 						},
 					},
 					"backupSchedule": {
 						SchemaProps: spec.SchemaProps{
 							Description: "BackupSchedule spec to specify how database backup will be taken",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
 						},
 					},
 					"monitor": {
@@ -2136,7 +2136,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_MySQLSpec(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecretVolumeSource", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecretVolumeSource", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
 	}
 }
 
@@ -2184,7 +2184,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Origin(ref common.ReferenceCallbac
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Origin Spec to store original database Spec",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.OriginSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.OriginSpec"),
 						},
 					},
 				},
@@ -2192,7 +2192,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Origin(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.OriginSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.OriginSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2204,50 +2204,50 @@ func schema_apimachinery_apis_kubedb_v1alpha1_OriginSpec(ref common.ReferenceCal
 					"elasticsearch": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Elasticsearch Spec",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec"),
 						},
 					},
 					"postgres": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Postgres Spec",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSpec"),
 						},
 					},
 					"mysql": {
 						SchemaProps: spec.SchemaProps{
 							Description: "MySQL Spec",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLSpec"),
 						},
 					},
 					"mongodb": {
 						SchemaProps: spec.SchemaProps{
 							Description: "MongoDB Spec",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec"),
 						},
 					},
 					"redis": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Redis Spec",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisSpec"),
 						},
 					},
 					"memcached": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Memcached Spec",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec"),
 						},
 					},
 					"etcd": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Etcd Spec",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.EtcdSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQLSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.EtcdSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemcachedSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDBSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQLSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisSpec"},
 	}
 }
 
@@ -2278,19 +2278,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Postgres(ref common.ReferenceCallb
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2343,7 +2343,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresList(ref common.ReferenceC
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Postgres"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Postgres"),
 									},
 								},
 							},
@@ -2353,7 +2353,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Postgres", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Postgres", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -2368,7 +2368,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresSchemaInfo(ref common.Refe
 							AdditionalProperties: &spec.SchemaOrBool{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresTableInfo"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresTableInfo"),
 									},
 								},
 							},
@@ -2379,7 +2379,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresSchemaInfo(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresTableInfo"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresTableInfo"},
 	}
 }
 
@@ -2432,7 +2432,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresSpec(ref common.ReferenceC
 					"archiver": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Archive for wal files",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresArchiverSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresArchiverSpec"),
 						},
 					},
 					"databaseSecret": {
@@ -2457,13 +2457,13 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresSpec(ref common.ReferenceC
 					"init": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Init is used to initialize database",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec"),
 						},
 					},
 					"backupSchedule": {
 						SchemaProps: spec.SchemaProps{
 							Description: "BackupSchedule spec to specify how database backup will be taken",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec"),
 						},
 					},
 					"monitor": {
@@ -2574,7 +2574,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresSpec(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.InitSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresArchiverSpec", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecretVolumeSource", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.BackupScheduleSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.InitSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresArchiverSpec", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.SecretVolumeSource", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
 	}
 }
 
@@ -2620,7 +2620,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresSummary(ref common.Referen
 							AdditionalProperties: &spec.SchemaOrBool{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSchemaInfo"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSchemaInfo"),
 									},
 								},
 							},
@@ -2631,7 +2631,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresSummary(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSchemaInfo"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSchemaInfo"},
 	}
 }
 
@@ -2680,7 +2680,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresWALSourceSpec(ref common.R
 					},
 					"pitr": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RecoveryTarget"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RecoveryTarget"),
 						},
 					},
 					"storageSecretName": {
@@ -2723,7 +2723,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_PostgresWALSourceSpec(ref common.R
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RecoveryTarget", "kmodules.xyz/objectstore-api/api/v1.AzureSpec", "kmodules.xyz/objectstore-api/api/v1.B2Spec", "kmodules.xyz/objectstore-api/api/v1.GCSSpec", "kmodules.xyz/objectstore-api/api/v1.LocalSpec", "kmodules.xyz/objectstore-api/api/v1.S3Spec", "kmodules.xyz/objectstore-api/api/v1.SwiftSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RecoveryTarget", "kmodules.xyz/objectstore-api/api/v1.AzureSpec", "kmodules.xyz/objectstore-api/api/v1.B2Spec", "kmodules.xyz/objectstore-api/api/v1.GCSSpec", "kmodules.xyz/objectstore-api/api/v1.LocalSpec", "kmodules.xyz/objectstore-api/api/v1.S3Spec", "kmodules.xyz/objectstore-api/api/v1.SwiftSpec"},
 	}
 }
 
@@ -2794,19 +2794,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Redis(ref common.ReferenceCallback
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2867,7 +2867,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_RedisList(ref common.ReferenceCall
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Redis"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Redis"),
 									},
 								},
 							},
@@ -2877,7 +2877,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_RedisList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Redis", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Redis", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -2910,7 +2910,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_RedisSpec(ref common.ReferenceCall
 					"cluster": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Redis cluster configuration for running redis servers in cluster mode. Required if Mode is set to \"Cluster\"",
-							Ref:         ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisClusterSpec"),
+							Ref:         ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisClusterSpec"),
 						},
 					},
 					"storageType": {
@@ -3034,7 +3034,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_RedisSpec(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.RedisClusterSpec", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.RedisClusterSpec", "k8s.io/api/apps/v1.StatefulSetUpdateStrategy", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/api/core/v1.PersistentVolumeClaimSpec", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.VolumeSource", "kmodules.xyz/monitoring-agent-api/api/v1.AgentSpec", "kmodules.xyz/offshoot-api/api/v1.PodTemplateSpec", "kmodules.xyz/offshoot-api/api/v1.ServiceTemplateSpec"},
 	}
 }
 
@@ -3095,19 +3095,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Report(ref common.ReferenceCallbac
 					},
 					"summary": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ReportSummary"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ReportSummary"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ReportStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ReportStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ReportStatus", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ReportSummary", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ReportStatus", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ReportSummary", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -3145,7 +3145,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ReportSummary(ref common.Reference
 							AdditionalProperties: &spec.SchemaOrBool{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSummary"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSummary"),
 									},
 								},
 							},
@@ -3157,7 +3157,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ReportSummary(ref common.Reference
 							AdditionalProperties: &spec.SchemaOrBool{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSummary"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSummary"),
 									},
 								},
 							},
@@ -3167,7 +3167,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_ReportSummary(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSummary", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.PostgresSummary"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.ElasticsearchSummary", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.PostgresSummary"},
 	}
 }
 
@@ -3378,19 +3378,19 @@ func schema_apimachinery_apis_kubedb_v1alpha1_Snapshot(ref common.ReferenceCallb
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotSpec"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotStatus"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotSpec", "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.SnapshotStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotSpec", "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.SnapshotStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -3425,7 +3425,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_SnapshotList(ref common.ReferenceC
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Snapshot"),
+										Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Snapshot"),
 									},
 								},
 							},
@@ -3435,7 +3435,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_SnapshotList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Snapshot", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Snapshot", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -3595,7 +3595,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_TLSPolicy(ref common.ReferenceCall
 				Properties: map[string]spec.Schema{
 					"member": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemberSecret"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemberSecret"),
 						},
 					},
 					"operatorSecret": {
@@ -3608,7 +3608,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_TLSPolicy(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MemberSecret"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MemberSecret"},
 	}
 }
 
@@ -3619,7 +3619,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_elasticsearchApp(ref common.Refere
 				Properties: map[string]spec.Schema{
 					"Elasticsearch": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"),
 						},
 					},
 				},
@@ -3627,7 +3627,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_elasticsearchApp(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"},
 	}
 }
 
@@ -3638,7 +3638,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_elasticsearchStatsService(ref comm
 				Properties: map[string]spec.Schema{
 					"Elasticsearch": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"),
 						},
 					},
 				},
@@ -3646,7 +3646,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_elasticsearchStatsService(ref comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Elasticsearch"},
 	}
 }
 
@@ -3657,7 +3657,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_etcdApp(ref common.ReferenceCallba
 				Properties: map[string]spec.Schema{
 					"Etcd": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Etcd"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Etcd"),
 						},
 					},
 				},
@@ -3665,7 +3665,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_etcdApp(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Etcd"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Etcd"},
 	}
 }
 
@@ -3676,7 +3676,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_etcdStatsService(ref common.Refere
 				Properties: map[string]spec.Schema{
 					"Etcd": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Etcd"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Etcd"),
 						},
 					},
 				},
@@ -3684,7 +3684,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_etcdStatsService(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Etcd"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Etcd"},
 	}
 }
 
@@ -3695,7 +3695,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_memcachedApp(ref common.ReferenceC
 				Properties: map[string]spec.Schema{
 					"Memcached": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Memcached"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Memcached"),
 						},
 					},
 				},
@@ -3703,7 +3703,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_memcachedApp(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Memcached"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Memcached"},
 	}
 }
 
@@ -3714,7 +3714,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_memcachedStatsService(ref common.R
 				Properties: map[string]spec.Schema{
 					"Memcached": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Memcached"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Memcached"),
 						},
 					},
 				},
@@ -3722,7 +3722,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_memcachedStatsService(ref common.R
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Memcached"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Memcached"},
 	}
 }
 
@@ -3733,7 +3733,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_mongoDBApp(ref common.ReferenceCal
 				Properties: map[string]spec.Schema{
 					"MongoDB": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDB"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDB"),
 						},
 					},
 				},
@@ -3741,7 +3741,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_mongoDBApp(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDB"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDB"},
 	}
 }
 
@@ -3752,7 +3752,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_mongoDBStatsService(ref common.Ref
 				Properties: map[string]spec.Schema{
 					"MongoDB": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDB"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDB"),
 						},
 					},
 				},
@@ -3760,7 +3760,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_mongoDBStatsService(ref common.Ref
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MongoDB"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MongoDB"},
 	}
 }
 
@@ -3771,7 +3771,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_mysqlApp(ref common.ReferenceCallb
 				Properties: map[string]spec.Schema{
 					"MySQL": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQL"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQL"),
 						},
 					},
 				},
@@ -3779,7 +3779,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_mysqlApp(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQL"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQL"},
 	}
 }
 
@@ -3790,7 +3790,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_mysqlStatsService(ref common.Refer
 				Properties: map[string]spec.Schema{
 					"MySQL": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQL"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQL"),
 						},
 					},
 				},
@@ -3798,7 +3798,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_mysqlStatsService(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.MySQL"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.MySQL"},
 	}
 }
 
@@ -3809,7 +3809,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_postgresApp(ref common.ReferenceCa
 				Properties: map[string]spec.Schema{
 					"Postgres": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Postgres"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Postgres"),
 						},
 					},
 				},
@@ -3817,7 +3817,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_postgresApp(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Postgres"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Postgres"},
 	}
 }
 
@@ -3828,7 +3828,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_postgresStatsService(ref common.Re
 				Properties: map[string]spec.Schema{
 					"Postgres": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Postgres"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Postgres"),
 						},
 					},
 				},
@@ -3836,7 +3836,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_postgresStatsService(ref common.Re
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Postgres"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Postgres"},
 	}
 }
 
@@ -3847,7 +3847,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_redisApp(ref common.ReferenceCallb
 				Properties: map[string]spec.Schema{
 					"Redis": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Redis"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Redis"),
 						},
 					},
 				},
@@ -3855,7 +3855,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_redisApp(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Redis"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Redis"},
 	}
 }
 
@@ -3866,7 +3866,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_redisStatsService(ref common.Refer
 				Properties: map[string]spec.Schema{
 					"Redis": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Redis"),
+							Ref: ref("github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Redis"),
 						},
 					},
 				},
@@ -3874,7 +3874,7 @@ func schema_apimachinery_apis_kubedb_v1alpha1_redisStatsService(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.Redis"},
+			"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.Redis"},
 	}
 }
 

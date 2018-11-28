@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/appscode/kutil/tools/queue"
-	amc "github.com/kubedb/apimachinery/pkg/controller"
-	"github.com/kubedb/apimachinery/pkg/eventer"
+	amc "github.com/tekliner/apimachinery/pkg/controller"
+	"github.com/tekliner/apimachinery/pkg/eventer"
 	batch "k8s.io/api/batch/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"

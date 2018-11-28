@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/kubedb/postgres/pkg/controller"
 	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	cs "github.com/tekliner/apimachinery/client/clientset/versioned"
+	"github.com/tekliner/postgres/pkg/controller"
 	kerr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"

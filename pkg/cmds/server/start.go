@@ -6,9 +6,9 @@ import (
 	"net"
 
 	"github.com/appscode/kutil/tools/clientcmd"
-	"github.com/kubedb/postgres/pkg/controller"
-	"github.com/kubedb/postgres/pkg/server"
 	"github.com/spf13/pflag"
+	"github.com/tekliner/postgres/pkg/controller"
+	"github.com/tekliner/postgres/pkg/server"
 	admissionv1beta1 "k8s.io/api/admission/v1beta1"
 	genericapiserver "k8s.io/apiserver/pkg/server"
 	genericoptions "k8s.io/apiserver/pkg/server/options"

@@ -19,10 +19,10 @@ limitations under the License.
 package scheme
 
 import (
-	authorizationv1alpha1 "github.com/kubedb/apimachinery/apis/authorization/v1alpha1"
-	catalogv1alpha1 "github.com/kubedb/apimachinery/apis/catalog/v1alpha1"
-	configv1alpha1 "github.com/kubedb/apimachinery/apis/config/v1alpha1"
-	kubedbv1alpha1 "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
+	authorizationv1alpha1 "github.com/tekliner/apimachinery/apis/authorization/v1alpha1"
+	catalogv1alpha1 "github.com/tekliner/apimachinery/apis/catalog/v1alpha1"
+	configv1alpha1 "github.com/tekliner/apimachinery/apis/config/v1alpha1"
+	kubedbv1alpha1 "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

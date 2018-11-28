@@ -1,5 +1,5 @@
-hash: 74869c36aa4bcea2f0a18df33a760f17fa6a6eb0a498b47cfab997c544299443
-updated: 2018-11-20T13:04:50.407618324+06:00
+hash: 0c4eb1cac19998f672e17af4506616a044b6a61bbba8193ebd3b34eab34da57b
+updated: 2018-11-27T13:14:41.377429465+07:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
@@ -35,7 +35,7 @@ imports:
   subpackages:
   - admission/v1beta1
 - name: github.com/appscode/kutil
-  version: 68433ef84c41b2028786372f2a128932908f7124
+  version: 5e4dc08e9e6e00fcf397b7186a3918dc4dcb9426
   subpackages:
   - apiextensions/v1beta1
   - core/v1
@@ -229,11 +229,11 @@ imports:
 - name: github.com/fatih/structs
   version: 878a968ab22548362a09bdb3322f98b00f470d46
 - name: github.com/fsnotify/fsnotify
-  version: ccc981bf80385c528a65fbfdd49bf2d8da22aa23
+  version: f12c6236fe7b5cf6bcf30e5935d08cb079d78334
 - name: github.com/ghodss/yaml
   version: 0ca9ea5df5451ffdf184b4428c902747c2c11cd7
 - name: github.com/go-ini/ini
-  version: 9c8236e659b76e87bf02044d06fde8683008ff3e
+  version: 300e940a926eb277d3901b20bdfcc54928ad3642
 - name: github.com/go-openapi/jsonpointer
   version: 46af16f9f7b149af66e5d1bd010e3574dc06de98
 - name: github.com/go-openapi/jsonreference
@@ -267,7 +267,7 @@ imports:
 - name: github.com/google/btree
   version: 7d79101e329e5a3adf994758c578dab82b90c017
 - name: github.com/google/go-cmp
-  version: 2248b49eaa8e1c8c0963ee77b40841adbc19d4ca
+  version: 3af367b6b30c263d47e8895973edcca9a49cf029
   subpackages:
   - cmp
   - cmp/internal/diff
@@ -276,7 +276,7 @@ imports:
 - name: github.com/google/gofuzz
   version: 44d81051d367757e1c7c6a5a86423ece9afcf63c
 - name: github.com/google/uuid
-  version: 9b3b1e0f5f99ae461456d768e7d301a7acdaa2d8
+  version: 8c31c18f31ede9fc8eae72290a7e7a8064e9b3e3
 - name: github.com/googleapis/gnostic
   version: 68f4ded48ba9414dab2ae69b3f0d69971da73aa5
   subpackages:
@@ -308,7 +308,7 @@ imports:
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/jmespath/go-jmespath
-  version: c2b33e8439af944379acbdd9c3a5fe0bc44bd8a5
+  version: 0b12d6b521d83fc7f755e7cfc1b1fbdd35a01a74
 - name: github.com/json-iterator/go
   version: 1624edc4454b8682399def8740d46db5e4362ba4
 - name: github.com/mailru/easyjson
@@ -375,10 +375,9 @@ imports:
 - name: github.com/PuerkitoBio/urlesc
   version: 5bd2802263f21d8788851d5305584c82a5c75d7e
 - name: github.com/satori/go.uuid
-  version: b2ce2384e17bbe0c6d34077efa39dbab3e09123b
+  version: f58768cc1a7a7e77a3bd49e98cdd21419399b6a3
 - name: github.com/sergi/go-diff
-  version: 24e2351369ec4949b2ed0dc5c477afdd4c4034e8
-  repo: https://github.com/sergi/go-diff
+  version: 97b2266dfe4bd4ea1b81a463322f04f8b724801e
   subpackages:
   - diffmatchpatch
 - name: github.com/sirupsen/logrus
@@ -392,12 +391,11 @@ imports:
   subpackages:
   - codec
 - name: github.com/yudai/gojsondiff
-  version: 0525c875b75ca60b9e67ddc44496aa16f21066b0
+  version: 7b1b7adf999dab73a6eb02669c3d82dbb27a3dd6
   subpackages:
   - formatter
 - name: github.com/yudai/golcs
   version: d1c525dea8ce39ea9a783d33cf08932305373f2c
-  repo: https://github.com/yudai/golcs
 - name: golang.org/x/crypto
   version: de0752318171da717af4ce24d0a2e8626afaeb11
   subpackages:
@@ -452,7 +450,7 @@ imports:
   - googleapi/internal/uritemplates
   - storage/v1
 - name: google.golang.org/appengine
-  version: 4a4468ece617fc8205e99368fa2200e9d1fad421
+  version: ae0ab99deb4dc413a2b4bd6c8bdd0eb67f1e4d06
   subpackages:
   - internal
   - internal/app_identity

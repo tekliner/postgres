@@ -17,7 +17,7 @@ limitations under the License.
 package install
 
 import (
-	"github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
+	"github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 )

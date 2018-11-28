@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	crdutils "github.com/appscode/kutil/apiextensions/v1beta1"
-	"github.com/kubedb/apimachinery/apis"
+	"github.com/tekliner/apimachinery/apis"
 	apiextensions "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 )
 
@@ -34,7 +34,7 @@ func (r MongoDBRole) CustomResourceDefinition() *apiextensions.CustomResourceDef
 		Labels: crdutils.Labels{
 			LabelsMap: map[string]string{"app": "kubedb"},
 		},
-		SpecDefinitionName:      "github.com/kubedb/apimachinery/apis/authorization/v1alpha1.MongoDBRole",
+		SpecDefinitionName:      "github.com/tekliner/apimachinery/apis/authorization/v1alpha1.MongoDBRole",
 		EnableValidation:        true,
 		GetOpenAPIDefinitions:   GetOpenAPIDefinitions,
 		EnableStatusSubresource: apis.EnableStatusSubresource,

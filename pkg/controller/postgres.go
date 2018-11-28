@@ -9,13 +9,13 @@ import (
 	core_util "github.com/appscode/kutil/core/v1"
 	dynamic_util "github.com/appscode/kutil/dynamic"
 	meta_util "github.com/appscode/kutil/meta"
-	validator "github.com/kubedb/postgres/pkg/admission"
 	"github.com/pkg/errors"
 	"github.com/tekliner/apimachinery/apis"
 	catalog "github.com/tekliner/apimachinery/apis/catalog/v1alpha1"
 	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	"github.com/tekliner/apimachinery/client/clientset/versioned/typed/kubedb/v1alpha1/util"
 	"github.com/tekliner/apimachinery/pkg/eventer"
+	validator "github.com/tekliner/postgres/pkg/admission"
 	core "k8s.io/api/core/v1"
 	kerr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -208,10 +208,15 @@ func (c *Controller) ensurePostgresNode(postgres *api.Postgres, postgresVersion 
 	return vt, nil
 }
 
-func (c *Controller) ensureBackupScheduler(postgres *api.Postgres) {
+func (c *Controller) ensureBackupScheduler(postgres *api.Postgres) error {
+	postgresVersion, err := c.ExtClient.CatalogV1alpha1().PostgresVersions().Get(string(postgres.Spec.Version), metav1.GetOptions{})
+	if err != nil {
+		return fmt.Errorf("failed to get PostgresVersion %v for %v/%v. Reason: %v", postgres.Spec.Version, postgres.Namespace, postgres.Name, err)
+	}
+
 	// Setup Schedule backup
 	if postgres.Spec.BackupSchedule != nil {
-		err := c.cronController.ScheduleBackup(postgres, postgres.ObjectMeta, postgres.Spec.BackupSchedule)
+		err := c.cronController.ScheduleBackup(postgres, postgres.Spec.BackupSchedule, postgresVersion)
 		if err != nil {
 			c.recorder.Eventf(
 				postgres,
@@ -225,6 +230,7 @@ func (c *Controller) ensureBackupScheduler(postgres *api.Postgres) {
 	} else {
 		c.cronController.StopBackupScheduling(postgres.ObjectMeta)
 	}
+	return nil
 }
 
 func (c *Controller) initialize(postgres *api.Postgres) error {

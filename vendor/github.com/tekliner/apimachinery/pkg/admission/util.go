@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	meta_util "github.com/appscode/kutil/meta"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/mergepatch"
 )

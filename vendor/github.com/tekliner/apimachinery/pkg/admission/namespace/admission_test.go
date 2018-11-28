@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/appscode/kutil/meta"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
-	"github.com/kubedb/apimachinery/client/clientset/versioned/scheme"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
+	"github.com/tekliner/apimachinery/client/clientset/versioned/scheme"
 	admission "k8s.io/api/admission/v1beta1"
 	authenticationv1 "k8s.io/api/authentication/v1"
 	core "k8s.io/api/core/v1"

@@ -16,7 +16,7 @@ APPSCODE_ENV=${APPSCODE_ENV:-dev}
 DOCKER_REGISTRY=${DOCKER_REGISTRY:-kubedb}
 IMG=pg-operator
 
-DIST=$GOPATH/src/github.com/kubedb/postgres/dist
+DIST=$GOPATH/src/github.com/tekliner/postgres/dist
 mkdir -p $DIST
 if [ -f "$DIST/.tag" ]; then
   export $(cat $DIST/.tag | xargs)

@@ -27,7 +27,7 @@ import:
 - package: cloud.google.com/go
   version: v0.2.0
 - package: github.com/tekliner/apimachinery
-  version: master
+  version: IN-46
 - package: github.com/lib/pq
 - package: github.com/onsi/ginkgo
   version: v1.6.0

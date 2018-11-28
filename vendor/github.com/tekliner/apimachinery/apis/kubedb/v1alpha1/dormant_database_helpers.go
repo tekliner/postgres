@@ -3,7 +3,7 @@ package v1alpha1
 import (
 	crdutils "github.com/appscode/kutil/apiextensions/v1beta1"
 	meta_util "github.com/appscode/kutil/meta"
-	"github.com/kubedb/apimachinery/apis"
+	"github.com/tekliner/apimachinery/apis"
 	apiextensions "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 )
 
@@ -75,7 +75,7 @@ func (d DormantDatabase) CustomResourceDefinition() *apiextensions.CustomResourc
 		Labels: crdutils.Labels{
 			LabelsMap: map[string]string{"app": "kubedb"},
 		},
-		SpecDefinitionName:      "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1.DormantDatabase",
+		SpecDefinitionName:      "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1.DormantDatabase",
 		EnableValidation:        false,
 		GetOpenAPIDefinitions:   GetOpenAPIDefinitions,
 		EnableStatusSubresource: apis.EnableStatusSubresource,

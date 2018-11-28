@@ -4,9 +4,9 @@ import (
 	"time"
 
 	"github.com/graymeta/stow"
-	"github.com/kubedb/postgres/pkg/controller"
 	. "github.com/onsi/gomega"
 	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
+	"github.com/tekliner/postgres/pkg/controller"
 	storage "kmodules.xyz/objectstore-api/osm"
 )
 

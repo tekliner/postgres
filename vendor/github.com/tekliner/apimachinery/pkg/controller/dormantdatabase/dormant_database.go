@@ -3,10 +3,10 @@ package dormantdatabase
 import (
 	"github.com/appscode/go/encoding/json/types"
 	meta_util "github.com/appscode/kutil/meta"
-	"github.com/kubedb/apimachinery/apis"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
-	"github.com/kubedb/apimachinery/client/clientset/versioned/typed/kubedb/v1alpha1/util"
-	"github.com/kubedb/apimachinery/pkg/eventer"
+	"github.com/tekliner/apimachinery/apis"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
+	"github.com/tekliner/apimachinery/client/clientset/versioned/typed/kubedb/v1alpha1/util"
+	"github.com/tekliner/apimachinery/pkg/eventer"
 	core "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

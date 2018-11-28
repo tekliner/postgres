@@ -9,10 +9,10 @@ import (
 	"github.com/appscode/go/log/golog"
 	v "github.com/appscode/go/version"
 	"github.com/jpillora/go-ogle-analytics"
-	"github.com/kubedb/postgres/pkg/controller"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/tekliner/apimachinery/client/clientset/versioned/scheme"
+	"github.com/tekliner/postgres/pkg/controller"
 	genericapiserver "k8s.io/apiserver/pkg/server"
 	clientsetscheme "k8s.io/client-go/kubernetes/scheme"
 )

@@ -5,7 +5,7 @@ import (
 	"sync"
 
 	hookapi "github.com/appscode/kubernetes-webhook-util/admission/v1beta1"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	admission "k8s.io/api/admission/v1beta1"
 	core "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

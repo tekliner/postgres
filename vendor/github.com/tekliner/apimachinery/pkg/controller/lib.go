@@ -8,7 +8,7 @@ import (
 	_ "github.com/graymeta/stow/azure"
 	_ "github.com/graymeta/stow/google"
 	_ "github.com/graymeta/stow/s3"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
 	batch "k8s.io/api/batch/v1"
 	core "k8s.io/api/core/v1"
 	kerr "k8s.io/apimachinery/pkg/api/errors"

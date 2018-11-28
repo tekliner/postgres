@@ -76,19 +76,14 @@ func (c *Controller) ensureStatefulSet(
 				},
 			},
 
-			VolumeMounts: []in.Spec.Template.Spec.Volumes,
-		}
-
-		// Create resource record if absent
-		// Indicates that new database cluster MAY needs some additional actions
-		// Works in pair with FirstRunConfigMap
-		if postgres.Spec.FirstRun == nil {
-			postgres.Spec.FirstRun = true
+			VolumeMounts: []core.VolumeMount{
+				{Name: postgres.Spec.FirstRunConfigMap, MountPath: "/firstrun"},
+			},
 		}
 
 		// Used to check before mount configmaps and execute planned actions
 		mountFirstRunConfigMap := false
-		if postgres.Spec.FirstRun && postgres.Spec.FirstRunConfigMap != nil {
+		if postgres.Spec.FirstRun && postgres.Spec.FirstRunConfigMap != "" {
 			mountFirstRunConfigMap = true
 		}
 
@@ -97,10 +92,10 @@ func (c *Controller) ensureStatefulSet(
 			in.Spec.Template.Spec.Volumes =
 				[]core.Volume{
 					{
-						Name: postgres.Spec.FirstRunConfigMap.Name,
+						Name: postgres.Spec.FirstRunConfigMap,
 						VolumeSource: core.VolumeSource{
 							ConfigMap: &core.ConfigMapVolumeSource{
-								LocalObjectReference: core.LocalObjectReference{Name: postgres.Spec.FirstRunConfigMap.Name},
+								LocalObjectReference: core.LocalObjectReference{Name: postgres.Spec.FirstRunConfigMap},
 							},
 						},
 					},

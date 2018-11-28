@@ -1,5 +1,5 @@
-hash: 6ca899980883ab9400834dc550465f4219e1fe9ca4739a2a88527a2e803bb1fb
-updated: 2018-11-27T13:26:09.263416008+07:00
+hash: 357fe9b9e96063f11ecbc43d5cb7e105731428a2776943d4aa29b47b7194f449
+updated: 2018-11-27T17:46:31.752080032+07:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
@@ -349,44 +349,6 @@ imports:
   version: 14b04e0594ef6a9fd943363b135656f0ec8c9d0e
 - name: github.com/json-iterator/go
   version: 1624edc4454b8682399def8740d46db5e4362ba4
-- name: github.com/kubedb/apimachinery
-  version: 2a7cb21fc0d7604e31ae2149d5ee9097fe4340eb
-  subpackages:
-  - apis
-  - apis/authorization
-  - apis/authorization/v1alpha1
-  - apis/catalog
-  - apis/catalog/v1alpha1
-  - apis/config/v1alpha1
-  - apis/kubedb
-  - apis/kubedb/v1alpha1
-  - client/clientset/versioned
-  - client/clientset/versioned/scheme
-  - client/clientset/versioned/typed/authorization/v1alpha1
-  - client/clientset/versioned/typed/authorization/v1alpha1/fake
-  - client/clientset/versioned/typed/catalog/v1alpha1
-  - client/clientset/versioned/typed/catalog/v1alpha1/fake
-  - client/clientset/versioned/typed/config/v1alpha1
-  - client/clientset/versioned/typed/config/v1alpha1/fake
-  - client/clientset/versioned/typed/kubedb/v1alpha1
-  - client/clientset/versioned/typed/kubedb/v1alpha1/fake
-  - client/clientset/versioned/typed/kubedb/v1alpha1/util
-  - client/informers/externalversions
-  - client/informers/externalversions/authorization
-  - client/informers/externalversions/authorization/v1alpha1
-  - client/informers/externalversions/catalog
-  - client/informers/externalversions/catalog/v1alpha1
-  - client/informers/externalversions/internalinterfaces
-  - client/informers/externalversions/kubedb
-  - client/informers/externalversions/kubedb/v1alpha1
-  - client/listers/authorization/v1alpha1
-  - client/listers/catalog/v1alpha1
-  - client/listers/kubedb/v1alpha1
-  - pkg/admission
-  - pkg/controller
-  - pkg/controller/job
-  - pkg/eventer
-  - pkg/validator
 - name: github.com/lib/pq
   version: 88edab0803230a3898347e77b474f8c1820a1f20
   subpackages:
@@ -500,22 +462,46 @@ imports:
 - name: github.com/spf13/pflag
   version: 298182f68c66c05229eb03ac171abe6e309ee79a
 - name: github.com/tekliner/apimachinery
-  version: 28755909634630e252c7f7fe243e118969192677
+  version: 1595b0c40a80548a19bdb6be8a1e00892c197c5d
   subpackages:
   - apis
+  - apis/authorization
+  - apis/authorization/v1alpha1
+  - apis/catalog
   - apis/catalog/v1alpha1
+  - apis/config/v1alpha1
+  - apis/kubedb
   - apis/kubedb/v1alpha1
   - client/clientset/versioned
   - client/clientset/versioned/fake
   - client/clientset/versioned/scheme
+  - client/clientset/versioned/typed/authorization/v1alpha1
+  - client/clientset/versioned/typed/authorization/v1alpha1/fake
+  - client/clientset/versioned/typed/catalog/v1alpha1
+  - client/clientset/versioned/typed/catalog/v1alpha1/fake
+  - client/clientset/versioned/typed/config/v1alpha1
+  - client/clientset/versioned/typed/config/v1alpha1/fake
+  - client/clientset/versioned/typed/kubedb/v1alpha1
+  - client/clientset/versioned/typed/kubedb/v1alpha1/fake
   - client/clientset/versioned/typed/kubedb/v1alpha1/util
   - client/informers/externalversions
+  - client/informers/externalversions/authorization
+  - client/informers/externalversions/authorization/v1alpha1
+  - client/informers/externalversions/catalog
+  - client/informers/externalversions/catalog/v1alpha1
+  - client/informers/externalversions/internalinterfaces
+  - client/informers/externalversions/kubedb
+  - client/informers/externalversions/kubedb/v1alpha1
+  - client/listers/authorization/v1alpha1
+  - client/listers/catalog/v1alpha1
   - client/listers/kubedb/v1alpha1
+  - pkg/admission
   - pkg/admission/dormantdatabase
   - pkg/admission/namespace
   - pkg/admission/snapshot
   - pkg/controller
   - pkg/controller/dormantdatabase
+  - pkg/controller/job
   - pkg/controller/snapshot
   - pkg/eventer
   - pkg/validator

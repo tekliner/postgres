@@ -4,8 +4,8 @@ import (
 	"io"
 
 	"github.com/appscode/go/log"
-	"github.com/kubedb/postgres/pkg/cmds/server"
 	"github.com/spf13/cobra"
+	"github.com/tekliner/postgres/pkg/cmds/server"
 )
 
 func NewCmdRun(out, errOut io.Writer, stopCh <-chan struct{}) *cobra.Command {

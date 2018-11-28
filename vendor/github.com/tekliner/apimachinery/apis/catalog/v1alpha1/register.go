@@ -1,7 +1,7 @@
 package v1alpha1
 
 import (
-	"github.com/kubedb/apimachinery/apis/catalog"
+	"github.com/tekliner/apimachinery/apis/catalog"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"

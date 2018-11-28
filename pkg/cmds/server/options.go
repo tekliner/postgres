@@ -6,12 +6,12 @@ import (
 
 	"github.com/appscode/kutil/meta"
 	prom "github.com/coreos/prometheus-operator/pkg/client/monitoring/v1"
-	"github.com/kubedb/postgres/pkg/controller"
 	"github.com/spf13/pflag"
 	"github.com/tekliner/apimachinery/apis"
 	cs "github.com/tekliner/apimachinery/client/clientset/versioned"
 	kubedbinformers "github.com/tekliner/apimachinery/client/informers/externalversions"
 	snapc "github.com/tekliner/apimachinery/pkg/controller/snapshot"
+	"github.com/tekliner/postgres/pkg/controller"
 	core "k8s.io/api/core/v1"
 	kext_cs "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/typed/apiextensions/v1beta1"
 	"k8s.io/client-go/dynamic"
@@ -120,7 +120,7 @@ func (s *ExtraOptions) ApplyTo(cfg *controller.OperatorConfig) error {
 	cfg.KubeInformerFactory = informers.NewSharedInformerFactory(cfg.KubeClient, cfg.ResyncPeriod)
 	cfg.KubedbInformerFactory = kubedbinformers.NewSharedInformerFactory(cfg.DBClient, cfg.ResyncPeriod)
 
-	cfg.CronController = snapc.NewCronController(cfg.KubeClient, cfg.DBClient)
+	cfg.CronController = snapc.NewCronController(cfg.KubeClient, cfg.DBClient, cfg.DynamicClient)
 
 	return nil
 }

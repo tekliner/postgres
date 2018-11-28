@@ -2,7 +2,7 @@ package v1alpha1
 
 import (
 	crdutils "github.com/appscode/kutil/apiextensions/v1beta1"
-	"github.com/kubedb/apimachinery/apis"
+	"github.com/tekliner/apimachinery/apis"
 	apiextensions "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 )
 
@@ -24,7 +24,7 @@ func (d DatabaseAccessRequest) CustomResourceDefinition() *apiextensions.CustomR
 		Labels: crdutils.Labels{
 			LabelsMap: map[string]string{"app": "kubedb"},
 		},
-		SpecDefinitionName:      "github.com/kubedb/apimachinery/apis/authorization/v1alpha1.DatabaseAccessRequest",
+		SpecDefinitionName:      "github.com/tekliner/apimachinery/apis/authorization/v1alpha1.DatabaseAccessRequest",
 		EnableValidation:        true,
 		GetOpenAPIDefinitions:   GetOpenAPIDefinitions,
 		EnableStatusSubresource: apis.EnableStatusSubresource,

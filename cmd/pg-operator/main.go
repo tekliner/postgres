@@ -4,7 +4,7 @@ import (
 	"log"
 
 	logs "github.com/appscode/go/log/golog"
-	"github.com/kubedb/postgres/pkg/cmds"
+	"github.com/tekliner/postgres/pkg/cmds"
 )
 
 func main() {

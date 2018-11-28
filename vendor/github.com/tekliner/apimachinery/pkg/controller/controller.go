@@ -5,9 +5,9 @@ import (
 
 	"github.com/appscode/go/log/golog"
 	"github.com/appscode/kutil/tools/queue"
-	api "github.com/kubedb/apimachinery/apis/kubedb/v1alpha1"
-	cs "github.com/kubedb/apimachinery/client/clientset/versioned"
-	kubedbinformers "github.com/kubedb/apimachinery/client/informers/externalversions"
+	api "github.com/tekliner/apimachinery/apis/kubedb/v1alpha1"
+	cs "github.com/tekliner/apimachinery/client/clientset/versioned"
+	kubedbinformers "github.com/tekliner/apimachinery/client/informers/externalversions"
 	batch "k8s.io/api/batch/v1"
 	crd_cs "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/typed/apiextensions/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

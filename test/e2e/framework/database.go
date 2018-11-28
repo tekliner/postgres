@@ -8,9 +8,9 @@ import (
 
 	"github.com/appscode/kutil/tools/portforward"
 	"github.com/go-xorm/xorm"
-	"github.com/kubedb/postgres/pkg/controller"
 	_ "github.com/lib/pq"
 	. "github.com/onsi/gomega"
+	"github.com/tekliner/postgres/pkg/controller"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
