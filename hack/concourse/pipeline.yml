@@ -18,7 +18,7 @@ resources:
   type: git
   tags: [cncf]
   source:
-    uri: https://github.com/kubedb/postgres
+    uri: https://github.com/tekliner/postgres
     branch: master
 
 - name: repo-status

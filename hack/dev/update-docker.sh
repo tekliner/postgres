@@ -2,7 +2,7 @@
 set -eou pipefail
 
 GOPATH=$(go env GOPATH)
-REPO_ROOT=$GOPATH/src/github.com/kubedb/postgres
+REPO_ROOT=$GOPATH/src/github.com/tekliner/postgres
 
 export DB_UPDATE=1
 export TOOLS_UPDATE=1

@@ -384,7 +384,7 @@ var _ = Describe("Postgres", func() {
 						ScriptSource: &api.ScriptSourceSpec{
 							VolumeSource: core.VolumeSource{
 								GitRepo: &core.GitRepoVolumeSource{
-									Repository: "https://github.com/kubedb/postgres-init-scripts.git",
+									Repository: "https://github.com/tekliner/postgres-init-scripts.git",
 									Directory:  ".",
 								},
 							},
@@ -530,7 +530,7 @@ var _ = Describe("Postgres", func() {
 						ScriptSource: &api.ScriptSourceSpec{
 							VolumeSource: core.VolumeSource{
 								GitRepo: &core.GitRepoVolumeSource{
-									Repository: "https://github.com/kubedb/postgres-init-scripts.git",
+									Repository: "https://github.com/tekliner/postgres-init-scripts.git",
 									Directory:  ".",
 								},
 							},
@@ -631,7 +631,7 @@ var _ = Describe("Postgres", func() {
 							ScriptPath: "postgres-init-scripts/run.sh",
 							VolumeSource: core.VolumeSource{
 								GitRepo: &core.GitRepoVolumeSource{
-									Repository: "https://github.com/kubedb/postgres-init-scripts.git",
+									Repository: "https://github.com/tekliner/postgres-init-scripts.git",
 								},
 							},
 						},

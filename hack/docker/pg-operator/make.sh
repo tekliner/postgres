@@ -8,7 +8,7 @@ GOPATH=$(go env GOPATH)
 SRC=$GOPATH/src
 BIN=$GOPATH/bin
 ROOT=$GOPATH
-REPO_ROOT=$GOPATH/src/github.com/kubedb/postgres
+REPO_ROOT=$GOPATH/src/github.com/tekliner/postgres
 
 source "$REPO_ROOT/hack/libbuild/common/kubedb_image.sh"
 

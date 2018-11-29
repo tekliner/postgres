@@ -5,14 +5,14 @@ import (
 	"log"
 )
 
-func getDirectoryContent(directoryName string) []string {
-	files, err := ioutil.ReadDir(".")
+func getDirectoryContent(directoryName string) ([]string, error) {
+	files, err := ioutil.ReadDir(directoryName)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	var filesList []string
 	for _, file := range files {
 		filesList = append(filesList, file.Name())
 	}
-	return filesList
+	return filesList, err
 }

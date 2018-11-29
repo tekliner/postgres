@@ -259,7 +259,7 @@ func samplePostgres() api.Postgres {
 				ScriptSource: &api.ScriptSourceSpec{
 					VolumeSource: core.VolumeSource{
 						GitRepo: &core.GitRepoVolumeSource{
-							Repository: "https://github.com/kubedb/postgres-init-scripts.git",
+							Repository: "https://github.com/tekliner/postgres-init-scripts.git",
 							Directory:  ".",
 						},
 					},

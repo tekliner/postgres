@@ -75,10 +75,6 @@ func (c *Controller) ensureStatefulSet(
 					Add: []core.Capability{"IPC_LOCK", "SYS_RESOURCE"},
 				},
 			},
-
-			VolumeMounts: []core.VolumeMount{
-				{Name: postgres.Spec.FirstRunConfigMap, MountPath: "/firstrun"},
-			},
 		}
 
 		// Used to check before mount configmaps and execute planned actions
@@ -100,7 +96,9 @@ func (c *Controller) ensureStatefulSet(
 						},
 					},
 				}
-
+			container.VolumeMounts = []core.VolumeMount{
+				{Name: postgres.Spec.FirstRunConfigMap, MountPath: "/firstrun"},
+			}
 		}
 
 		in.Spec.Template.Spec.Containers = core_util.UpsertContainer(

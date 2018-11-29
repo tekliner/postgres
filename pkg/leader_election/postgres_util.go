@@ -144,15 +144,12 @@ func execBaseBackup(ctx context.Context) error {
 }
 
 func execPostgresAction(ctx context.Context, action string) {
-
-	var postgresOptions string
-	// Check if value came with context
-	if v := ctx.Value("options"); v != nil {
-		postgresOptions = fmt.Sprintf("-o '%s'", v)
-	}
-
 	log.Printf("execPostgresAction: %s", action)
+	// env variables list
 	var env []string
+	// List of parameters passed to pg_ctl
+	var cmdParams []string
+
 	env = append(env, fmt.Sprintf("WALE_S3_PREFIX=%s", getEnv("ARCHIVE_S3_PREFIX", "")))
 	// auth for wal-g
 	env = append(env, fmt.Sprintf("PGUSER=%s", getEnv("POSTGRES_USER", "")))
@@ -172,9 +169,26 @@ func execPostgresAction(ctx context.Context, action string) {
 	if err != nil {
 		log.Printf("Error opening file %v", err)
 	}
+
+	cmdParams = append(cmdParams,
+		"postgres",
+		"pg_ctl",
+		"-D",
+		getEnv("PGDATA", "/var/pv/data"),
+		"-w",
+	)
+
+	// Check if additional options passed
+	if v := ctx.Value("options"); v != nil {
+		log.Printf("Additional startup parameters -o: %v", v)
+		cmdParams = append(cmdParams, fmt.Sprintf("-o '%s'", v))
+	}
+
+	cmdParams = append(cmdParams, action)
+
 	env = append(env, fmt.Sprintf("AWS_ACCESS_KEY_ID=%s", awsKey))
 	env = append(env, fmt.Sprintf("AWS_SECRET_ACCESS_KEY=%s", awsSecret))
-	err = runCmd(ctx, env, "su-exec", "postgres", "p	g_ctl", "-D", getEnv("PGDATA", "/var/pv/data"), "-w", postgresOptions, action)
+	err = runCmd(ctx, env, "su-exec", cmdParams...)
 	if err != nil {
 		log.Printf("Error happened during pg_ctl: %v", err)
 	}
@@ -345,7 +359,7 @@ func restoreMasterFromBackup(ctx context.Context) error {
 	setPermission()
 
 	// TODO: make code if error, directory may be not created
-	if scriptsDirList := getDirectoryContent("/firstfun"); scriptsDirList != nil {
+	if scriptsDirList, err := getDirectoryContent("/firstrun"); err == nil && len(scriptsDirList) > 0 {
 		type contextKey string
 		bindTo := contextKey("options")
 
