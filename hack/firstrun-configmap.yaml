@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: firstrun-test
+  namespace: kubedb
+data:
+  entrypoint.sh: |
+    #!/bin/bash
+    su -c 'psql -c "create database testdb;"' postgres
+    su -c "psql -d testdb -c 'create table public.mytable () with (OIDS=FALSE);'" postgres
+    echo "Test script"
+    ls /tmp
+    mkdir -p /tmp/sex
+    touch /tmp/sex/penis
+    ls -Rlah /tmp

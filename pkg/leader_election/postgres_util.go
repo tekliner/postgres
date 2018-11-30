@@ -12,6 +12,8 @@ import (
 	_ "github.com/lib/pq"
 )
 
+type contextKey string
+
 func pgConnString(hostname string) string {
 
 	//hostname := getEnv("PRIMARY_HOST", "localhost")
@@ -33,14 +35,17 @@ func pgConnString(hostname string) string {
 
 func setPosgresUserPassword(username, password string) {
 	log.Printf("Trying to set password to Postgres user: %s", username)
-
-	if db, err := sql.Open("postgres", pgConnString("localhost")); db != nil {
+	if db, _ := sql.Open("postgres", pgConnString("localhost")); db != nil {
 		defer db.Close()
+		username := getEnv("POSTGRES_USER", "postgres")
+		password := getEnv("POSTGRES_PASSWORD", "postgres")
 
-		if _, err = db.Exec("ALTER USER $1 WITH PASSWORD $2", username, password); err == nil {
-			log.Printf("Password successfully set to %s", password)
+		_, sterr := db.Exec(fmt.Sprintf("ALTER USER %s WITH PASSWORD '%s'", username, password))
+		if sterr != nil {
+			log.Printf("Error during altering user password: %v", sterr)
+		} else {
+			log.Println("User's password changed")
 		}
-		log.Println("query error")
 	} else {
 		log.Println("connection error")
 	}
@@ -179,7 +184,7 @@ func execPostgresAction(ctx context.Context, action string) {
 	)
 
 	// Check if additional options passed
-	if v := ctx.Value("options"); v != nil {
+	if v := ctx.Value(contextKey("options")); v != nil {
 		log.Printf("Additional startup parameters -o: %v", v)
 		cmdParams = append(cmdParams, fmt.Sprintf("-o '%s'", v))
 	}
@@ -360,38 +365,38 @@ func restoreMasterFromBackup(ctx context.Context) error {
 
 	// TODO: make code if error, directory may be not created
 	if scriptsDirList, err := getDirectoryContent("/firstrun"); err == nil && len(scriptsDirList) > 0 {
-		type contextKey string
 		bindTo := contextKey("options")
 
 		// use cancelpostgresContextActions to shutdown postgres after actions
-		postgresContextActions, cancelpostgresContextActions := context.WithCancel(ctx)
-		defer cancelpostgresContextActions()
+		log.Printf("Staring postgres in 'firstrun' mode ")
+		postgresContextActionStart, cancelpostgresContextActionStart := context.WithCancel(ctx)
+		defer cancelpostgresContextActionStart()
 
 		// Tell in Postgres options network interface to bind
-		postgresContextActionsVal := context.WithValue(postgresContextActions, bindTo, "-h 127.0.0.1")
-		go execPostgresAction(postgresContextActionsVal, "start")
+		postgresContextActionsVal := context.WithValue(postgresContextActionStart, bindTo, "-h 127.0.0.1")
+		execPostgresAction(postgresContextActionsVal, "start")
 
 		// Wait until postgres start febore actions
-		ctxFirstRunWait, cancelFirstRunWait := context.WithCancel(postgresContextActions)
+		ctxFirstRunWait, cancelFirstRunWait := context.WithCancel(postgresContextActionStart)
 		defer cancelFirstRunWait()
 		online := make(chan bool)
 		go func() { online <- isPostgresOnline(ctxFirstRunWait, "127.0.0.1", true) }()
 		select {
 		case <-online:
 			var env []string
-			// We already have directory list in scriptsDirList variable
-			// Lets circle it and run scripts
-			for _, scriptName := range scriptsDirList {
-				scriptContext, cancelScript := context.WithCancel(ctxFirstRunWait)
-				defer cancelScript()
-				runCmd(scriptContext, env, scriptName)
-			}
+			scriptContext, cancelScript := context.WithCancel(ctxFirstRunWait)
+			defer cancelScript()
+			runCmd(scriptContext, env, "/bin/bash", "/firstrun/entrypoint.sh")
 
 		case <-ctxFirstRunWait.Done():
 			// in case of cancel break a glass
 		}
 		// Turn off postgres
-		cancelpostgresContextActions()
+		log.Printf("Stopping postgres in 'firstrun' mode ")
+		cancelpostgresContextActionStart()
+		postgresContextActionStop, cancelpostgresContextActionStop := context.WithCancel(ctx)
+		defer cancelpostgresContextActionStop()
+		execPostgresAction(postgresContextActionStop, "stop")
 	}
 
 	// Now run as usual
